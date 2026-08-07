@@ -11,25 +11,26 @@ def qr_matrix_to_svg(slug, target_url, output_path):
         version=None,
         error_correction=qrcode.constants.ERROR_CORRECT_M,
         box_size=10,
-        border=2,
+        border=4,
     )
     qr.add_data(target_url)
     qr.make(fit=True)
 
-    matrix = qr.get_matrix()
-    dim = len(matrix)
-    path_parts = []
-    for r in range(dim):
-        for c in range(dim):
-            if matrix[r][c]:
-                path_parts.append(f"M{c*10},{r*10}h10v10h-10z")
+    img = qr.make_image(image_factory=qrcode.image.svg.SvgPathImage)
+    svg_str = img.to_string(encoding='utf-8').decode('utf-8')
 
-    view_dim = dim * 10
-    path_d = "".join(path_parts)
-    svg_data = f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {view_dim} {view_dim}" width="100%" height="100%"><rect width="{view_dim}" height="{view_dim}" fill="#FFFFFF"/><path d="{path_d}" fill="#000C44"/></svg>'
+    # Style dark modules with Delhi Police Deep Navy (#000C44)
+    svg_str = svg_str.replace('<path ', '<path fill="#000C44" ')
+
+    # Add crisp white background rect inside <svg>
+    idx = svg_str.find('>')
+    svg_str = svg_str[:idx+1] + '<rect width="100%" height="100%" fill="#FFFFFF"/>' + svg_str[idx+1:]
 
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write(svg_data)
+        f.write(svg_str)
+
+
+
 
 def load_svg_icon(icon_name):
     path = f"src/assets/icons/{icon_name}.svg"
