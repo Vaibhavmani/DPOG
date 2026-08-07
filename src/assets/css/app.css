@@ -80,7 +80,7 @@ body::before {
   z-index: 1;          /* above body background, below all content (z-index 10+) */
 }
 
-/* Language Mutual Exclusivity Rule & Hindi Font Boost */
+/* Language Mutual Exclusivity Rule */
 html[lang="en"] .lang-hi,
 html:not([lang="hi"]) .lang-hi {
   display: none !important;
@@ -91,27 +91,9 @@ html[lang="hi"] .lang-en {
 }
 
 .lang-hi {
-  font-size: 1.08em !important;
-  line-height: 1.65 !important;
-  font-weight: 600 !important;
+  font-weight: 500;
 }
 
-.masthead-title .lang-hi,
-.post-header-title .lang-hi,
-.post-tile-title .lang-hi,
-.instructions-heading .lang-hi,
-.key-directives-title .lang-hi,
-.qr-card-title .lang-hi,
-.control-room-call-btn .lang-hi {
-  font-size: 1.15em !important;
-  font-weight: 800 !important;
-}
-
-.instruction-text .lang-hi {
-  font-size: 1.12em !important;
-  font-weight: 600 !important;
-  line-height: 1.7 !important;
-}
 
 /* ==========================================================================
    Header & Masthead Component (Responsive Layout for Mobile/Tablet/Desktop)
