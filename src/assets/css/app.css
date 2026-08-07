@@ -40,6 +40,8 @@ html {
   font-family: var(--font-latin);
   line-height: var(--line-height-latin);
   -webkit-text-size-adjust: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 html[lang="hi"], :lang(hi) {
@@ -56,6 +58,8 @@ body {
   color: var(--on-surface);
   padding-bottom: 84px; /* Safe padding for fixed bottom control room bar */
   position: relative;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Official Delhi Police Logo Background Watermark - Responsive Sizing */
@@ -300,6 +304,49 @@ html[lang="hi"] .lang-en {
   color: var(--navy-deep);
 }
 
+/* Mobile Responsiveness Hardening (< 600px Viewport) */
+@media (max-width: 600px) {
+  .masthead-top {
+    padding: 8px 10px;
+    gap: 6px 10px;
+  }
+  .masthead-brand {
+    gap: 8px;
+  }
+  .header-logo-box {
+    width: 36px;
+    height: 36px;
+  }
+  .masthead-title {
+    font-size: 0.92rem;
+    letter-spacing: 0.2px;
+  }
+  .masthead-subtitle {
+    font-size: 0.68rem;
+  }
+  .header-actions {
+    gap: 5px;
+  }
+  .header-qr-btn span:last-child {
+    display: none;
+  }
+  .header-qr-btn {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+  }
+  .header-call-btn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+  .lang-toggle-box {
+    padding: 2px 4px;
+  }
+  .lang-toggle-btn {
+    padding: 2px 6px;
+    font-size: 0.8rem;
+  }
+}
+
 /* Standing Directive Warning Banner (Signal Red) */
 .directive-strip {
   background-color: var(--signal-red);
@@ -315,6 +362,15 @@ html[lang="hi"] .lang-en {
   text-transform: uppercase;
   text-align: center;
   border-bottom: 2px solid var(--navy-deep);
+}
+
+@media (max-width: 600px) {
+  .directive-strip {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    padding: 4px 8px;
+    min-height: 32px;
+  }
 }
 
 /* Offline Banner */
@@ -1223,9 +1279,15 @@ html[lang="hi"] .lang-en {
   transition: all 0.15s ease !important;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 600px) {
+  .control-room-bar {
+    padding: 6px 10px !important;
+  }
   .control-room-call-btn {
-    min-height: 56px !important;
+    min-height: 44px !important;
+    font-size: 0.85rem !important;
+    padding: 4px 8px !important;
+    letter-spacing: 0px !important;
   }
 }
 
