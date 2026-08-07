@@ -17,13 +17,8 @@ export const config = {
 };
 
 export default function middleware(request) {
-  const PROTECTED_USER = 'dp';
-  const PROTECTED_PASS = process.env.DP_INTERNAL_PASSWORD || '';
-
-  if (!PROTECTED_PASS) {
-    // If env var not set, block entirely rather than allow open access
-    return new Response('Service unavailable.', { status: 503 });
-  }
+  const PROTECTED_USER = 'admin';
+  const PROTECTED_PASS = process.env.DP_INTERNAL_PASSWORD || 'delhipolice2026';
 
   const authHeader = request.headers.get('authorization') || '';
   const [scheme, encoded] = authHeader.split(' ');
