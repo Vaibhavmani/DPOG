@@ -3,163 +3,307 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Portal — Law & Order Duty Instructions Editor</title>
+  <title>Admin Portal — Delhi Police Duty Instructions Editor</title>
   <style>
     :root {
-      --navy-deep: #0B1F6B;
+      --navy-deep: #000C44;
       --navy-ink: #071543;
       --signal-red: #D62027;
       --alert-yellow: #FFD100;
-      --paper: #F7F5F0;
+      --paper: #F8F9FA;
       --white: #FFFFFF;
-      --gray-light: #EFECE4;
-      --khaki: #C8B187;
+      --gray-border: #E0E4EC;
+      --gray-bg: #F0F3F8;
+      --text-dark: #111827;
+      --text-muted: #4B5563;
+      --success-green: #059669;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: var(--paper);
-      color: var(--navy-ink);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #F1F4F9;
+      color: var(--text-dark);
       line-height: 1.5;
-      padding-bottom: 110px;
+      padding-bottom: 120px;
     }
-    header {
-      background-color: var(--navy-deep);
+
+    /* Sticky Header */
+    header.admin-header {
+      background: linear-gradient(135deg, #000C44 0%, #071543 100%);
       color: var(--white);
-      padding: 16px 20px;
+      padding: 14px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 14px rgba(0, 12, 68, 0.25);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 200;
+      border-bottom: 3px solid var(--alert-yellow);
     }
-    header h1 { font-size: 1.25rem; font-weight: 700; text-transform: uppercase; }
-    .save-header-btn {
-      background-color: var(--alert-yellow);
-      color: var(--navy-ink);
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .header-logo {
+      height: 42px;
+      width: auto;
+    }
+    .header-title-box h1 {
+      font-size: 1.15rem;
       font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #FFFFFF;
+    }
+    .header-title-box p {
+      font-size: 0.75rem;
+      color: var(--alert-yellow);
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .save-header-btn {
+      background: linear-gradient(185deg, #FFD100 0%, #E6BC00 100%);
+      color: var(--navy-deep);
+      font-weight: 900;
       border: none;
-      padding: 10px 18px;
-      border-radius: 6px;
+      padding: 12px 24px;
+      border-radius: 8px;
       cursor: pointer;
       font-size: 1rem;
-      transition: transform 0.1s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(255, 209, 0, 0.35);
+      transition: all 0.15s ease-in-out;
     }
-    .save-header-btn:active { transform: scale(0.97); }
-    .container { max-width: 960px; margin: 20px auto; padding: 0 16px; }
-    
+    .save-header-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 209, 0, 0.5);
+      background: #FFE033;
+    }
+    .save-header-btn:active { transform: translateY(0); }
+
+    /* Wide Layout Container */
+    .container {
+      max-width: 1440px;
+      width: 95%;
+      margin: 24px auto;
+    }
+
+    /* Status Alert Banner */
     .status-msg {
-      padding: 14px 18px;
-      margin-bottom: 20px;
-      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      border-radius: 10px;
       font-weight: 700;
       display: none;
-      line-height: 1.4;
+      line-height: 1.5;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
-    .status-msg.success { background-color: #D4EDDA; color: #155724; border: 1px solid #C3E6CB; }
-    .status-msg.error { background-color: #F8D7DA; color: #721C24; border: 1px solid #F5C6CB; }
-    .status-msg.info { background-color: #CCE5FF; color: #004085; border: 1px solid #B8DAFF; }
+    .status-msg.success { background-color: #D1FAE5; color: #065F46; border: 1.5px solid #10B981; }
+    .status-msg.error { background-color: #FEE2E2; color: #991B1B; border: 1.5px solid #EF4444; }
+    .status-msg.info { background-color: #DBEAFE; color: #1E40AF; border: 1.5px solid #3B82F6; }
 
+    /* Jump Bar */
+    .jump-nav-bar {
+      background-color: var(--white);
+      border: 1px solid var(--gray-border);
+      padding: 12px 18px;
+      border-radius: 10px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow-x: auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .jump-nav-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--navy-deep);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .jump-btn {
+      background-color: var(--gray-bg);
+      color: var(--navy-deep);
+      border: 1px solid var(--gray-border);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.825rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .jump-btn:hover {
+      background-color: var(--navy-deep);
+      color: var(--white);
+    }
+
+    /* Cards */
     .card {
       background-color: var(--white);
-      border: 2px solid var(--navy-deep);
-      border-radius: 8px;
-      padding: 22px;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      border: 1px solid #D1D5DB;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 16px rgba(0, 12, 68, 0.05);
       position: relative;
     }
     .card-header-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 2px solid var(--gray-light);
-      padding-bottom: 12px;
-      margin-bottom: 16px;
+      border-bottom: 2px solid var(--gray-bg);
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+    .card-header-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .post-badge-num {
+      background-color: var(--navy-deep);
+      color: var(--alert-yellow);
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.875rem;
     }
     .card-header-bar h2 {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       color: var(--navy-deep);
+      font-weight: 800;
       text-transform: uppercase;
     }
 
     .form-group { margin-bottom: 14px; }
-    label { display: block; font-weight: 700; font-size: 0.9375rem; margin-bottom: 4px; color: var(--navy-deep); }
+    label { display: block; font-weight: 700; font-size: 0.875rem; margin-bottom: 6px; color: var(--navy-deep); }
     input[type="text"], textarea, select {
       width: 100%;
-      padding: 10px 12px;
-      font-size: 1rem;
-      border: 1px solid #CCC;
-      border-radius: 4px;
+      padding: 11px 14px;
+      font-size: 0.95rem;
+      border: 1.5px solid #D1D5DB;
+      border-radius: 8px;
       font-family: inherit;
+      background-color: #FAFAFA;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
     }
-    textarea { min-height: 70px; resize: vertical; }
+    input[type="text"]:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--navy-deep);
+      background-color: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(0, 12, 68, 0.08);
+    }
+    textarea { min-height: 68px; resize: vertical; }
 
     .bilingual-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 20px;
     }
-    @media (min-width: 650px) {
+    @media (min-width: 768px) {
       .bilingual-grid { grid-template-columns: 1fr 1fr; }
     }
     .lang-box {
-      background-color: var(--paper);
-      padding: 14px;
-      border-radius: 6px;
-      border: 1px solid var(--khaki);
+      background-color: #F8FAFC;
+      padding: 18px;
+      border-radius: 10px;
+      border: 1.5px solid #E2E8F0;
     }
-    .lang-title { font-weight: 800; font-size: 0.875rem; text-transform: uppercase; margin-bottom: 8px; color: var(--navy-deep); }
+    .lang-title {
+      font-weight: 800;
+      font-size: 0.825rem;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      color: var(--navy-deep);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
     .dynamic-item {
       display: flex;
-      gap: 8px;
-      margin-bottom: 8px;
-      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+    .item-line-num {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #6B7280;
+      width: 32px;
+      flex-shrink: 0;
+      text-align: center;
+      background-color: #E5E7EB;
+      padding: 4px;
+      border-radius: 4px;
     }
     .remove-btn {
-      background-color: var(--signal-red);
-      color: white;
-      border: none;
-      width: 36px;
-      height: 36px;
-      border-radius: 4px;
+      background-color: #FEE2E2;
+      color: #DC2626;
+      border: 1px solid #FCA5A5;
+      width: 38px;
+      height: 38px;
+      border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: all 0.15s ease;
+    }
+    .remove-btn:hover {
+      background-color: #DC2626;
+      color: white;
     }
     .delete-post-btn {
-      background-color: var(--signal-red);
-      color: white;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 4px;
+      background-color: #FEE2E2;
+      color: #DC2626;
+      border: 1px solid #FCA5A5;
+      padding: 8px 16px;
+      border-radius: 6px;
       font-weight: 700;
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .delete-post-btn:hover {
+      background-color: #DC2626;
+      color: white;
     }
     .add-btn {
       background-color: var(--navy-deep);
       color: white;
       border: none;
-      padding: 6px 12px;
-      border-radius: 4px;
-      font-weight: 600;
-      font-size: 0.875rem;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.85rem;
       cursor: pointer;
-      margin-top: 6px;
+      margin-top: 8px;
+      transition: background-color 0.15s ease;
+    }
+    .add-btn:hover {
+      background-color: #071543;
     }
     .add-post-main-btn {
       width: 100%;
-      background-color: var(--navy-deep);
+      background: linear-gradient(135deg, #000C44 0%, #071543 100%);
       color: var(--white);
       border: 2px dashed var(--alert-yellow);
-      padding: 16px;
-      border-radius: 8px;
+      padding: 18px;
+      border-radius: 10px;
       font-weight: 800;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       text-transform: uppercase;
       cursor: pointer;
       margin-bottom: 28px;
@@ -167,71 +311,122 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
+      box-shadow: 0 4px 14px rgba(0, 12, 68, 0.15);
+      transition: transform 0.15s ease;
     }
     .add-post-main-btn:hover {
-      background-color: #071543;
+      transform: translateY(-2px);
     }
-    .footer-actions {
+
+    /* Fixed Floating Bottom Action Bar */
+    .floating-save-bar {
       position: fixed;
-      bottom: 0; left: 0; right: 0;
-      background-color: var(--navy-ink);
-      padding: 14px 20px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, #000C44 0%, #071543 100%);
+      padding: 14px 28px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 -3px 10px rgba(0,0,0,0.3);
-      z-index: 100;
+      box-shadow: 0 -6px 20px rgba(0, 12, 68, 0.3);
+      z-index: 200;
+      border-top: 3px solid var(--alert-yellow);
     }
-    .footer-actions a { color: var(--white); text-decoration: none; font-weight: 700; }
+    .floating-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .open-app-btn {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background-color: rgba(255,255,255,0.1);
+      padding: 10px 18px;
+      border-radius: 6px;
+      transition: background-color 0.15s ease;
+    }
+    .open-app-btn:hover { background-color: rgba(255,255,255,0.2); }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Admin Portal — Law & Order Duty Instructions Editor</h1>
-    <button type="button" class="save-header-btn" onclick="saveContent()">💾 Save & Rebuild App</button>
+  <!-- Sticky Main Header -->
+  <header class="admin-header">
+    <div class="header-brand">
+      <img src="/assets/images/dp_logo.png" alt="Delhi Police Emblem" class="header-logo" onerror="this.style.display='none'">
+      <div class="header-title-box">
+        <h1>ADMIN PORTAL — DUTY INSTRUCTIONS EDITOR</h1>
+        <p>DELHI POLICE • LAW &amp; ORDER DEPLOYMENT</p>
+      </div>
+    </div>
+    <button type="button" class="save-header-btn" onclick="saveContent()">
+      💾 SAVE CHANGES &amp; REBUILD SITE
+    </button>
   </header>
 
   <main class="container">
+    <!-- Status Message Banner -->
     <div id="status-msg" class="status-msg"></div>
 
-    <!-- Metadata Section -->
-    <section class="card">
-      <h2>App Metadata & Control Room</h2>
+    <!-- Quick Jump Navigation Bar -->
+    <div class="jump-nav-bar" id="jump-nav-bar">
+      <span class="jump-nav-title">⚡ Quick Jump:</span>
+      <!-- Dynamically filled by JS -->
+    </div>
+
+    <!-- App Metadata Card -->
+    <section class="card" id="section-meta">
+      <div class="card-header-bar">
+        <div class="card-header-title">
+          <span class="post-badge-num">CONFIG</span>
+          <h2>App Metadata &amp; Control Room Hotlines</h2>
+        </div>
+      </div>
       <div class="bilingual-grid">
         <div class="form-group">
-          <label>Version Stamp</label>
-          <input type="text" id="meta-version">
+          <label>Version Stamp (vX.Y)</label>
+          <input type="text" id="meta-version" placeholder="e.g. 1.0">
         </div>
         <div class="form-group">
           <label>Last Updated Date</label>
-          <input type="text" id="meta-updated">
+          <input type="text" id="meta-updated" placeholder="e.g. 2026-08-07">
         </div>
       </div>
       <div class="form-group">
         <label>North District Control Room Phone Number</label>
-        <input type="text" id="ctrl-number">
+        <input type="text" id="ctrl-number" placeholder="e.g. 011-23817012">
       </div>
     </section>
 
-    <!-- Header Action Bar for Adding Posts -->
+    <!-- Top Add Post CTA -->
     <button type="button" class="add-post-main-btn" onclick="addNewPost()">
       ➕ Add New Duty Post (नया ड्यूटी पॉइंट जोड़ें)
     </button>
 
-    <!-- Posts Section Container -->
+    <!-- Dynamic Posts Editor Container -->
     <div id="posts-editor-container"></div>
 
-    <!-- Bottom Action Button for Adding Posts -->
+    <!-- Bottom Add Post CTA -->
     <button type="button" class="add-post-main-btn" onclick="addNewPost()">
       ➕ Add New Duty Post (नया ड्यूटी पॉइंट जोड़ें)
     </button>
 
   </main>
 
-  <div class="footer-actions">
-    <a href="/" target="_blank">← Open Public App</a>
-    <button type="button" class="save-header-btn" onclick="saveContent()">💾 Save & Rebuild App</button>
+  <!-- Always-Visible Floating Bottom Save Action Bar -->
+  <div class="floating-save-bar">
+    <div class="floating-btn-group">
+      <a href="/" target="_blank" class="open-app-btn">🌐 Open Public Web App</a>
+    </div>
+    <button type="button" class="save-header-btn" onclick="saveContent()" style="font-size: 1.05rem; padding: 12px 28px;">
+      💾 SAVE CHANGES &amp; REBUILD SITE
+    </button>
   </div>
 
   <script>
@@ -261,6 +456,14 @@
       document.getElementById('meta-updated').value = currentContent.meta.updated || '';
       document.getElementById('ctrl-number').value = currentContent.meta.controlRoom[0].number || '';
 
+      // Render Jump Bar Buttons
+      var jumpBar = document.getElementById('jump-nav-bar');
+      var jumpHtml = '<span class="jump-nav-title">⚡ Quick Jump:</span>';
+      currentContent.posts.forEach((p, idx) => {
+        jumpHtml += `<button type="button" class="jump-btn" onclick="scrollToPost(${idx})">${idx + 1}. ${p.en.name}</button>`;
+      });
+      jumpBar.innerHTML = jumpHtml;
+
       var container = document.getElementById('posts-editor-container');
       var html = '';
 
@@ -269,10 +472,20 @@
           `<option value="${ic}" ${post.icon === ic ? 'selected' : ''}>${ic}</option>`
         ).join('');
 
+        var enCount = post.en.instructions.length;
+        var hiCount = post.hi.instructions.length;
+        var parityBadge = enCount === hiCount
+          ? `<span style="background:#D1FAE5; color:#065F46; padding:4px 8px; border-radius:4px; font-size:0.75rem; font-weight:800;">✓ Parity: ${enCount} lines</span>`
+          : `<span style="background:#FEE2E2; color:#991B1B; padding:4px 8px; border-radius:4px; font-size:0.75rem; font-weight:800;">⚠️ Mismatch: EN=${enCount}, HI=${hiCount}</span>`;
+
         html += `
-        <div class="card" data-post-index="${pIdx}">
+        <div class="card" id="post-card-${pIdx}" data-post-index="${pIdx}">
           <div class="card-header-bar">
-            <h2>Duty Post ${pIdx + 1}: ${post.en.name} (${post.slug})</h2>
+            <div class="card-header-title">
+              <span class="post-badge-num">POST ${pIdx + 1}</span>
+              <h2>${escapeAttr(post.en.name)} (${post.slug})</h2>
+              ${parityBadge}
+            </div>
             <button type="button" class="delete-post-btn" onclick="deletePost(${pIdx})">🗑️ Delete Post</button>
           </div>
           
@@ -289,26 +502,27 @@
 
           <div class="bilingual-grid" style="margin-bottom:16px;">
             <div class="lang-box">
-              <div class="lang-title">English Name</div>
+              <div class="lang-title">🇬🇧 English Name</div>
               <input type="text" class="post-en-name" value="${escapeAttr(post.en.name)}">
             </div>
             <div class="lang-box">
-              <div class="lang-title">Hindi Name (हिंदी नाम)</div>
+              <div class="lang-title">🇮🇳 Hindi Name (हिंदी नाम)</div>
               <input type="text" class="post-hi-name" value="${escapeAttr(post.hi.name)}">
             </div>
           </div>
 
           <!-- Key Directives -->
-          <div style="margin-bottom:16px;">
-            <h3 style="font-size:1rem; color:var(--navy-deep); margin-bottom:8px;">Key Directives (Imperatives)</h3>
+          <div style="margin-bottom:20px;">
+            <h3 style="font-size:0.95rem; color:var(--navy-deep); margin-bottom:10px; font-weight:800;">🛡️ KEY DIRECTIVES (IMPERATIVES)</h3>
             <div class="bilingual-grid">
               <div class="lang-box">
-                <div class="lang-title">English Key Directives</div>
+                <div class="lang-title">🇬🇧 English Key Directives</div>
                 <div class="kd-en-list" id="kd-en-${pIdx}">
-                  ${post.en.keyDirectives.map(kd => `
+                  ${post.en.keyDirectives.map((kd, idx) => `
                     <div class="dynamic-item">
+                      <span class="item-line-num">D${idx + 1}</span>
                       <input type="text" value="${escapeAttr(kd)}">
-                      <button type="button" class="remove-btn" onclick="this.parentElement.remove()">✕</button>
+                      <button type="button" class="remove-btn" onclick="this.parentElement.remove()" title="Remove">✕</button>
                     </div>
                   `).join('')}
                 </div>
@@ -316,12 +530,13 @@
               </div>
 
               <div class="lang-box">
-                <div class="lang-title">Hindi Key Directives</div>
+                <div class="lang-title">🇮🇳 Hindi Key Directives</div>
                 <div class="kd-hi-list" id="kd-hi-${pIdx}">
-                  ${post.hi.keyDirectives.map(kd => `
+                  ${post.hi.keyDirectives.map((kd, idx) => `
                     <div class="dynamic-item">
+                      <span class="item-line-num">D${idx + 1}</span>
                       <input type="text" value="${escapeAttr(kd)}">
-                      <button type="button" class="remove-btn" onclick="this.parentElement.remove()">✕</button>
+                      <button type="button" class="remove-btn" onclick="this.parentElement.remove()" title="Remove">✕</button>
                     </div>
                   `).join('')}
                 </div>
@@ -332,15 +547,16 @@
 
           <!-- Full Instructions -->
           <div>
-            <h3 style="font-size:1rem; color:var(--navy-deep); margin-bottom:8px;">Full Numbered Instructions</h3>
+            <h3 style="font-size:0.95rem; color:var(--navy-deep); margin-bottom:10px; font-weight:800;">📋 FULL NUMBERED INSTRUCTIONS</h3>
             <div class="bilingual-grid">
               <div class="lang-box">
-                <div class="lang-title">English Instructions</div>
+                <div class="lang-title">🇬🇧 English Instructions</div>
                 <div class="inst-en-list" id="inst-en-${pIdx}">
-                  ${post.en.instructions.map(inst => `
+                  ${post.en.instructions.map((inst, idx) => `
                     <div class="dynamic-item">
+                      <span class="item-line-num">${(idx + 1 < 10 ? '0' + (idx + 1) : idx + 1)}</span>
                       <textarea>${escapeAttr(inst)}</textarea>
-                      <button type="button" class="remove-btn" onclick="this.parentElement.remove()">✕</button>
+                      <button type="button" class="remove-btn" onclick="this.parentElement.remove()" title="Remove">✕</button>
                     </div>
                   `).join('')}
                 </div>
@@ -348,12 +564,13 @@
               </div>
 
               <div class="lang-box">
-                <div class="lang-title">Hindi Instructions</div>
+                <div class="lang-title">🇮🇳 Hindi Instructions</div>
                 <div class="inst-hi-list" id="inst-hi-${pIdx}">
-                  ${post.hi.instructions.map(inst => `
+                  ${post.hi.instructions.map((inst, idx) => `
                     <div class="dynamic-item">
+                      <span class="item-line-num">${(idx + 1 < 10 ? '0' + (idx + 1) : idx + 1)}</span>
                       <textarea>${escapeAttr(inst)}</textarea>
-                      <button type="button" class="remove-btn" onclick="this.parentElement.remove()">✕</button>
+                      <button type="button" class="remove-btn" onclick="this.parentElement.remove()" title="Remove">✕</button>
                     </div>
                   `).join('')}
                 </div>
@@ -369,10 +586,16 @@
       container.innerHTML = html;
     }
 
+    function scrollToPost(idx) {
+      var el = document.getElementById('post-card-' + idx);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
     function addNewPost() {
       if (!currentContent) return;
 
-      // Sync form fields to memory first before adding a new item
       collectFormData();
 
       var newIndex = currentContent.posts.length + 1;
@@ -409,11 +632,7 @@
       currentContent.posts.push(newPost);
       renderEditor();
 
-      // Scroll to newly added card
-      var cards = document.querySelectorAll('.card[data-post-index]');
-      if (cards.length > 0) {
-        cards[cards.length - 1].scrollIntoView({ behavior: 'smooth' });
-      }
+      scrollToPost(currentContent.posts.length - 1);
     }
 
     function deletePost(idx) {
@@ -428,17 +647,20 @@
 
     function addItem(containerId) {
       var c = document.getElementById(containerId);
+      var lineNum = c.querySelectorAll('.dynamic-item').length + 1;
       var div = document.createElement('div');
       div.className = 'dynamic-item';
-      div.innerHTML = '<input type="text" value=""><button type="button" class="remove-btn" onclick="this.parentElement.remove()">✕</button>';
+      div.innerHTML = `<span class="item-line-num">D${lineNum}</span><input type="text" value=""><button type="button" class="remove-btn" onclick="this.parentElement.remove()" title="Remove">✕</button>`;
       c.appendChild(div);
     }
 
     function addTextAreaItem(containerId) {
       var c = document.getElementById(containerId);
+      var count = c.querySelectorAll('.dynamic-item').length + 1;
+      var lineStr = count < 10 ? '0' + count : count;
       var div = document.createElement('div');
       div.className = 'dynamic-item';
-      div.innerHTML = '<textarea></textarea><button type="button" class="remove-btn" onclick="this.parentElement.remove()">✕</button>';
+      div.innerHTML = `<span class="item-line-num">${lineStr}</span><textarea></textarea><button type="button" class="remove-btn" onclick="this.parentElement.remove()" title="Remove">✕</button>`;
       c.appendChild(div);
     }
 
