@@ -362,9 +362,9 @@ def main():
     with open("src/index.html", "w", encoding="utf-8") as f:
         f.write(home_html)
 
-    # 4. Pre-render Duty Shift Compliance Checklist Page (`src/dp-c9f7e2/index.html`)
-    print("\nPre-rendering Duty Shift Compliance Checklist Page (dp-c9f7e2/index.html)...")
-    os.makedirs("src/dp-c9f7e2", exist_ok=True)
+    # 4. Pre-render Duty Shift Compliance Checklist Page (`src/checklist/index.html`)
+    print("\nPre-rendering Duty Shift Compliance Checklist Page (checklist/index.html)...")
+    os.makedirs("src/checklist", exist_ok=True)
 
     checklist_main_html = f"""
     <div class="back-bar">
@@ -430,8 +430,9 @@ def main():
 
     checklist_extra_script = '<script src="../assets/js/checklist.js?v=8.0"></script>'
     checklist_html = build_page_html("Duty Shift Compliance Checklist", "ड्यूटी चेकलिस्ट", checklist_main_html, rel_prefix="../", qr_modal_target_id="qr-modal-checklist", active_nav="checklist", extra_script=checklist_extra_script)
-    with open("src/dp-c9f7e2/index.html", "w", encoding="utf-8") as f:
+    with open("src/checklist/index.html", "w", encoding="utf-8") as f:
         f.write(checklist_html)
+
 
     # 5. Pre-render Post Detail Pages
     print("\nPre-rendering Post Detail Pages...")

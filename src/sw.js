@@ -3,9 +3,10 @@
  * Cache Version 11.0 - Guaranteed Fixed Signal Red Call Control Room Bar & Boosted Hindi Typography
  */
 
-var CACHE_NAME = 'dp-instructions-v13.0';
+var CACHE_NAME = 'dp-instructions-v14.0';
 
 var STATIC_ASSETS = [
+
   '/',
   '/index.html',
   '/search/',
@@ -99,7 +100,15 @@ self.addEventListener('fetch', function (event) {
 
   var requestUrl = new URL(event.request.url);
 
+  // Bypass Service Worker completely for Admin Portal and API endpoints
+  if (requestUrl.pathname.startsWith('/dp-c9f7e2') ||
+      requestUrl.pathname.startsWith('/admin') ||
+      requestUrl.pathname.startsWith('/api/')) {
+    return;
+  }
+
   // Network-First strategy for HTML pages
+
   if (event.request.mode === 'navigate' || requestUrl.pathname.endsWith('.html') || requestUrl.pathname.endsWith('/')) {
     event.respondWith(
       fetch(event.request)
