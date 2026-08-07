@@ -98,7 +98,7 @@ def main():
     search_svg = load_svg_icon("search")
     arrow_left_svg = load_svg_icon("arrow-left")
 
-    base_domain = "https://deploy.delhipolice.gov.in"
+    base_domain = "https://dpog.vercel.app"
 
     # Base HTML Layout Generator with Top Header Ribbon & Fixed Bottom Nav Bar
     def build_page_html(title_en, title_hi, main_content_html, rel_prefix="", qr_modal_target_id="qr-modal-home", active_nav="home", extra_script=""):
