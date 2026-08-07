@@ -1,0 +1,460 @@
+{
+  "meta": {
+    "title": {
+      "en": "Law & Order Deployment — Quick Instructions",
+      "hi": "कानून एवं व्यवस्था तैनाती — त्वरित निर्देश"
+    },
+    "directive": {
+      "en": "Stay Alert • Stay Vigilant • Stay Safe",
+      "hi": "सतर्क रहें • चौकस रहें • सुरक्षित रहें"
+    },
+    "issuedBy": {
+      "en": "Delhi Police — North District",
+      "hi": "दिल्ली पुलिस — उत्तरी जिला"
+    },
+    "version": "1.0",
+    "updated": "2026-08-07",
+    "controlRoom": [
+      {
+        "label": {
+          "en": "North District Control Room",
+          "hi": "उत्तरी जिला नियंत्रण कक्ष"
+        },
+        "number": "9899101199"
+      },
+      {
+        "label": {
+          "en": "Police Control Room",
+          "hi": "पुलिस नियंत्रण कक्ष"
+        },
+        "number": "112"
+      }
+    ],
+    "hotlines": [
+      {
+        "name": {
+          "en": "Emergency Response",
+          "hi": "आपातकालीन प्रतिक्रिया"
+        },
+        "number": "112",
+        "icon": "🚨"
+      },
+      {
+        "name": {
+          "en": "North District Control Room",
+          "hi": "उत्तरी जिला नियंत्रण कक्ष"
+        },
+        "number": "011-23817012",
+        "icon": "📞"
+      },
+      {
+        "name": {
+          "en": "Police Control Room (PCR)",
+          "hi": "पुलिस नियंत्रण कक्ष"
+        },
+        "number": "100",
+        "icon": "🚓"
+      },
+      {
+        "name": {
+          "en": "SWAT / QRT Tactical Command",
+          "hi": "स्वाट / क्यूआरटी सामरिक कमान"
+        },
+        "number": "011-23817013",
+        "icon": "🛡️"
+      }
+    ]
+  },
+  "posts": [
+    {
+      "id": "rooftop",
+      "slug": "rooftop",
+      "icon": "building-watch",
+      "en": {
+        "name": "Rooftop / Elevated Post",
+        "keyDirectives": [
+          "Maintain continuous watch",
+          "Look for suspicious activity, drones, kites, objects",
+          "Do not leave the post without relief"
+        ],
+        "instructions": [
+          "No unauthorized person should enter the rooftop of buildings.",
+          "If you see any suspicious aircraft, drone or any other flying object while on duty, immediately inform your sector in-charge (I/C Roof Tops) and then inform the North District Control Room.",
+          "To keep liaison with the nodal/security officer of buildings (in case of a Govt. establishment) for better coordination in case of any emergency.",
+          "The staff should not leave the rooftop dominance and convey to North District Control Room and Sector in-charge (I/C Roof Tops) for any suspicious activities for verification.",
+          "Any windows and doors of buildings which open towards place of function/route should be closed. If any door or window is seen open, immediately inform to their supervisory officer and then inform your sector in-charge (I/C Roof Tops) and then North District Control Room.",
+          "Staff deployed on Roof tops shall also keep close watch on the adjacent buildings and if any door/window is found open or any suspicious activity is found, then, he shall immediately inform to their supervisory officer and then inform your sector in-charge (I/C Roof Tops) and then North District Control Room.",
+          "On receiving an alert call from Roof Top staff, the concerned supervisory officer (SI) and Sector Incharge will immediately respond & verify the facts and inform the Control Room immediately.",
+          "Roof Top staff should know deployment, call sign of all Roof Tops around them.",
+          "In case of any unauthorized access on roof top they should be able to coordinate and pinpoint response team (supervisory officer (SI))."
+        ]
+      },
+      "hi": {
+        "name": "रूफ टॉप / ऊँचा स्थान",
+        "keyDirectives": [
+          "निरंतर निगरानी बनाए रखें",
+          "संदिग्ध गतिविधि, ड्रोन, पतंग, वस्तुओं पर नज़र रखें",
+          "रिलीवर के बिना पोस्ट न छोड़ें"
+        ],
+        "instructions": [
+          "कोई भी अनधिकृत व्यक्ति इमारतों की छत पर प्रवेश नहीं करना चाहिए।",
+          "यदि आपको ड्यूटी के दौरान कोई संदिग्ध विमान, ड्रोन या कोई अन्य उड़ने वाली वस्तु दिखाई देती है, तो तुरंत अपने सेक्टर प्रभारी (I/C Roof Top) को सूचित करें और फिर उत्तरी जिला नियंत्रण कक्ष को सूचित करें।",
+          "किसी भी आपातकालीन स्थिति में बेहतर समन्वय (co-ordination) के लिए भवनों (in case of a Govt. establishment) के Nodal/सुरक्षा अधिकारी के साथ संपर्क रखेंगे।",
+          "कर्मचारी छत पर प्रभुत्व (dominance) नहीं छोड़ेंगे और कोई भी संदिग्ध गतिविधियों की जाँच की सूचना सेक्टर प्रभारी और उत्तरी जिला नियंत्रण कक्ष (Control Room North District) को देंगे।",
+          "इमारतों की कोई भी खिड़की और दरवाज़ा जो समारोह स्थल/मार्ग की ओर खुले नहीं होने चाहिए। यदि कोई दरवाजा या खिड़की खुली दिखे तो तुरंत अपने पर्यवेक्षक अधिकारी को सूचित करें और फिर अपने सेक्टर प्रभारी (I/C Roof Top) और फिर उत्तरी जिला नियंत्रण कक्ष (Control Room North District) को सूचित करेंगे।",
+          "रूफ टॉप पर तैनात कर्मचारी आस-पास की इमारतों पर भी कड़ी नजर रखेंगे और यदि कोई दरवाजा/खिड़की खुली पाई जाती है या कोई संदिग्ध गतिविधि पाई जाती है, तो वह तुरंत अपने पर्यवेक्षी अधिकारी को सूचित करेंगे और फिर अपने सेक्टर प्रभारी (I/C Roof Top) और फिर उत्तरी जिला नियंत्रण कक्ष (Control Room North District) को सूचित करेंगे।",
+          "रूफ टॉप स्टाफ से अलर्ट कॉल प्राप्त होने पर, संबंधित पर्यवेक्षी अधिकारी (SI) और सेक्टर प्रभारी तुरंत जवाब देंगे और तथ्यों को सत्यापित करेंगे और तुरंत नियंत्रण कक्ष को सूचित करेंगे।",
+          "रूफ टॉप के कर्मचारियों को अपने आस-पास के सभी रूफ टॉप की तैनाती, कॉल साइन की जानकारी होनी चाहिए।",
+          "छत पर किसी भी अनधिकृत पहुंच के मामले में उन्हें प्रतिक्रिया टीम (पर्यवेक्षी अधिकारी (एसआई)) के साथ समन्वय/तालमेल करेंगे और उस बिल्डिंग की सटीक लोकेशन की पहचान करेंगे।"
+        ]
+      },
+      "category": "elevated"
+    },
+    {
+      "id": "morcha",
+      "slug": "morcha",
+      "icon": "barricade",
+      "en": {
+        "name": "Morcha / Barricade Point",
+        "keyDirectives": [
+          "Maintain cordon & access control",
+          "Prevent unauthorized entry",
+          "Regulate movement of crowd",
+          "Remain vigilant during VIP / VVIP movement"
+        ],
+        "instructions": [
+          "Primary role is to neutralize and respond to any armed threat/attack or activities in the area of responsibility.",
+          "The Staff will keep in mind the position of other armed components of security forces & other deployment.",
+          "The Staff would coordinate and handshake with SWAT & NSG teams for defined area of firing and area of responsibility, along with familiarity of each other's weapon and position.",
+          "Remain stationed in a covered and safe position.",
+          "In case of attack, hold your position/post until reinforcements arrive.",
+          "In the event of an armed attack or a hostile situation involving firearms or other weapons, counter/neutralize the threat and minimize damage.",
+          "Act on the direction of Zonal/Sector In-charge or as per SOP.",
+          "Conduct visual Anti-Sabotage check of the duty point."
+        ]
+      },
+      "hi": {
+        "name": "मोर्चा / बैरिकेड पॉइंट",
+        "keyDirectives": [
+          "घेराबंदी एवं प्रवेश नियंत्रण बनाए रखें",
+          "अनधिकृत प्रवेश रोकें",
+          "भीड़ की आवाजाही नियंत्रित करें",
+          "VIP / VVIP आवागमन के दौरान सतर्क रहें"
+        ],
+        "instructions": [
+          "प्राथमिक भूमिका ज़िम्मेदारी के क्षेत्र में किसी भी सशस्त्र खतरे/हमले या गतिविधियों को बेअसर करना और उसका जवाब देना है।",
+          "कर्मचारी सुरक्षा बलों और अन्य तैनाती के अन्य सशस्त्र बलों की स्थिति को ध्यान में रखेंगे।",
+          "कर्मचारी गोलीबारी के निर्धारित क्षेत्र और ज़िम्मेदारी के क्षेत्र के लिए SWAT और NSG टीमों के साथ समन्वय करेंगे, साथ ही एक-दूसरे के हथियार और स्थिति से परिचित होंगे।",
+          "अपनी तैनाती मोर्चे में रखेंगे।",
+          "हमले की स्थिति में, अतिरिक्त बल आने तक अपनी स्थिति/पोस्ट पर बने रहें।",
+          "सशस्त्र हमले की स्थिति में उसका मुकाबला करे व उसे निष्प्रभावी करने के लिए कम से कम बल का प्रयोग करे।",
+          "Zonal/Sector प्रभारी के निर्देशानुसार या SOP के अनुसार कार्य करें।",
+          "ड्यूटी पॉइंट की visual Anti-Sabotage check करें।"
+        ]
+      },
+      "category": "access"
+    },
+    {
+      "id": "machan",
+      "slug": "machan",
+      "icon": "watchtower",
+      "en": {
+        "name": "Machan / Observation Post",
+        "keyDirectives": [
+          "Observe the assigned area continuously",
+          "Monitor crowd & unusual activity",
+          "Keep communication with team",
+          "Report any security concern"
+        ],
+        "instructions": [
+          "Maintain continuous surveillance over the assigned Area of Responsibility (AoR) from the Observation Post.",
+          "Keep a constant watch on crowd movement, rooftops, vulnerable locations, and suspicious activities.",
+          "Immediately report any unusual movement, unattended object, or security concern to the Control Room and supervising officer.",
+          "Maintain continuous communication with nearby deployment, Quick Reaction Team (QRT), and other security components.",
+          "Ensure binoculars, communication equipment, emergency whistle, and other operational resources remain functional and readily available.",
+          "Remain alert throughout the duty period and never leave the Observation Post without proper relief.",
+          "Record all significant observations, incidents, and timings accurately in the duty log.",
+          "Act promptly on the directions of the Zonal/Sector In-charge and follow all prescribed SOPs."
+        ]
+      },
+      "hi": {
+        "name": "मचान / अवलोकन पोस्ट",
+        "keyDirectives": [
+          "निर्धारित क्षेत्र पर लगातार निगरानी रखें",
+          "भीड़ एवं असामान्य गतिविधि पर नज़र रखें",
+          "टीम से संचार बनाए रखें",
+          "किसी भी सुरक्षा चिंता की सूचना दें"
+        ],
+        "instructions": [
+          "अपने निर्धारित जिम्मेदारी क्षेत्र (Area of Responsibility - AoR) पर मचान/अवलोकन पोस्ट से लगातार और सतर्क निगरानी रखें।",
+          "भीड़ की गतिविधियों, छतों, संवेदनशील स्थानों तथा किसी भी संदिग्ध गतिविधि पर निरंतर नज़र बनाए रखें।",
+          "किसी भी संदिग्ध व्यक्ति, लावारिस वस्तु या सुरक्षा संबंधी चिंता की सूचना तुरंत कंट्रोल रूम एवं संबंधित प्रभारी अधिकारी को दें।",
+          "निकटवर्ती तैनात पुलिस बल, क्विक रिएक्शन टीम (QRT) तथा अन्य सुरक्षा इकाइयों के साथ लगातार समन्वय और संचार बनाए रखें।",
+          "दूरबीन, संचार उपकरण, आपातकालीन सीटी तथा अन्य आवश्यक सुरक्षा उपकरणों को हमेशा कार्यशील एवं तुरंत उपयोग के लिए तैयार रखें।",
+          "पूरी ड्यूटी के दौरान पूर्ण सतर्क रहें तथा उचित रिलीवर के आने तक अवलोकन पोस्ट न छोड़ें।",
+          "ड्यूटी के दौरान हुई सभी महत्वपूर्ण गतिविधियों, घटनाओं एवं समय का सही एवं व्यवस्थित रिकॉर्ड ड्यूटी लॉग में दर्ज करें।",
+          "जोनल/सेक्टर प्रभारी के निर्देशों का तुरंत पालन करें तथा निर्धारित मानक संचालन प्रक्रिया (SOP) के अनुसार कार्य करें।"
+        ]
+      },
+      "category": "elevated"
+    },
+    {
+      "id": "vehicle-checking",
+      "slug": "vehicle-checking",
+      "icon": "vehicle-check",
+      "en": {
+        "name": "Vehicle Checking Team",
+        "keyDirectives": [
+          "Check vehicles systematically",
+          "Maintain traffic flow",
+          "Look for suspicious vehicles, occupants, articles",
+          "Report unusual findings"
+        ],
+        "instructions": [
+          "The staff shall thoroughly check the vehicles parked in the parking lots assigned to them. No vehicle should be allowed to be parked without proper parking label/stickers.",
+          "Ensure that vehicles in the parking lot are parked in such a way so as not to obstruct vehicular movement.",
+          "No vehicle under repair or idle parking should be permitted at the parking lots.",
+          "The team should be equipped with all essential equipment such as inverted mirrors, torches, checking stickers, etc.",
+          "After checking of vehicles, the staff should affix \"Checking Stickers\" to the said vehicles.",
+          "The VEHISCAN App be used to identify the ownership of unknown vehicles.",
+          "The staff on duty shall be well aware of Under Vehicle Scanning system (UVSS) to ensure thorough checking.",
+          "The bonnet, dickiey and undercarriage of all vehicles shall necessarily be checked and sticker pasted."
+        ]
+      },
+      "hi": {
+        "name": "वाहन जाँच टीम",
+        "keyDirectives": [
+          "वाहनों की व्यवस्थित जाँच करें",
+          "यातायात प्रवाह बनाए रखें",
+          "संदिग्ध वाहन, सवार, वस्तुओं पर नज़र रखें",
+          "असामान्य पाए जाने पर सूचना दें"
+        ],
+        "instructions": [
+          "Staff अपने लिए निर्धारित पार्किंग स्थलों में खड़े वाहनों की पूरी जाँच करेंगे। किसी भी वाहन को उचित पार्किंग लेबल/स्टिकर के बिना पार्क करने की अनुमति नहीं दी जाएगी।",
+          "Staff यह भी सुनिश्चित करें कि पार्किंग स्थलों में वाहन इस तरह पार्क किए जाएँ कि वाहनों की आवाजाही में कोई बाधा न आए।",
+          "पार्किंग स्थलों पर किसी भी UnderRepair या बेकार खड़े वाहन को पार्क करने की अनुमति नहीं दी जाये।",
+          "टीम के पास सभी आवश्यक उपकरण जैसे Inverted mirrors, टॉर्च, चेकिंग स्टिकर आदि होने चाहिए।",
+          "वाहनों की जाँच के बाद, कर्मचारी उक्त वाहनों पर \"चेकिंग स्टिकर\" लगायेंगे।",
+          "लावारिस या अज्ञात वाहनों के स्वामित्व की पहचान के लिए VEHISCAN APP का उपयोग करें।",
+          "गहन जांच सुनिश्चित करने के लिए ड्यूटी पर मौजूद कर्मचारियों को अंडर व्हीकल स्कैनिंग सिस्टम (यूवीएसएस) के बारे में अच्छी तरह से पता होना चाहिए।",
+          "गाडी का बोनट, डिक्की व नीचे ज़रूर चेक करे व स्टीकर लगायें।"
+        ]
+      },
+      "category": "mobile"
+    },
+    {
+      "id": "dfmd",
+      "slug": "dfmd",
+      "icon": "door-frame-detector",
+      "en": {
+        "name": "DFMD / Access Control",
+        "keyDirectives": [
+          "Screen every person properly",
+          "Do not allow prohibited items",
+          "Maintain queue & discipline",
+          "Report suspicious behaviour / objects immediately"
+        ],
+        "instructions": [
+          "The staff deployed at DFMDs shall thoroughly check all visitors.",
+          "They shall wear gloves and be equipped with HHMDs for searching/frisking.",
+          "Two police personnel will be deployed at one point. One police personnel will search/frisk the upper body, while second police personnel will search/frisk the lower body.",
+          "Female visitors will be searched/frisked by female police personnel only. Checking of female visitors will be conducted inside ladies frisking booths (covered place).",
+          "The ID cards of visitors/invitees/guests be properly checked to prevent any unauthorised entry.",
+          "The deployed staff and I/C will ensure that there is proper electricity connection and the DFMDs/HHMDs are in working condition.",
+          "The I/Cs would ensure that signboards displaying enclosure no. etc. are properly displayed to visitors.",
+          "The staff would display signboards of prohibited items and ensure that no visitor takes prohibited item to their seating location.",
+          "Visitors carrying electric remote keys be properly briefed to deposit their keys at designated key booths."
+        ]
+      },
+      "hi": {
+        "name": "DFMD / प्रवेश नियंत्रण",
+        "keyDirectives": [
+          "प्रत्येक व्यक्ति की उचित जाँच करें",
+          "निषिद्ध वस्तुएँ अंदर न जाने दें",
+          "कतार एवं अनुशासन बनाए रखें",
+          "संदिग्ध व्यवहार / वस्तु की तुरंत सूचना दें"
+        ],
+        "instructions": [
+          "DFMD duty पर तैनात कर्मचारी सभी आगंतुकों की अच्छी तरह से जाँच/तलाशी करेंगे।",
+          "तलाशी लेने वाला स्टाफ हाथों में दस्ताने पहनेंगे और तलाशी के लिए HHMD से लैस होंगे।",
+          "एक स्थान पर कम से कम दो पुलिसकर्मी तैनात रहेंगे। एक पुलिसकर्मी शरीर के ऊपरी हिस्से की तलाशी लेगा, जबकि दूसरा पुलिसकर्मी शरीर के निचले हिस्से की तलाशी लेगा।",
+          "महिला आगंतुकों की तलाशी केवल महिला पुलिसकर्मियों द्वारा ही ली जाएगी। महिला आगंतुकों की जाँच महिला तलाशी बूथ (आवरण) के अंदर की जाएगी।",
+          "किसी भी अनधिकृत प्रवेश को रोकने के लिए आगंतुकों/आमंत्रित व्यक्तियों/मेहमानों के पहचान पत्रों की उचित जाँच की जाएगी।",
+          "तैनात कर्मचारी और प्रभारी अधिकारी यह सुनिश्चित करेंगे कि बिजली का उचित कनेक्शन है और DFMD/HHMD चालू स्थिति में हों।",
+          "प्रभारी अधिकारी यह सुनिश्चित करेंगे कि आगंतुकों को Enclosure No. आदि प्रदर्शित करने वाले साइनबोर्ड उचित रूप से प्रदर्शित किए जाएँ।",
+          "कर्मचारी निषिद्ध वस्तुओं (Prohibited Items) के साइनबोर्ड प्रदर्शित करेंगे और यह सुनिश्चित करेंगे कि कोई भी आगंतुक निषिद्ध वस्तु अपने बैठने के स्थान पर न ले जाए।",
+          "Staff आगंतुकों को अपनी Remote car key जमा करने के लिए उचित जानकारी देंगे।"
+        ]
+      },
+      "category": "access"
+    },
+    {
+      "id": "qrt",
+      "slug": "qrt",
+      "icon": "rapid-response",
+      "en": {
+        "name": "QRT — Quick Reaction Team",
+        "keyDirectives": [
+          "Remain standby & ready",
+          "Keep vehicle & equipment ready",
+          "Respond immediately on orders",
+          "Maintain communication"
+        ],
+        "instructions": [
+          "Look out for suspicious persons and activities. Enquire them thoroughly and report any suspicious activity to senior formations.",
+          "Respond immediately to any calls for assistance.",
+          "Keep Control room always informed of your location and activities.",
+          "Provide rapid armed response to any security incident or emergency within the area of their operation.",
+          "Conduct visual Anti-Sabotage Check of their respective area.",
+          "If any individual is found exhibiting suspicious behaviour or protestors is sighted, immediately inform the North District Control Room and restrain and verify the person.",
+          "In case of armed attack, counter it and call for backup from North District Control Room."
+        ]
+      },
+      "hi": {
+        "name": "QRT — क्विक रिएक्शन टीम",
+        "keyDirectives": [
+          "स्टैंडबाय एवं तैयार रहें",
+          "वाहन एवं उपकरण तैयार रखें",
+          "आदेश मिलते ही तुरंत प्रतिक्रिया दें",
+          "संचार बनाए रखें"
+        ],
+        "instructions": [
+          "संदिग्ध व्यक्तियों और गतिविधियों पर नज़र रखें। उनसे गहन पूछताछ करें और किसी भी संदिग्ध गतिविधि की सूचना वरिष्ठ अधिकारियों को दें।",
+          "सहायता के लिए किसी भी कॉल का तुरंत जवाब दें।",
+          "नियंत्रण कक्ष को हमेशा अपने स्थान और गतिविधियों से अवगत कराते रहें।",
+          "अपने कार्यक्षेत्र में किसी भी सुरक्षा घटना या आपात स्थिति में त्वरित सशस्त्र प्रतिक्रिया प्रदान करें।",
+          "अपने-अपने क्षेत्र में visual Anti-Sabotage Check करें।",
+          "यदि कोई व्यक्ति संदिग्ध व्यवहार करता हुआ पाया जाता है या प्रदर्शनकारी दिखाई देते हैं, तो तुरंत उत्तरी जिला नियंत्रण कक्ष को सूचित करें और उस व्यक्ति को रोकें और उसकी जाँच करें।",
+          "सशस्त्र हमले की स्थिति में, उसका प्रतिकार (counter) करें और उत्तरी जिला नियंत्रण कक्ष से सहायता के लिए कॉल करें।"
+        ]
+      },
+      "category": "mobile"
+    },
+    {
+      "id": "xray",
+      "slug": "xray",
+      "icon": "baggage-scanner",
+      "en": {
+        "name": "X-Ray Baggage Scanner",
+        "keyDirectives": [
+          "Screen baggage carefully",
+          "Look for suspicious items",
+          "Do not allow unscreened items",
+          "Report suspicious baggage"
+        ],
+        "instructions": [
+          "Screen every bag, suitcase, parcel, and carry-on item thoroughly through the X-Ray Baggage Scanner before granting entry.",
+          "Carefully identify suspicious shapes, concealed wires, dense objects, explosive components, or hazardous materials on the X-ray monitor.",
+          "Do not permit any unscanned baggage or personal belongings to enter the secured area under any circumstances.",
+          "Immediately isolate any suspicious baggage, inform the supervising officer, and act strictly in accordance with the prescribed SOP.",
+          "Ensure periodic rotation of X-ray scanner operators to minimize fatigue and maintain continuous vigilance during duty.",
+          "Affix the prescribed security tag or clearance sticker only after successful screening and before allowing final entry.",
+          "Maintain complete records of suspicious detections, secondary inspections, equipment issues, and all significant screening activities during the duty period."
+        ]
+      },
+      "hi": {
+        "name": "एक्स-रे बैगेज स्कैनर",
+        "keyDirectives": [
+          "सामान की सावधानी से जाँच करें",
+          "संदिग्ध वस्तुओं पर ध्यान दें",
+          "बिना जाँच किया सामान न जाने दें",
+          "संदिग्ध सामान की सूचना दें"
+        ],
+        "instructions": [
+          "प्रवेश से पूर्व सभी बैग, सूटकेस, पैकेट एवं अन्य सामान की एक्स-रे बैगेज स्कैनर के माध्यम से सावधानीपूर्वक जांच सुनिश्चित करें।",
+          "एक्स-रे मॉनिटर पर संदिग्ध आकृतियों, छिपे हुए तारों, घने पदार्थों, विस्फोटक सामग्री अथवा अन्य खतरनाक वस्तुओं की पहचान पर विशेष ध्यान दें।",
+          "बिना जांच किए गए किसी भी बैग या सामान को किसी भी परिस्थिति में सुरक्षित क्षेत्र में प्रवेश न करने दें।",
+          "किसी भी संदिग्ध बैग या सामान को तुरंत अलग करें, संबंधित प्रभारी अधिकारी को सूचित करें तथा निर्धारित मानक संचालन प्रक्रिया (SOP) का पूर्णतः पालन करें।",
+          "सतर्कता बनाए रखने एवं थकान कम करने के लिए एक्स-रे स्कैनर ऑपरेटरों की समय-समय पर अदला-बदली सुनिश्चित करें।",
+          "सफल जांच के उपरांत ही प्रत्येक बैग/सामान पर निर्धारित सुरक्षा टैग अथवा क्लियरेंस स्टिकर लगाकर अंतिम प्रवेश की अनुमति दें।",
+          "ड्यूटी के दौरान संदिग्ध वस्तुओं, द्वितीयक जांच, उपकरण संबंधी खराबियों तथा अन्य महत्वपूर्ण घटनाओं का पूर्ण एवं सही रिकॉर्ड सुरक्षित रखें।"
+        ]
+      },
+      "category": "access"
+    },
+    {
+      "id": "cctv",
+      "slug": "cctv",
+      "icon": "camera-monitor",
+      "en": {
+        "name": "CCTV / Control Room",
+        "keyDirectives": [
+          "Monitor cameras continuously",
+          "Watch sensitive locations",
+          "Communicate suspicious activity",
+          "Record & preserve footage"
+        ],
+        "instructions": [
+          "Continuously monitor all live CCTV camera feeds covering the assigned sectors and operational areas.",
+          "Maintain special surveillance over high-footfall zones, entry/exit gates, restricted areas, and other vulnerable locations.",
+          "Immediately alert field officers and the Control Room regarding any suspicious activity, security threat, or unusual crowd movement.",
+          "Record, preserve, and securely archive all significant footage required for investigation or post-incident review.",
+          "Regularly verify the operational status of CCTV cameras, including PTZ, zoom, infrared, and night-vision systems.",
+          "Maintain accurate logs of all incidents, alerts, communications, and actions with timestamps and the concerned officer's identification.",
+          "Act promptly on the directions of the Control Room Supervisor and ensure uninterrupted coordination with all deployed security teams."
+        ]
+      },
+      "hi": {
+        "name": "सीसीटीवी / नियंत्रण कक्ष",
+        "keyDirectives": [
+          "कैमरों की निरंतर निगरानी करें",
+          "संवेदनशील स्थानों पर नज़र रखें",
+          "संदिग्ध गतिविधि की सूचना दें",
+          "फुटेज रिकॉर्ड एवं संरक्षित करें"
+        ],
+        "instructions": [
+          "अपने निर्धारित क्षेत्रों एवं सभी संवेदनशील स्थानों के लाइव सीसीटीवी कैमरा फीड पर निरंतर एवं सतर्क निगरानी रखें।",
+          "अधिक भीड़ वाले क्षेत्रों, प्रवेश एवं निकास द्वारों, प्रतिबंधित क्षेत्रों तथा अन्य संवेदनशील स्थानों पर विशेष निगरानी बनाए रखें।",
+          "किसी भी संदिग्ध गतिविधि, सुरक्षा खतरे अथवा असामान्य भीड़ की स्थिति की सूचना तुरंत फील्ड अधिकारियों एवं कंट्रोल रूम को दें।",
+          "जांच, समीक्षा अथवा भविष्य में आवश्यक उपयोग हेतु सभी महत्वपूर्ण वीडियो फुटेज को सुरक्षित रूप से रिकॉर्ड एवं संरक्षित रखें।",
+          "सीसीटीवी प्रणाली, PTZ (Pan-Tilt-Zoom) कैमरे, ज़ूम एवं नाइट विज़न कैमरों की कार्यशीलता की समय-समय पर जांच सुनिश्चित करें।",
+          "प्रत्येक घटना, अलर्ट, संचार एवं की गई कार्रवाई का समय (Timestamp) तथा संबंधित अधिकारी की पहचान (ID) सहित सही एवं पूर्ण विवरण लॉग बुक में दर्ज करें।",
+          "कंट्रोल रूम प्रभारी के निर्देशों का तुरंत पालन करें तथा सभी तैनात सुरक्षा टीमों के साथ निरंतर समन्वय एवं प्रभावी संचार बनाए रखें।"
+        ]
+      },
+      "category": "monitoring"
+    },
+    {
+      "id": "medical",
+      "slug": "medical",
+      "icon": "ambulance",
+      "en": {
+        "name": "Medical / Ambulance",
+        "keyDirectives": [
+          "Keep vehicle & equipment ready",
+          "Ensure clear access",
+          "Respond quickly to emergency",
+          "Coordinate with control room"
+        ],
+        "instructions": [
+          "Keep the ambulance, medical equipment, and life-saving supplies fully operational and ready for immediate deployment.",
+          "Ensure a clear and unobstructed emergency access route for the ambulance at all times.",
+          "Respond immediately to medical emergencies and provide prompt first aid until advanced medical care is available.",
+          "Maintain continuous communication and coordination with the Control Room, field officers, and nearby medical teams.",
+          "Shift injured or ill persons safely using approved patient-handling procedures while ensuring their comfort and safety.",
+          "Maintain adequate stock of emergency medicines, oxygen cylinders, stretchers, trauma kits, and other essential medical equipment.",
+          "Record all medical incidents, patient movements, response timings, and actions taken, and immediately report any critical emergency to the supervising officer."
+        ]
+      },
+      "hi": {
+        "name": "चिकित्सा / एम्बुलेंस",
+        "keyDirectives": [
+          "वाहन एवं उपकरण तैयार रखें",
+          "मार्ग बाधा रहित रखें",
+          "आपात स्थिति में शीघ्र प्रतिक्रिया दें",
+          "नियंत्रण कक्ष से समन्वय रखें"
+        ],
+        "instructions": [
+          "एम्बुलेंस, चिकित्सा उपकरणों तथा सभी जीवनरक्षक संसाधनों को सदैव पूर्णतः कार्यशील एवं तत्काल उपयोग के लिए तैयार रखें।",
+          "एम्बुलेंस के आवागमन हेतु आपातकालीन मार्ग को हर समय साफ एवं बाधा रहित बनाए रखें।",
+          "किसी भी चिकित्सा आपातकाल की सूचना मिलते ही तुरंत मौके पर पहुंचें तथा आवश्यक प्राथमिक उपचार उपलब्ध कराएं।",
+          "कंट्रोल रूम, फील्ड अधिकारियों एवं निकटवर्ती चिकित्सा टीमों के साथ निरंतर समन्वय एवं प्रभावी संचार बनाए रखें।",
+          "घायल अथवा बीमार व्यक्ति को निर्धारित सुरक्षा मानकों के अनुसार सुरक्षित रूप से एम्बुलेंस तक पहुंचाकर आवश्यक चिकित्सा सहायता सुनिश्चित करें।",
+          "ऑक्सीजन सिलेंडर, स्ट्रेचर, ट्रॉमा किट, आवश्यक दवाइयों तथा अन्य चिकित्सा उपकरणों की उपलब्धता एवं कार्यशीलता की नियमित जांच करते रहें।",
+          "प्रत्येक चिकित्सा घटना, मरीज के स्थानांतरण, प्रतिक्रिया समय एवं की गई कार्रवाई का सही रिकॉर्ड रखें तथा किसी भी गंभीर स्थिति की सूचना तुरंत संबंधित प्रभारी अधिकारी को दें।"
+        ]
+      },
+      "category": "mobile"
+    }
+  ]
+}

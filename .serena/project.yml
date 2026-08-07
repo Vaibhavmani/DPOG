@@ -1,0 +1,58 @@
+# Serena project configuration
+# Docs: https://oraios.github.io/serena/02-usage/040_workflow.html#project-configuration
+
+project_name: "dp-deployment-instructions"
+
+# IMPORTANT: html and scss are EXPERIMENTAL language servers in Serena and are NOT
+# auto-detected. On a vanilla HTML/CSS/JS project they must be listed explicitly or
+# Serena falls back to plain text search and the symbol tools return nothing useful.
+#
+# `typescript` is also the correct key for plain JavaScript — there is no separate
+# `javascript` language server. The first entry acts as the default/fallback.
+#
+# Each language server costs startup time, so this list is deliberately minimal.
+languages:
+  - typescript   # .js / .mjs — the app's ES modules
+  - html         # experimental; in-file element/id symbols only, no cross-file refs
+  - scss         # experimental; handles .css as well as .scss/.sass
+  - markdown     # the docs in this repo
+
+# Note: there is no JSON language server in Serena, so `json` is NOT a valid key here
+# — adding it fails at startup. content/content.json is reached with search_for_pattern
+# and direct file reads, which is sufficient for a flat data file.
+
+encoding: "utf-8"
+
+ignore_all_files_in_gitignore: true
+
+ignored_paths:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/.git/**"
+  - "qr/**"                    # generated SVG output, no symbols worth indexing
+  - "docs/design-exports/**"   # Stitch reference markup; read manually, never edited
+
+read_only: false
+
+# Passed to the LLM every time this project is activated. Keep it short — it competes
+# with the Antigravity rules for attention, so it points at them rather than repeating them.
+initial_prompt: |
+  This project builds an offline-first bilingual (English/Hindi) duty-instruction web app
+  for a police deployment. Operational document: instruction text in content/content.json
+  is verbatim and must never be paraphrased or edited.
+
+  Before planning anything, read the memories `core` and `conventions`. Antigravity resets
+  its context between sessions; these memories are the only continuity that survives.
+
+  Hard constraints live in AGENTS.md and .agents/rules/. Design contract is DESIGN.md.
+
+excluded_tools: []
+
+# Modes are additive: base_modes (global) + default_modes + added_modes.
+# Projects can no longer override base_modes — use added_modes instead.
+# Onboarding is disabled because .serena/memories/ is hand-seeded and more accurate
+# than a re-derived pass would be.
+added_modes:
+  - no-onboarding
+
+included_optional_tools: []

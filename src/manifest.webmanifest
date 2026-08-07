@@ -1,0 +1,20 @@
+{
+  "short_name": "DP Duty",
+  "name": "Law & Order Deployment \u2014 Quick Instructions",
+  "icons": [
+    {
+      "src": "/assets/images/dp_logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/images/dp_logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#FBF9F4",
+  "theme_color": "#000C44",
+  "display": "standalone"
+}

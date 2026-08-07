@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Delhi Police — Scan QR for Instructions</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #1a1a2e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Arial Black', Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .card {
+      position: relative;
+      width: min(420px, 100%);
+      aspect-ratio: 3 / 4;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.7);
+      background-color: #000C44;
+      background-image: url('../assets/images/cover.jpg');
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      background-position: bottom center;
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        #000C44 0%,
+        #000C44 52%,
+        rgba(0, 12, 68, 0.55) 68%,
+        transparent 100%
+      );
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      padding: clamp(12px, 4%, 22px);
+    }
+
+    .logo-wrap {
+      width: clamp(56px, 16%, 76px);
+      margin-bottom: clamp(6px, 2%, 12px);
+      background: #fff;
+      border-radius: 50%;
+      padding: 3px;
+      box-shadow: 0 0 0 3px #c8a84b, 0 4px 16px rgba(0,0,0,0.5);
+    }
+    .logo-wrap img { width: 100%; display: block; border-radius: 50%; }
+
+    .title-block { text-align: center; line-height: 1.1; width: 100%; }
+    .title-law {
+      font-size: clamp(1.15rem, 5.5vw, 1.9rem);
+      font-weight: 900; color: #ffffff;
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .title-deployment {
+      font-size: clamp(1.8rem, 9vw, 3.2rem);
+      font-weight: 900; color: #FFE000;
+      letter-spacing: 0.02em; text-transform: uppercase; line-height: 1;
+    }
+    .title-sub {
+      font-size: clamp(0.7rem, 2.8vw, 1rem);
+      font-weight: 700; color: #ffffff;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      margin-top: 4px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .title-sub::before, .title-sub::after {
+      content: ''; display: block; height: 2px;
+      width: clamp(20px, 5%, 40px); background: #ffffff;
+    }
+
+    .alert-ribbon {
+      width: 100%;
+      background: #CC0000; color: #ffffff;
+      font-size: clamp(0.6rem, 2.4vw, 0.85rem);
+      font-weight: 900; letter-spacing: 0.12em;
+      text-align: center;
+      padding: clamp(6px, 1.8%, 10px) 12px;
+      text-transform: uppercase;
+      margin-top: clamp(8px, 2.5%, 14px);
+      border: 2px solid #ff4444;
+    }
+
+    .qr-zone {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: clamp(10px, 3.5%, 18px);
+      flex: 1; gap: 10px;
+    }
+
+    .scan-label { flex: 1; text-align: left; line-height: 1.3; }
+    .scan-label .scan-main {
+      font-size: clamp(0.85rem, 3.5vw, 1.2rem);
+      font-weight: 900; color: #FFE000;
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .scan-label .scan-sub {
+      font-size: clamp(0.65rem, 2.5vw, 0.85rem);
+      font-weight: 700; color: #ffffff;
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .scan-label .scan-url {
+      font-size: clamp(0.5rem, 1.8vw, 0.65rem);
+      color: rgba(255,255,255,0.6);
+      margin-top: 6px; font-family: monospace; word-break: break-all;
+    }
+
+    .qr-box {
+      flex-shrink: 0;
+      width: clamp(90px, 28%, 130px);
+      aspect-ratio: 1;
+      background: #ffffff;
+      border-radius: 6px;
+      padding: 6px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 0 3px rgba(255,224,0,0.4);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .qr-box svg { width: 100%; height: 100%; }
+
+    @media print {
+      body { background: #fff; padding: 0; min-height: 0; }
+      .card { width: 148mm; aspect-ratio: auto; height: 210mm; border-radius: 0; box-shadow: none; }
+      .print-btn { display: none; }
+    }
+
+    .print-btn {
+      position: fixed; top: 16px; right: 16px;
+      background: #CC0000; color: #fff; border: none;
+      padding: 10px 20px; font-size: 0.9rem; font-weight: 700;
+      border-radius: 6px; cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 9999;
+      letter-spacing: 0.05em;
+    }
+    .print-btn:hover { background: #aa0000; }
+  </style>
+</head>
+<body>
+
+  <button class="print-btn" onclick="window.print()">&#128438; Print / Save PDF</button>
+
+  <div class="card">
+    <div class="card-overlay"></div>
+    <div class="card-content">
+
+      <div class="logo-wrap">
+        <img src="../assets/images/dp_logo.png" alt="Delhi Police Logo">
+      </div>
+
+      <div class="title-block">
+        <div class="title-law">Law &amp; Order</div>
+        <div class="title-deployment">DEPLOYMENT</div>
+        <div class="title-sub">Quick Instructions</div>
+      </div>
+
+      <div class="alert-ribbon">
+        STAY ALERT &bull; STAY VIGILANT &bull; STAY SAFE
+      </div>
+
+      <div class="qr-zone">
+        <div class="scan-label">
+          <div class="scan-main">Scan QR Code</div>
+          <div class="scan-sub">for complete<br>instructions</div>
+          <div class="scan-url">deploy.delhipolice.gov.in</div>
+        </div>
+
+        <div class="qr-box">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280" width="100%" height="100%">
+  <rect width="280" height="280" fill="#FFFFFF"/>
+  <rect x="15" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="25" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="65" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="135" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="245" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="135" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="65" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="65" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="65" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="65" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="65" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="65" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="65" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="25" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="65" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="105" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="135" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="245" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="135" y="85" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="85" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="85" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="25" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="85" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="105" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="65" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="245" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="25" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="105" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="135" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="85" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="105" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="185" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="65" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="85" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="25" y="155" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="155" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="155" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="155" width="10" height="10" fill="#000C44"/>
+  <rect x="135" y="155" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="155" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="155" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="155" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="165" width="10" height="10" fill="#000C44"/>
+  <rect x="105" y="165" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="165" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="165" width="10" height="10" fill="#000C44"/>
+  <rect x="185" y="165" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="165" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="165" width="10" height="10" fill="#000C44"/>
+  <rect x="245" y="165" width="10" height="10" fill="#000C44"/>
+  <rect x="65" y="175" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="175" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="175" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="175" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="175" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="175" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="175" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="185" width="10" height="10" fill="#000C44"/>
+  <rect x="135" y="185" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="185" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="185" width="10" height="10" fill="#000C44"/>
+  <rect x="185" y="185" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="185" width="10" height="10" fill="#000C44"/>
+  <rect x="245" y="185" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="25" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="65" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="135" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="185" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="245" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="135" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="105" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="185" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="245" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="25" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="65" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="135" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="255" width="10" height="10" fill="#000C44"/>
+</svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

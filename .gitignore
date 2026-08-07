@@ -1,0 +1,36 @@
+# Dependencies & Build Output
+node_modules/
+dist/
+.vercel/
+
+# Generated runtime content copy (source of truth is content/content.json)
+src/content/content.json
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+
+# Serena AI cache
+.serena/cache/
+.serena/project.local.yml
+
+# Secrets & Environment
+.env
+*.env.*
+*.key
+*.secret
+
+# Archive Protection (separate archive folder outside repo)
+*archive*/
+dev-tools/
+*.jp2
+
+# Logs & Temporary files
+*.log
+*.tmp
+__pycache__/
+*.pyc

@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /dp-c9f7e2/
+Disallow: /dp-q3b8a1/

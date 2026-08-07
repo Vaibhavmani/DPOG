@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Search Instructions | Delhi Police</title>
+  <link rel="stylesheet" href="../assets/css/app.css?v=8.0">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#000C44">
+</head>
+<body>
+
+  <!-- Offline Status Banner -->
+  <div id="offline-banner" class="offline-banner" role="status">
+    ☁️ <span class="lang-en">Offline — showing saved instructions (v1.0)</span>
+    <span class="lang-hi">ऑफ़लाइन — सहेजे गए निर्देश दिखा रहा है (v1.0)</span>
+  </div>
+
+  <!-- Masthead Header Ribbon (Exact Match to User Mockup) -->
+  <header class="masthead">
+    <div class="masthead-top">
+      <a href="../" class="masthead-brand">
+        <div class="header-logo-box">
+          <img src="../assets/images/dp_logo.png" alt="Delhi Police Logo">
+        </div>
+        <div class="header-titles">
+          <h1 class="masthead-title">QUICK INSTRUCTIONS</h1>
+          <div class="masthead-subtitle">DELHI POLICE • दिल्ली पुलिस</div>
+        </div>
+      </a>
+      <div class="header-actions">
+        <button type="button" class="header-qr-btn qr-view-btn" data-target-modal="qr-modal-search">
+          <span>📱</span>
+          <span>QR Code</span>
+        </button>
+        <a href="tel:112" class="header-call-btn" aria-label="Call 112">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <span>112</span>
+        </a>
+        <div class="lang-toggle-box">
+          <button type="button" class="lang-toggle-btn active-lang" onclick="toggleLanguage('en')">EN</button>
+          <span style="color:rgba(255, 224, 127, 0.5); font-size:0.8rem;">|</span>
+          <button type="button" class="lang-toggle-btn" onclick="toggleLanguage('hi')">हिंदी</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Red Standing Directive Ribbon -->
+    <div class="directive-strip">
+      <span class="lang-en">STAY ALERT • STAY VIGILANT • STAY SAFE</span>
+      <span class="lang-hi">सतर्क रहें • चौकस रहें • सुरक्षित रहें</span>
+    </div>
+  </header>
+
+  <!-- Main Content Canvas -->
+  <main class="container">
+    
+    <div class="back-bar">
+      <a href="../" class="back-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        <span class="lang-en">ALL POSTS</span>
+        <span class="lang-hi">सभी पोस्ट</span>
+      </a>
+    </div>
+
+    <div class="search-form">
+      <div class="search-input-wrapper">
+        <div class="search-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+        <input type="search" id="search-input" class="search-input" placeholder="Search instructions / निर्देश खोजें..." aria-label="Search duty instructions" autofocus>
+      </div>
+    </div>
+
+    <div id="search-results"></div>
+
+    <div class="version-stamp">
+      Version 1.0 • Updated 2026-08-07
+    </div>
+
+    
+    <!-- QR Code Modal (Exact Match to User Mockup Image 2) -->
+    <div id="qr-modal-search" class="qr-modal-overlay" role="dialog" aria-modal="true">
+      <div class="qr-card-printable">
+        <button type="button" class="qr-modal-close-btn" aria-label="Close">✕</button>
+        <img src="../assets/images/dp_logo.png" alt="Delhi Police Logo" class="qr-modal-logo">
+        <h2 class="qr-card-title">SCAN QR CODE FOR INSTRUCTIONS</h2>
+        <p class="qr-card-subtitle">
+          Scan with any smartphone camera to open instructions directly on mobile or tablet.
+        </p>
+
+        <div class="qr-inner-frame">
+          <div class="qr-image-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280" width="100%" height="100%">
+  <rect width="280" height="280" fill="#FFFFFF"/>
+  <rect x="15" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="25" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="65" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="245" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="15" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="25" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="35" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="45" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="55" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="65" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="65" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="65" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="65" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="65" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="65" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="65" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="25" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="65" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="105" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="135" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="245" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="75" width="10" height="10" fill="#000C44"/>
+  <rect x="105" y="85" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="85" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="85" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="65" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="105" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="135" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="95" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="65" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="105" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="105" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="25" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="105" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="185" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="115" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="25" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="105" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="135" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="185" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="125" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="25" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="85" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="185" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="245" y="135" width="10" height="10" fill="#000C44"/>
+  <rect x="25" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="85" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="185" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="245" y="145" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="155" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="155" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="155" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="155" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="155" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="155" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="165" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="165" width="10" height="10" fill="#000C44"/>
+  <rect x="85" y="165" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="165" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="165" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="165" width="10" height="10" fill="#000C44"/>
+  <rect x="245" y="165" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="175" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="175" width="10" height="10" fill="#000C44"/>
+  <rect x="85" y="175" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="175" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="175" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="175" width="10" height="10" fill="#000C44"/>
+  <rect x="245" y="175" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="175" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="185" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="185" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="185" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="185" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="185" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="25" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="65" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="245" y="195" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="135" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="165" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="205" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="135" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="255" y="215" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="145" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="225" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="105" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="115" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="185" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="195" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="235" y="235" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="105" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="125" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="185" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="245" width="10" height="10" fill="#000C44"/>
+  <rect x="15" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="25" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="35" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="45" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="55" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="65" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="75" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="95" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="105" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="155" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="175" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="205" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="215" y="255" width="10" height="10" fill="#000C44"/>
+  <rect x="225" y="255" width="10" height="10" fill="#000C44"/>
+</svg>
+          </div>
+          <div class="qr-frame-badge">
+            <span>📱</span>
+            <span>MOBILE &amp; TABLET OPTIMIZED</span>
+          </div>
+        </div>
+
+        <div class="qr-modal-actions">
+          <button type="button" class="qr-copy-btn qr-copy-url-btn" onclick="copyPageURL(this)">
+            <span>📋</span>
+            <span>Copy URL</span>
+          </button>
+          <button type="button" class="qr-share-btn" onclick="shareWebsite()">
+            <span>🔗</span>
+            <span>Share Website</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    
+  </main>
+
+  
+    <!-- Emergency Hotlines Modal -->
+    <div id="hotline-modal" class="qr-modal-overlay" role="dialog" aria-modal="true">
+      <div class="qr-card-printable">
+        <button type="button" class="qr-modal-close-btn" aria-label="Close">✕</button>
+        <img src="../assets/images/dp_logo.png" alt="Delhi Police Logo" class="qr-modal-logo">
+        <h2 class="qr-card-title">EMERGENCY CONTROL ROOM HOTLINES</h2>
+        <p class="qr-card-subtitle">One-touch tactical dialing for field personnel &amp; commanders.</p>
+
+        <div style="margin-bottom: 20px; text-align: left;">
+          <div class="hotline-item-card">
+            <div class="hotline-info">
+              <div class="hotline-icon">🚨</div>
+              <div>
+                <div class="hotline-name">Emergency Response System</div>
+                <div class="hotline-num">112 (Toll Free)</div>
+              </div>
+            </div>
+            <a href="tel:112" class="hotline-dial-btn">📞 Dial 112</a>
+          </div>
+
+          <div class="hotline-item-card">
+            <div class="hotline-info">
+              <div class="hotline-icon">📞</div>
+              <div>
+                <div class="hotline-name">North District Control Room</div>
+                <div class="hotline-num">011-23817012</div>
+              </div>
+            </div>
+            <a href="tel:01123817012" class="hotline-dial-btn">📞 Dial</a>
+          </div>
+
+          <div class="hotline-item-card">
+            <div class="hotline-info">
+              <div class="hotline-icon">🚓</div>
+              <div>
+                <div class="hotline-name">Central Police Control Room (PCR)</div>
+                <div class="hotline-num">100</div>
+              </div>
+            </div>
+            <a href="tel:100" class="hotline-dial-btn">📞 Dial 100</a>
+          </div>
+
+          <div class="hotline-item-card">
+            <div class="hotline-info">
+              <div class="hotline-icon">🛡️</div>
+              <div>
+                <div class="hotline-name">SWAT / QRT Tactical Command</div>
+                <div class="hotline-num">011-23817013</div>
+              </div>
+            </div>
+            <a href="tel:01123817013" class="hotline-dial-btn">📞 Dial</a>
+          </div>
+        </div>
+
+        <button type="button" class="qr-copy-btn qr-modal-close-btn-inline" style="width:100%; border:none; background-color:var(--navy-deep); color:var(--white);">Close Modal</button>
+      </div>
+    </div>
+    
+
+  <!-- Fixed Bottom Control Room Call Bar (Signal Red Signature Element) -->
+  <footer class="control-room-bar">
+    <a href="tel:9899101199" class="control-room-call-btn" aria-label="Call Control Room">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:24px; height:24px; fill:var(--signal-red);"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      <span class="lang-en">CALL CONTROL ROOM (9899101199)</span>
+      <span class="lang-hi">नियंत्रण कक्ष को कॉल करें (9899101199)</span>
+    </a>
+  </footer>
+
+  <script src="../assets/js/lang.js"></script>
+  <script src="../assets/js/search.js"></script>
+  <script src="../assets/js/app.js?v=8.0"></script>
+  
+</body>
+</html>
