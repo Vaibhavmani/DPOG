@@ -3,61 +3,33 @@ import os
 import gzip
 import re
 import math
+import qrcode
+import qrcode.image.svg
 
-def generate_qr_matrix(text):
-    size = 25
-    matrix = [[0 for _ in range(size)] for _ in range(size)]
-    
-    def add_finder(r_off, c_off):
-        for r in range(7):
-            for c in range(7):
-                if r in (0, 6) or c in (0, 6) or (2 <= r <= 4 and 2 <= c <= 4):
-                    matrix[r_off + r][c_off + c] = 1
+def qr_matrix_to_svg(slug, target_url, output_path):
+    qr = qrcode.QRCode(
+        version=None,
+        error_correction=qrcode.constants.ERROR_CORRECT_M,
+        box_size=10,
+        border=2,
+    )
+    qr.add_data(target_url)
+    qr.make(fit=True)
 
-    add_finder(0, 0)
-    add_finder(0, size - 7)
-    add_finder(size - 7, 0)
+    matrix = qr.get_matrix()
+    dim = len(matrix)
+    path_parts = []
+    for r in range(dim):
+        for c in range(dim):
+            if matrix[r][c]:
+                path_parts.append(f"M{c*10},{r*10}h10v10h-10z")
 
-    for i in range(8, size - 8):
-        if i % 2 == 0:
-            matrix[6][i] = 1
-            matrix[i][6] = 1
-
-    h = hash(text)
-    for r in range(size):
-        for c in range(size):
-            if matrix[r][c] == 0:
-                if (r < 8 and (c < 8 or c >= size - 8)) or (r >= size - 8 and c < 8):
-                    continue
-                val = (h ^ (r * 31 + c * 17)) % 3 == 0
-                matrix[r][c] = 1 if val else 0
-                
-    return matrix, size
-
-def qr_matrix_to_svg(text, target_url, output_path):
-    matrix, size = generate_qr_matrix(target_url)
-    module_size = 10
-    padding = 15
-    qr_dim = size * module_size
-    width = qr_dim + (padding * 2)
-    height = qr_dim + (padding * 2)
-
-    svg_parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="100%" height="100%">',
-        f'  <rect width="{width}" height="{height}" fill="#FFFFFF"/>'
-    ]
-
-    for r in range(size):
-        for c in range(size):
-            if matrix[r][c] == 1:
-                x = padding + (c * module_size)
-                y = padding + (r * module_size)
-                svg_parts.append(f'  <rect x="{x}" y="{y}" width="{module_size}" height="{module_size}" fill="#000C44"/>')
-
-    svg_parts.append('</svg>')
+    view_dim = dim * 10
+    path_d = "".join(path_parts)
+    svg_data = f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {view_dim} {view_dim}" width="100%" height="100%"><rect width="{view_dim}" height="{view_dim}" fill="#FFFFFF"/><path d="{path_d}" fill="#000C44"/></svg>'
 
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write("\n".join(svg_parts))
+        f.write(svg_data)
 
 def load_svg_icon(icon_name):
     path = f"src/assets/icons/{icon_name}.svg"
@@ -620,7 +592,19 @@ def main():
     with open("src/robots.txt", "w", encoding="utf-8") as f:
         f.write("User-agent: *\nDisallow: /dp-c9f7e2/\nDisallow: /dp-q3b8a1/\n")
 
-    # 9. Payload Budget Measurement Check
+    # 9a. Sync admin panel into the protected URL slot
+    #     admin/index.html is the source of truth; src/dp-c9f7e2/index.html
+    #     must always be the admin CMS panel, not the checklist.
+    import shutil as _shutil
+    _admin_src = os.path.join(os.path.dirname(__file__), "admin", "index.html")
+    _admin_dst = os.path.join("src", "dp-c9f7e2", "index.html")
+    if os.path.exists(_admin_src):
+        os.makedirs(os.path.dirname(_admin_dst), exist_ok=True)
+        _shutil.copy2(_admin_src, _admin_dst)
+        print("  Admin panel synced -> src/dp-c9f7e2/index.html")
+
+
+
     print("\nRunning Payload Budget Measurement (< 100KB gzipped)...")
     total_uncompressed = 0
     total_gzipped = 0

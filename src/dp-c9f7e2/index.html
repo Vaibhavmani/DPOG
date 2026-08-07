@@ -3,468 +3,541 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <title>Duty Shift Compliance Checklist | Delhi Police</title>
-  <link rel="stylesheet" href="../assets/css/app.css?v=8.0">
-  <link rel="manifest" href="../manifest.webmanifest">
-  <meta name="theme-color" content="#000C44">
+  <title>Admin Portal — Law & Order Duty Instructions Editor</title>
+  <style>
+    :root {
+      --navy-deep: #0B1F6B;
+      --navy-ink: #071543;
+      --signal-red: #D62027;
+      --alert-yellow: #FFD100;
+      --paper: #F7F5F0;
+      --white: #FFFFFF;
+      --gray-light: #EFECE4;
+      --khaki: #C8B187;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--paper);
+      color: var(--navy-ink);
+      line-height: 1.5;
+      padding-bottom: 120px;
+    }
+    header {
+      background-color: var(--navy-deep);
+      color: var(--white);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 { font-size: 1.25rem; font-weight: 700; text-transform: uppercase; }
+
+    .container { max-width: 960px; margin: 20px auto; padding: 0 16px; }
+    
+    .status-msg {
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      font-weight: 700;
+      display: none;
+      line-height: 1.4;
+    }
+    .status-msg.success { background-color: #D4EDDA; color: #155724; border: 1px solid #C3E6CB; }
+    .status-msg.error { background-color: #F8D7DA; color: #721C24; border: 1px solid #F5C6CB; }
+    .status-msg.info { background-color: #CCE5FF; color: #004085; border: 1px solid #B8DAFF; }
+
+    .card {
+      background-color: var(--white);
+      border: 2px solid var(--navy-deep);
+      border-radius: 8px;
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      position: relative;
+    }
+    .card-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--gray-light);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .card-header-bar h2 {
+      font-size: 1.25rem;
+      color: var(--navy-deep);
+      text-transform: uppercase;
+    }
+
+    .form-group { margin-bottom: 14px; }
+    label { display: block; font-weight: 700; font-size: 0.9375rem; margin-bottom: 4px; color: var(--navy-deep); }
+    input[type="text"], textarea, select {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 1rem;
+      border: 1px solid #CCC;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+    textarea { min-height: 70px; resize: vertical; }
+
+    .bilingual-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 650px) {
+      .bilingual-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .lang-box {
+      background-color: var(--paper);
+      padding: 14px;
+      border-radius: 6px;
+      border: 1px solid var(--khaki);
+    }
+    .lang-title { font-weight: 800; font-size: 0.875rem; text-transform: uppercase; margin-bottom: 8px; color: var(--navy-deep); }
+
+    .dynamic-item {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+      align-items: flex-start;
+    }
+    .remove-btn {
+      background-color: var(--signal-red);
+      color: white;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .delete-post-btn {
+      background-color: var(--signal-red);
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .add-btn {
+      background-color: var(--navy-deep);
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+    .add-post-main-btn {
+      width: 100%;
+      background-color: var(--navy-deep);
+      color: var(--white);
+      border: 2px dashed var(--alert-yellow);
+      padding: 16px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .add-post-main-btn:hover {
+      background-color: #071543;
+    }
+
+    /* Fixed Bottom Action Bar with Single Extra Large Centered Save Button */
+    .footer-actions {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background-color: var(--navy-ink);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.4);
+      z-index: 200;
+      border-top: 3px solid var(--alert-yellow);
+    }
+    .footer-actions .open-link {
+      position: absolute;
+      left: 20px;
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .save-center-btn {
+      background: linear-gradient(180deg, #FFD100 0%, #E6BC00 100%);
+      color: var(--navy-ink);
+      font-weight: 900;
+      border: none;
+      padding: 16px 42px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1.25rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 14px rgba(255, 209, 0, 0.4);
+      transition: transform 0.15s ease, background-color 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .save-center-btn:hover {
+      background: #FFE033;
+      transform: scale(1.03);
+    }
+    .save-center-btn:active {
+      transform: scale(0.98);
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Offline Status Banner -->
-  <div id="offline-banner" class="offline-banner" role="status">
-    ☁️ <span class="lang-en">Offline — showing saved instructions (v1.0)</span>
-    <span class="lang-hi">ऑफ़लाइन — सहेजे गए निर्देश दिखा रहा है (v1.0)</span>
-  </div>
-
-  <!-- Masthead Header Ribbon (Exact Match to User Mockup) -->
-  <header class="masthead">
-    <div class="masthead-top">
-      <a href="../" class="masthead-brand">
-        <div class="header-logo-box">
-          <img src="../assets/images/dp_logo.png" alt="Delhi Police Logo">
-        </div>
-        <div class="header-titles">
-          <h1 class="masthead-title">QUICK INSTRUCTIONS</h1>
-          <div class="masthead-subtitle">DELHI POLICE • दिल्ली पुलिस</div>
-        </div>
-      </a>
-      <div class="header-actions">
-        <button type="button" class="header-qr-btn qr-view-btn" data-target-modal="qr-modal-checklist">
-          <span>📱</span>
-          <span>QR Code</span>
-        </button>
-        <a href="tel:112" class="header-call-btn" aria-label="Call 112">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-          <span>112</span>
-        </a>
-        <div class="lang-toggle-box">
-          <button type="button" class="lang-toggle-btn active-lang" onclick="toggleLanguage('en')">EN</button>
-          <span style="color:rgba(255, 224, 127, 0.5); font-size:0.8rem;">|</span>
-          <button type="button" class="lang-toggle-btn" onclick="toggleLanguage('hi')">हिंदी</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Red Standing Directive Ribbon -->
-    <div class="directive-strip">
-      <span class="lang-en">STAY ALERT • STAY VIGILANT • STAY SAFE</span>
-      <span class="lang-hi">सतर्क रहें • चौकस रहें • सुरक्षित रहें</span>
-    </div>
+  <header>
+    <h1>Admin Portal — Law &amp; Order Duty Instructions Editor</h1>
   </header>
 
-  <!-- Main Content Canvas -->
   <main class="container">
-    
-    <div class="back-bar">
-      <a href="../" class="back-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-        <span class="lang-en">ALL POSTS</span>
-        <span class="lang-hi">सभी पोस्ट</span>
-      </a>
-      <button type="button" class="qr-view-btn" onclick="resetChecklist()" style="color:var(--signal-red); border-color:var(--signal-red);">
-        🔄 Reset Shift
-      </button>
-    </div>
+    <div id="status-msg" class="status-msg"></div>
 
-    <div class="post-header-band">
-      <h2 class="post-header-title">
-        <span class="lang-en">DUTY SHIFT COMPLIANCE CHECKLIST</span>
-        <span class="lang-hi">ड्यूटी शिफ्ट अनुपालन चेकलिस्ट</span>
-      </h2>
-      <div class="post-header-icon">📋</div>
-    </div>
-
-    <div class="checklist-card-box">
-      <div class="checklist-form-grid">
+    <!-- Metadata Section -->
+    <section class="card">
+      <h2>App Metadata &amp; Control Room</h2>
+      <div class="bilingual-grid">
         <div class="form-group">
-          <label class="form-label" for="post-select">Select Duty Post / स्थान चुनें</label>
-          <select id="post-select" class="form-control"></select>
+          <label>Version Stamp</label>
+          <input type="text" id="meta-version">
         </div>
         <div class="form-group">
-          <label class="form-label" for="officer-rank">Officer Rank / पद</label>
-          <select id="officer-rank" class="form-control">
-            <option value="Constable">Constable / आरक्षी</option>
-            <option value="Head Constable">Head Constable / मुख्य आरक्षी</option>
-            <option value="Assistant Sub-Inspector">Assistant Sub-Inspector / ए.एस.आई</option>
-            <option value="Sub-Inspector">Sub-Inspector / उप-निरीक्षक</option>
-            <option value="Inspector">Inspector / निरीक्षक</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="officer-name">Officer Name &amp; PNO / नाम व पी.एन.ओ</label>
-          <input type="text" id="officer-name" class="form-control" placeholder="e.g. Ct. Ramesh Kumar (PNO 28190012)">
+          <label>Last Updated Date</label>
+          <input type="text" id="meta-updated">
         </div>
       </div>
-
-      <div class="progress-container">
-        <div class="progress-header">
-          <span id="progress-text-val">0 / 0 Verified (0%)</span>
-          <span id="checklist-status-badge" class="status-badge-pending">IN PROGRESS</span>
-        </div>
-        <div class="progress-bar-bg">
-          <div id="progress-bar-fill" class="progress-bar-fill"></div>
-        </div>
+      <div class="form-group">
+        <label>North District Control Room Phone Number</label>
+        <input type="text" id="ctrl-number">
       </div>
+    </section>
 
-      <div id="checklist-items-container"></div>
-    </div>
+    <!-- Header Action Bar for Adding Posts -->
+    <button type="button" class="add-post-main-btn" onclick="addNewPost()">
+      ➕ Add New Duty Post (नया ड्यूटी पॉइंट जोड़ें)
+    </button>
 
-    <div class="version-stamp">
-      Version 1.0 • Updated 2026-08-07
-    </div>
+    <!-- Posts Section Container -->
+    <div id="posts-editor-container"></div>
 
-    
-    <!-- QR Code Modal (Exact Match to User Mockup Image 2) -->
-    <div id="qr-modal-checklist" class="qr-modal-overlay" role="dialog" aria-modal="true">
-      <div class="qr-card-printable">
-        <button type="button" class="qr-modal-close-btn" aria-label="Close">✕</button>
-        <img src="../assets/images/dp_logo.png" alt="Delhi Police Logo" class="qr-modal-logo">
-        <h2 class="qr-card-title">SCAN QR CODE FOR INSTRUCTIONS</h2>
-        <p class="qr-card-subtitle">
-          Scan with any smartphone camera to open instructions directly on mobile or tablet.
-        </p>
+    <!-- Bottom Action Button for Adding Posts -->
+    <button type="button" class="add-post-main-btn" onclick="addNewPost()">
+      ➕ Add New Duty Post (नया ड्यूटी पॉइंट जोड़ें)
+    </button>
 
-        <div class="qr-inner-frame">
-          <div class="qr-image-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280" width="100%" height="100%">
-  <rect width="280" height="280" fill="#FFFFFF"/>
-  <rect x="15" y="15" width="10" height="10" fill="#000C44"/>
-  <rect x="25" y="15" width="10" height="10" fill="#000C44"/>
-  <rect x="35" y="15" width="10" height="10" fill="#000C44"/>
-  <rect x="45" y="15" width="10" height="10" fill="#000C44"/>
-  <rect x="55" y="15" width="10" height="10" fill="#000C44"/>
-  <rect x="65" y="15" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="15" width="10" height="10" fill="#000C44"/>
-  <rect x="195" y="15" width="10" height="10" fill="#000C44"/>
-  <rect x="205" y="15" width="10" height="10" fill="#000C44"/>
-  <rect x="215" y="15" width="10" height="10" fill="#000C44"/>
-  <rect x="225" y="15" width="10" height="10" fill="#000C44"/>
-  <rect x="235" y="15" width="10" height="10" fill="#000C44"/>
-  <rect x="245" y="15" width="10" height="10" fill="#000C44"/>
-  <rect x="255" y="15" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="25" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="25" width="10" height="10" fill="#000C44"/>
-  <rect x="125" y="25" width="10" height="10" fill="#000C44"/>
-  <rect x="155" y="25" width="10" height="10" fill="#000C44"/>
-  <rect x="175" y="25" width="10" height="10" fill="#000C44"/>
-  <rect x="195" y="25" width="10" height="10" fill="#000C44"/>
-  <rect x="255" y="25" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="35" width="10" height="10" fill="#000C44"/>
-  <rect x="35" y="35" width="10" height="10" fill="#000C44"/>
-  <rect x="45" y="35" width="10" height="10" fill="#000C44"/>
-  <rect x="55" y="35" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="35" width="10" height="10" fill="#000C44"/>
-  <rect x="195" y="35" width="10" height="10" fill="#000C44"/>
-  <rect x="215" y="35" width="10" height="10" fill="#000C44"/>
-  <rect x="225" y="35" width="10" height="10" fill="#000C44"/>
-  <rect x="235" y="35" width="10" height="10" fill="#000C44"/>
-  <rect x="255" y="35" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="45" width="10" height="10" fill="#000C44"/>
-  <rect x="35" y="45" width="10" height="10" fill="#000C44"/>
-  <rect x="45" y="45" width="10" height="10" fill="#000C44"/>
-  <rect x="55" y="45" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="45" width="10" height="10" fill="#000C44"/>
-  <rect x="95" y="45" width="10" height="10" fill="#000C44"/>
-  <rect x="115" y="45" width="10" height="10" fill="#000C44"/>
-  <rect x="125" y="45" width="10" height="10" fill="#000C44"/>
-  <rect x="145" y="45" width="10" height="10" fill="#000C44"/>
-  <rect x="165" y="45" width="10" height="10" fill="#000C44"/>
-  <rect x="195" y="45" width="10" height="10" fill="#000C44"/>
-  <rect x="215" y="45" width="10" height="10" fill="#000C44"/>
-  <rect x="225" y="45" width="10" height="10" fill="#000C44"/>
-  <rect x="235" y="45" width="10" height="10" fill="#000C44"/>
-  <rect x="255" y="45" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="55" width="10" height="10" fill="#000C44"/>
-  <rect x="35" y="55" width="10" height="10" fill="#000C44"/>
-  <rect x="45" y="55" width="10" height="10" fill="#000C44"/>
-  <rect x="55" y="55" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="55" width="10" height="10" fill="#000C44"/>
-  <rect x="135" y="55" width="10" height="10" fill="#000C44"/>
-  <rect x="145" y="55" width="10" height="10" fill="#000C44"/>
-  <rect x="155" y="55" width="10" height="10" fill="#000C44"/>
-  <rect x="165" y="55" width="10" height="10" fill="#000C44"/>
-  <rect x="195" y="55" width="10" height="10" fill="#000C44"/>
-  <rect x="215" y="55" width="10" height="10" fill="#000C44"/>
-  <rect x="225" y="55" width="10" height="10" fill="#000C44"/>
-  <rect x="235" y="55" width="10" height="10" fill="#000C44"/>
-  <rect x="255" y="55" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="65" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="65" width="10" height="10" fill="#000C44"/>
-  <rect x="125" y="65" width="10" height="10" fill="#000C44"/>
-  <rect x="165" y="65" width="10" height="10" fill="#000C44"/>
-  <rect x="195" y="65" width="10" height="10" fill="#000C44"/>
-  <rect x="255" y="65" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="25" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="35" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="45" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="55" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="65" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="95" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="105" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="115" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="135" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="155" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="175" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="195" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="205" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="215" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="225" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="235" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="245" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="255" y="75" width="10" height="10" fill="#000C44"/>
-  <rect x="135" y="85" width="10" height="10" fill="#000C44"/>
-  <rect x="55" y="95" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="95" width="10" height="10" fill="#000C44"/>
-  <rect x="25" y="105" width="10" height="10" fill="#000C44"/>
-  <rect x="35" y="105" width="10" height="10" fill="#000C44"/>
-  <rect x="65" y="105" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="105" width="10" height="10" fill="#000C44"/>
-  <rect x="105" y="105" width="10" height="10" fill="#000C44"/>
-  <rect x="145" y="105" width="10" height="10" fill="#000C44"/>
-  <rect x="205" y="105" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="115" width="10" height="10" fill="#000C44"/>
-  <rect x="45" y="115" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="115" width="10" height="10" fill="#000C44"/>
-  <rect x="95" y="115" width="10" height="10" fill="#000C44"/>
-  <rect x="115" y="115" width="10" height="10" fill="#000C44"/>
-  <rect x="125" y="115" width="10" height="10" fill="#000C44"/>
-  <rect x="155" y="115" width="10" height="10" fill="#000C44"/>
-  <rect x="165" y="115" width="10" height="10" fill="#000C44"/>
-  <rect x="235" y="115" width="10" height="10" fill="#000C44"/>
-  <rect x="245" y="115" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="125" width="10" height="10" fill="#000C44"/>
-  <rect x="25" y="125" width="10" height="10" fill="#000C44"/>
-  <rect x="35" y="125" width="10" height="10" fill="#000C44"/>
-  <rect x="45" y="125" width="10" height="10" fill="#000C44"/>
-  <rect x="55" y="125" width="10" height="10" fill="#000C44"/>
-  <rect x="65" y="125" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="125" width="10" height="10" fill="#000C44"/>
-  <rect x="85" y="125" width="10" height="10" fill="#000C44"/>
-  <rect x="95" y="125" width="10" height="10" fill="#000C44"/>
-  <rect x="105" y="125" width="10" height="10" fill="#000C44"/>
-  <rect x="115" y="125" width="10" height="10" fill="#000C44"/>
-  <rect x="135" y="125" width="10" height="10" fill="#000C44"/>
-  <rect x="175" y="125" width="10" height="10" fill="#000C44"/>
-  <rect x="215" y="125" width="10" height="10" fill="#000C44"/>
-  <rect x="255" y="125" width="10" height="10" fill="#000C44"/>
-  <rect x="35" y="135" width="10" height="10" fill="#000C44"/>
-  <rect x="65" y="135" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="135" width="10" height="10" fill="#000C44"/>
-  <rect x="85" y="135" width="10" height="10" fill="#000C44"/>
-  <rect x="105" y="135" width="10" height="10" fill="#000C44"/>
-  <rect x="125" y="135" width="10" height="10" fill="#000C44"/>
-  <rect x="175" y="135" width="10" height="10" fill="#000C44"/>
-  <rect x="185" y="135" width="10" height="10" fill="#000C44"/>
-  <rect x="195" y="135" width="10" height="10" fill="#000C44"/>
-  <rect x="205" y="135" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="145" width="10" height="10" fill="#000C44"/>
-  <rect x="45" y="145" width="10" height="10" fill="#000C44"/>
-  <rect x="55" y="145" width="10" height="10" fill="#000C44"/>
-  <rect x="145" y="145" width="10" height="10" fill="#000C44"/>
-  <rect x="155" y="145" width="10" height="10" fill="#000C44"/>
-  <rect x="175" y="145" width="10" height="10" fill="#000C44"/>
-  <rect x="195" y="145" width="10" height="10" fill="#000C44"/>
-  <rect x="215" y="145" width="10" height="10" fill="#000C44"/>
-  <rect x="225" y="145" width="10" height="10" fill="#000C44"/>
-  <rect x="245" y="145" width="10" height="10" fill="#000C44"/>
-  <rect x="25" y="155" width="10" height="10" fill="#000C44"/>
-  <rect x="65" y="155" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="155" width="10" height="10" fill="#000C44"/>
-  <rect x="95" y="155" width="10" height="10" fill="#000C44"/>
-  <rect x="115" y="155" width="10" height="10" fill="#000C44"/>
-  <rect x="135" y="155" width="10" height="10" fill="#000C44"/>
-  <rect x="145" y="155" width="10" height="10" fill="#000C44"/>
-  <rect x="255" y="155" width="10" height="10" fill="#000C44"/>
-  <rect x="85" y="165" width="10" height="10" fill="#000C44"/>
-  <rect x="95" y="165" width="10" height="10" fill="#000C44"/>
-  <rect x="105" y="165" width="10" height="10" fill="#000C44"/>
-  <rect x="115" y="165" width="10" height="10" fill="#000C44"/>
-  <rect x="165" y="165" width="10" height="10" fill="#000C44"/>
-  <rect x="185" y="165" width="10" height="10" fill="#000C44"/>
-  <rect x="215" y="165" width="10" height="10" fill="#000C44"/>
-  <rect x="35" y="175" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="175" width="10" height="10" fill="#000C44"/>
-  <rect x="115" y="175" width="10" height="10" fill="#000C44"/>
-  <rect x="155" y="175" width="10" height="10" fill="#000C44"/>
-  <rect x="125" y="185" width="10" height="10" fill="#000C44"/>
-  <rect x="135" y="185" width="10" height="10" fill="#000C44"/>
-  <rect x="185" y="185" width="10" height="10" fill="#000C44"/>
-  <rect x="225" y="185" width="10" height="10" fill="#000C44"/>
-  <rect x="235" y="185" width="10" height="10" fill="#000C44"/>
-  <rect x="255" y="185" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="195" width="10" height="10" fill="#000C44"/>
-  <rect x="25" y="195" width="10" height="10" fill="#000C44"/>
-  <rect x="35" y="195" width="10" height="10" fill="#000C44"/>
-  <rect x="45" y="195" width="10" height="10" fill="#000C44"/>
-  <rect x="55" y="195" width="10" height="10" fill="#000C44"/>
-  <rect x="65" y="195" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="195" width="10" height="10" fill="#000C44"/>
-  <rect x="155" y="195" width="10" height="10" fill="#000C44"/>
-  <rect x="175" y="195" width="10" height="10" fill="#000C44"/>
-  <rect x="195" y="195" width="10" height="10" fill="#000C44"/>
-  <rect x="205" y="195" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="205" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="205" width="10" height="10" fill="#000C44"/>
-  <rect x="125" y="205" width="10" height="10" fill="#000C44"/>
-  <rect x="135" y="205" width="10" height="10" fill="#000C44"/>
-  <rect x="145" y="205" width="10" height="10" fill="#000C44"/>
-  <rect x="155" y="205" width="10" height="10" fill="#000C44"/>
-  <rect x="165" y="205" width="10" height="10" fill="#000C44"/>
-  <rect x="175" y="205" width="10" height="10" fill="#000C44"/>
-  <rect x="185" y="205" width="10" height="10" fill="#000C44"/>
-  <rect x="195" y="205" width="10" height="10" fill="#000C44"/>
-  <rect x="205" y="205" width="10" height="10" fill="#000C44"/>
-  <rect x="225" y="205" width="10" height="10" fill="#000C44"/>
-  <rect x="245" y="205" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="215" width="10" height="10" fill="#000C44"/>
-  <rect x="35" y="215" width="10" height="10" fill="#000C44"/>
-  <rect x="45" y="215" width="10" height="10" fill="#000C44"/>
-  <rect x="55" y="215" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="215" width="10" height="10" fill="#000C44"/>
-  <rect x="95" y="215" width="10" height="10" fill="#000C44"/>
-  <rect x="115" y="215" width="10" height="10" fill="#000C44"/>
-  <rect x="145" y="215" width="10" height="10" fill="#000C44"/>
-  <rect x="165" y="215" width="10" height="10" fill="#000C44"/>
-  <rect x="195" y="215" width="10" height="10" fill="#000C44"/>
-  <rect x="215" y="215" width="10" height="10" fill="#000C44"/>
-  <rect x="225" y="215" width="10" height="10" fill="#000C44"/>
-  <rect x="235" y="215" width="10" height="10" fill="#000C44"/>
-  <rect x="245" y="215" width="10" height="10" fill="#000C44"/>
-  <rect x="255" y="215" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="225" width="10" height="10" fill="#000C44"/>
-  <rect x="35" y="225" width="10" height="10" fill="#000C44"/>
-  <rect x="45" y="225" width="10" height="10" fill="#000C44"/>
-  <rect x="55" y="225" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="225" width="10" height="10" fill="#000C44"/>
-  <rect x="95" y="225" width="10" height="10" fill="#000C44"/>
-  <rect x="125" y="225" width="10" height="10" fill="#000C44"/>
-  <rect x="135" y="225" width="10" height="10" fill="#000C44"/>
-  <rect x="165" y="225" width="10" height="10" fill="#000C44"/>
-  <rect x="175" y="225" width="10" height="10" fill="#000C44"/>
-  <rect x="205" y="225" width="10" height="10" fill="#000C44"/>
-  <rect x="215" y="225" width="10" height="10" fill="#000C44"/>
-  <rect x="235" y="225" width="10" height="10" fill="#000C44"/>
-  <rect x="255" y="225" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="235" width="10" height="10" fill="#000C44"/>
-  <rect x="35" y="235" width="10" height="10" fill="#000C44"/>
-  <rect x="45" y="235" width="10" height="10" fill="#000C44"/>
-  <rect x="55" y="235" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="235" width="10" height="10" fill="#000C44"/>
-  <rect x="105" y="235" width="10" height="10" fill="#000C44"/>
-  <rect x="185" y="235" width="10" height="10" fill="#000C44"/>
-  <rect x="225" y="235" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="245" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="245" width="10" height="10" fill="#000C44"/>
-  <rect x="245" y="245" width="10" height="10" fill="#000C44"/>
-  <rect x="15" y="255" width="10" height="10" fill="#000C44"/>
-  <rect x="25" y="255" width="10" height="10" fill="#000C44"/>
-  <rect x="35" y="255" width="10" height="10" fill="#000C44"/>
-  <rect x="45" y="255" width="10" height="10" fill="#000C44"/>
-  <rect x="55" y="255" width="10" height="10" fill="#000C44"/>
-  <rect x="65" y="255" width="10" height="10" fill="#000C44"/>
-  <rect x="75" y="255" width="10" height="10" fill="#000C44"/>
-  <rect x="135" y="255" width="10" height="10" fill="#000C44"/>
-  <rect x="195" y="255" width="10" height="10" fill="#000C44"/>
-  <rect x="235" y="255" width="10" height="10" fill="#000C44"/>
-</svg>
-          </div>
-          <div class="qr-frame-badge">
-            <span>📱</span>
-            <span>MOBILE &amp; TABLET OPTIMIZED</span>
-          </div>
-        </div>
-
-        <div class="qr-modal-actions">
-          <button type="button" class="qr-copy-btn qr-copy-url-btn" onclick="copyPageURL(this)">
-            <span>📋</span>
-            <span>Copy URL</span>
-          </button>
-          <button type="button" class="qr-share-btn" onclick="shareWebsite()">
-            <span>🔗</span>
-            <span>Share Website</span>
-          </button>
-        </div>
-      </div>
-    </div>
-    
-    
   </main>
 
-  
-    <!-- Emergency Hotlines Modal -->
-    <div id="hotline-modal" class="qr-modal-overlay" role="dialog" aria-modal="true">
-      <div class="qr-card-printable">
-        <button type="button" class="qr-modal-close-btn" aria-label="Close">✕</button>
-        <img src="../assets/images/dp_logo.png" alt="Delhi Police Logo" class="qr-modal-logo">
-        <h2 class="qr-card-title">EMERGENCY CONTROL ROOM HOTLINES</h2>
-        <p class="qr-card-subtitle">One-touch tactical dialing for field personnel &amp; commanders.</p>
+  <!-- Sticky Bottom Footer with Single Large Centered Save Option -->
+  <div class="footer-actions">
+    <a href="/" target="_blank" class="open-link">← Open Public App</a>
+    <button type="button" class="save-center-btn" onclick="saveContent()">💾 SAVE CHANGES &amp; REBUILD SITE</button>
+  </div>
 
-        <div style="margin-bottom: 20px; text-align: left;">
-          <div class="hotline-item-card">
-            <div class="hotline-info">
-              <div class="hotline-icon">🚨</div>
-              <div>
-                <div class="hotline-name">Emergency Response System</div>
-                <div class="hotline-num">112 (Toll Free)</div>
-              </div>
+  <script>
+    var currentContent = null;
+    var availableIcons = [
+      "barricade", "building-watch", "watchtower", "vehicle-check",
+      "door-frame-detector", "rapid-response", "baggage-scanner",
+      "camera-monitor", "ambulance"
+    ];
+
+    function fetchContent() {
+      fetch('/api/get-content')
+        .then(res => res.json())
+        .then(data => {
+          currentContent = data;
+          renderEditor();
+        })
+        .catch(err => {
+          showStatus('Failed to load content data: ' + err, 'error');
+        });
+    }
+
+    function renderEditor() {
+      if (!currentContent) return;
+
+      document.getElementById('meta-version').value = currentContent.meta.version || '1.0';
+      document.getElementById('meta-updated').value = currentContent.meta.updated || '';
+      document.getElementById('ctrl-number').value = currentContent.meta.controlRoom[0].number || '';
+
+      var container = document.getElementById('posts-editor-container');
+      var html = '';
+
+      currentContent.posts.forEach((post, pIdx) => {
+        var iconOptions = availableIcons.map(ic => 
+          `<option value="${ic}" ${post.icon === ic ? 'selected' : ''}>${ic}</option>`
+        ).join('');
+
+        html += `
+        <div class="card" data-post-index="${pIdx}">
+          <div class="card-header-bar">
+            <h2>Duty Post ${pIdx + 1}: ${post.en.name} (${post.slug})</h2>
+            <button type="button" class="delete-post-btn" onclick="deletePost(${pIdx})">🗑️ Delete Post</button>
+          </div>
+          
+          <div class="bilingual-grid" style="margin-bottom:14px;">
+            <div class="form-group">
+              <label>Post Slug (URL Identifier, e.g. morcha, rooftop, patrol)</label>
+              <input type="text" class="post-slug" value="${escapeAttr(post.slug || post.id)}">
             </div>
-            <a href="tel:112" class="hotline-dial-btn">📞 Dial 112</a>
+            <div class="form-group">
+              <label>Post Icon Style</label>
+              <select class="post-icon">${iconOptions}</select>
+            </div>
           </div>
 
-          <div class="hotline-item-card">
-            <div class="hotline-info">
-              <div class="hotline-icon">📞</div>
-              <div>
-                <div class="hotline-name">North District Control Room</div>
-                <div class="hotline-num">011-23817012</div>
-              </div>
+          <div class="bilingual-grid" style="margin-bottom:16px;">
+            <div class="lang-box">
+              <div class="lang-title">English Name</div>
+              <input type="text" class="post-en-name" value="${escapeAttr(post.en.name)}">
             </div>
-            <a href="tel:01123817012" class="hotline-dial-btn">📞 Dial</a>
+            <div class="lang-box">
+              <div class="lang-title">Hindi Name (हिंदी नाम)</div>
+              <input type="text" class="post-hi-name" value="${escapeAttr(post.hi.name)}">
+            </div>
           </div>
 
-          <div class="hotline-item-card">
-            <div class="hotline-info">
-              <div class="hotline-icon">🚓</div>
-              <div>
-                <div class="hotline-name">Central Police Control Room (PCR)</div>
-                <div class="hotline-num">100</div>
+          <!-- Key Directives -->
+          <div style="margin-bottom:16px;">
+            <h3 style="font-size:1rem; color:var(--navy-deep); margin-bottom:8px;">Key Directives (Imperatives)</h3>
+            <div class="bilingual-grid">
+              <div class="lang-box">
+                <div class="lang-title">English Key Directives</div>
+                <div class="kd-en-list" id="kd-en-${pIdx}">
+                  ${post.en.keyDirectives.map(kd => `
+                    <div class="dynamic-item">
+                      <input type="text" value="${escapeAttr(kd)}">
+                      <button type="button" class="remove-btn" onclick="this.parentElement.remove()">✕</button>
+                    </div>
+                  `).join('')}
+                </div>
+                <button type="button" class="add-btn" onclick="addItem('kd-en-${pIdx}')">+ Add Directive</button>
+              </div>
+
+              <div class="lang-box">
+                <div class="lang-title">Hindi Key Directives</div>
+                <div class="kd-hi-list" id="kd-hi-${pIdx}">
+                  ${post.hi.keyDirectives.map(kd => `
+                    <div class="dynamic-item">
+                      <input type="text" value="${escapeAttr(kd)}">
+                      <button type="button" class="remove-btn" onclick="this.parentElement.remove()">✕</button>
+                    </div>
+                  `).join('')}
+                </div>
+                <button type="button" class="add-btn" onclick="addItem('kd-hi-${pIdx}')">+ Add Directive</button>
               </div>
             </div>
-            <a href="tel:100" class="hotline-dial-btn">📞 Dial 100</a>
           </div>
 
-          <div class="hotline-item-card">
-            <div class="hotline-info">
-              <div class="hotline-icon">🛡️</div>
-              <div>
-                <div class="hotline-name">SWAT / QRT Tactical Command</div>
-                <div class="hotline-num">011-23817013</div>
+          <!-- Full Instructions -->
+          <div>
+            <h3 style="font-size:1rem; color:var(--navy-deep); margin-bottom:8px;">Full Numbered Instructions</h3>
+            <div class="bilingual-grid">
+              <div class="lang-box">
+                <div class="lang-title">English Instructions</div>
+                <div class="inst-en-list" id="inst-en-${pIdx}">
+                  ${post.en.instructions.map(inst => `
+                    <div class="dynamic-item">
+                      <textarea>${escapeAttr(inst)}</textarea>
+                      <button type="button" class="remove-btn" onclick="this.parentElement.remove()">✕</button>
+                    </div>
+                  `).join('')}
+                </div>
+                <button type="button" class="add-btn" onclick="addTextAreaItem('inst-en-${pIdx}')">+ Add Instruction Line</button>
+              </div>
+
+              <div class="lang-box">
+                <div class="lang-title">Hindi Instructions</div>
+                <div class="inst-hi-list" id="inst-hi-${pIdx}">
+                  ${post.hi.instructions.map(inst => `
+                    <div class="dynamic-item">
+                      <textarea>${escapeAttr(inst)}</textarea>
+                      <button type="button" class="remove-btn" onclick="this.parentElement.remove()">✕</button>
+                    </div>
+                  `).join('')}
+                </div>
+                <button type="button" class="add-btn" onclick="addTextAreaItem('inst-hi-${pIdx}')">+ Add Instruction Line</button>
               </div>
             </div>
-            <a href="tel:01123817013" class="hotline-dial-btn">📞 Dial</a>
           </div>
+
         </div>
+        `;
+      });
 
-        <button type="button" class="qr-copy-btn qr-modal-close-btn-inline" style="width:100%; border:none; background-color:var(--navy-deep); color:var(--white);">Close Modal</button>
-      </div>
-    </div>
-    
+      container.innerHTML = html;
+    }
 
-  <!-- Fixed Bottom Control Room Call Bar (Signal Red Signature Element) -->
-  <footer class="control-room-bar">
-    <a href="tel:9899101199" class="control-room-call-btn" aria-label="Call Control Room">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:24px; height:24px; fill:var(--signal-red);"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-      <span class="lang-en">CALL CONTROL ROOM (9899101199)</span>
-      <span class="lang-hi">नियंत्रण कक्ष को कॉल करें (9899101199)</span>
-    </a>
-  </footer>
+    function addNewPost() {
+      if (!currentContent) return;
 
-  <script src="../assets/js/lang.js"></script>
-  <script src="../assets/js/search.js"></script>
-  <script src="../assets/js/app.js?v=8.0"></script>
-  <script src="../assets/js/checklist.js?v=8.0"></script>
+      collectFormData();
+
+      var newIndex = currentContent.posts.length + 1;
+      var newPost = {
+        "id": "post-" + newIndex,
+        "slug": "post-" + newIndex,
+        "icon": "barricade",
+        "en": {
+          "name": "New Duty Post " + newIndex,
+          "keyDirectives": [
+            "Maintain strict vigilance at post",
+            "Report suspicious movement to Control Room"
+          ],
+          "instructions": [
+            "Ensure proper security posture and equipment check.",
+            "Maintain continuous communication with Sector Incharge.",
+            "Log all incidents and hand over duty cleanly."
+          ]
+        },
+        "hi": {
+          "name": "नया ड्यूटी पॉइंट " + newIndex,
+          "keyDirectives": [
+            "ड्यूटी पॉइंट पर कड़ी सतर्कता बनाए रखें",
+            "नियंत्रण कक्ष को संदिग्ध गतिविधि की रिपोर्ट करें"
+          ],
+          "instructions": [
+            "उचित सुरक्षा व्यवस्था और उपकरणों की जांच सुनिश्चित करें।",
+            "सेक्टर प्रभारी के साथ निरंतर संचार बनाए रखें।",
+            "सभी घटनाओं को लॉग करें और ड्यूटी का सुचारू प्रभार सौंपें।"
+          ]
+        }
+      };
+
+      currentContent.posts.push(newPost);
+      renderEditor();
+
+      var cards = document.querySelectorAll('.card[data-post-index]');
+      if (cards.length > 0) {
+        cards[cards.length - 1].scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function deletePost(idx) {
+      if (!currentContent || !currentContent.posts[idx]) return;
+      var postName = currentContent.posts[idx].en.name;
+      if (confirm(`Are you sure you want to delete post "${postName}"?`)) {
+        collectFormData();
+        currentContent.posts.splice(idx, 1);
+        renderEditor();
+      }
+    }
+
+    function addItem(containerId) {
+      var c = document.getElementById(containerId);
+      var div = document.createElement('div');
+      div.className = 'dynamic-item';
+      div.innerHTML = '<input type="text" value=""><button type="button" class="remove-btn" onclick="this.parentElement.remove()">✕</button>';
+      c.appendChild(div);
+    }
+
+    function addTextAreaItem(containerId) {
+      var c = document.getElementById(containerId);
+      var div = document.createElement('div');
+      div.className = 'dynamic-item';
+      div.innerHTML = '<textarea></textarea><button type="button" class="remove-btn" onclick="this.parentElement.remove()">✕</button>';
+      c.appendChild(div);
+    }
+
+    function escapeAttr(str) {
+      return (str || '').replace(/"/g, '&quot;');
+    }
+
+    function collectFormData() {
+      if (!currentContent) return;
+
+      currentContent.meta.version = document.getElementById('meta-version').value;
+      currentContent.meta.updated = document.getElementById('meta-updated').value;
+      currentContent.meta.controlRoom[0].number = document.getElementById('ctrl-number').value;
+
+      var postCards = document.querySelectorAll('.card[data-post-index]');
+      postCards.forEach((card, idx) => {
+        if (currentContent.posts[idx]) {
+          var post = currentContent.posts[idx];
+          var rawSlug = card.querySelector('.post-slug').value.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-');
+          post.slug = rawSlug || ('post-' + (idx + 1));
+          post.id = post.slug;
+          post.icon = card.querySelector('.post-icon').value;
+
+          post.en.name = card.querySelector('.post-en-name').value;
+          post.hi.name = card.querySelector('.post-hi-name').value;
+
+          post.en.keyDirectives = Array.from(card.querySelectorAll('#kd-en-' + idx + ' input')).map(i => i.value).filter(v => v.trim());
+          post.hi.keyDirectives = Array.from(card.querySelectorAll('#kd-hi-' + idx + ' input')).map(i => i.value).filter(v => v.trim());
+
+          post.en.instructions = Array.from(card.querySelectorAll('#inst-en-' + idx + ' textarea')).map(i => i.value).filter(v => v.trim());
+          post.hi.instructions = Array.from(card.querySelectorAll('#inst-hi-' + idx + ' textarea')).map(i => i.value).filter(v => v.trim());
+        }
+      });
+    }
+
+    function saveContent() {
+      if (!currentContent) return;
+
+      collectFormData();
+      var errorFound = false;
+
+      currentContent.posts.forEach((post, idx) => {
+        if (post.en.instructions.length !== post.hi.instructions.length) {
+          showStatus(`Instruction count mismatch in post "${post.en.name}"! EN has ${post.en.instructions.length} lines, HI has ${post.hi.instructions.length} lines. Counts must match!`, 'error');
+          errorFound = true;
+        }
+      });
+
+      if (errorFound) return;
+
+      showStatus('Saving content and rebuilding static app & QR codes...', 'info');
+
+      fetch('/api/save-content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(currentContent)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'ok') {
+          showStatus('✓ Content saved successfully! Static site, SW cache, and QR codes rebuilt cleanly in ' + data.gzipped_kb + ' KB.', 'success');
+        } else {
+          showStatus('Error saving content: ' + data.message, 'error');
+        }
+      })
+      .catch(err => {
+        showStatus('Server error saving content: ' + err, 'error');
+      });
+    }
+
+    function showStatus(msg, type) {
+      var s = document.getElementById('status-msg');
+      s.textContent = msg;
+      s.className = 'status-msg ' + type;
+      s.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchContent);
+  </script>
 </body>
 </html>

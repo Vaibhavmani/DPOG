@@ -1,5 +1,6 @@
 {
   "outputDirectory": "src",
+  "buildCommand": "pip install qrcode pillow && python build.py",
   "headers": [
     {
       "source": "/(.*)",
