@@ -47,7 +47,8 @@ html {
 html[lang="hi"], :lang(hi) {
   font-family: var(--font-devanagari), var(--font-latin);
   line-height: var(--line-height-devanagari);
-  font-size: 19.5px !important;
+  font-size: 18.5px;
+  text-rendering: optimizeLegibility;
 }
 
 body {
@@ -80,14 +81,33 @@ body::before {
   z-index: 1;          /* above body background, below all content (z-index 10+) */
 }
 
-/* Language Mutual Exclusivity Rule */
+/* Smooth Language Transition System for Portable & Touch Devices */
+.lang-en, .lang-hi {
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+body.lang-transitioning .lang-en,
+body.lang-transitioning .lang-hi {
+  transition: opacity 0.15s ease-out;
+}
+
 html[lang="en"] .lang-hi,
 html:not([lang="hi"]) .lang-hi {
   display: none !important;
+  opacity: 0;
 }
 
 html[lang="hi"] .lang-en {
   display: none !important;
+  opacity: 0;
+}
+
+html[lang="en"] .lang-en,
+html[lang="hi"] .lang-hi {
+  opacity: 1;
 }
 
 .lang-hi {
@@ -279,6 +299,17 @@ html[lang="hi"] .lang-en {
   cursor: pointer;
   padding: 3px 8px;
   border-radius: 3px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background-color 0.18s cubic-bezier(0.4, 0, 0.2, 1), 
+              color 0.18s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 0.12s ease;
+}
+
+.lang-toggle-btn:active, .inline-switch-btn:active {
+  transform: scale(0.95);
 }
 
 .lang-toggle-btn.active-lang {

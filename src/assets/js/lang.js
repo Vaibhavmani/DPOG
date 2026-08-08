@@ -33,6 +33,10 @@
   function setLanguage(lang, updateUrl) {
     if (lang !== 'en' && lang !== 'hi') lang = 'en';
 
+    if (document.body) {
+      document.body.classList.add('lang-transitioning');
+    }
+
     // Update document root lang attribute
     document.documentElement.setAttribute('lang', lang);
 
@@ -53,7 +57,14 @@
     // Update all language toggle button labels & ARIA states
     var toggleBtns = document.querySelectorAll('.lang-toggle-btn');
     toggleBtns.forEach(function (btn) {
-      btn.setAttribute('aria-pressed', lang === 'hi' ? 'true' : 'false');
+      var btnLang = btn.getAttribute('data-lang');
+      if (btnLang) {
+        btn.classList.toggle('active-lang', btnLang === lang);
+        btn.setAttribute('aria-pressed', btnLang === lang ? 'true' : 'false');
+      } else {
+        btn.setAttribute('aria-pressed', lang === 'hi' ? 'true' : 'false');
+      }
+
       var enSpan = btn.querySelector('.lang-label-en');
       var hiSpan = btn.querySelector('.lang-label-hi');
       if (enSpan && hiSpan) {
@@ -83,12 +94,35 @@
 
     // Dispatch custom event for search or other modules
     window.dispatchEvent(new CustomEvent('dp-lang-changed', { detail: { lang: lang } }));
+
+    if (window.requestAnimationFrame) {
+      window.requestAnimationFrame(function () {
+        setTimeout(function () {
+          if (document.body) {
+            document.body.classList.remove('lang-transitioning');
+          }
+        }, 180);
+      });
+    }
   }
 
   function toggleLanguage() {
     var currentLang = document.documentElement.getAttribute('lang') || 'en';
     var newLang = currentLang === 'hi' ? 'en' : 'hi';
+
+    var docElem = document.documentElement;
+    var maxScroll = Math.max(1, docElem.scrollHeight - window.innerHeight);
+    var scrollRatio = window.scrollY / maxScroll;
+
     setLanguage(newLang, true);
+
+    if (window.requestAnimationFrame) {
+      window.requestAnimationFrame(function () {
+        var newMaxScroll = docElem.scrollHeight - window.innerHeight;
+        var targetY = Math.round(scrollRatio * newMaxScroll);
+        window.scrollTo({ top: targetY, behavior: 'instant' });
+      });
+    }
   }
 
   // Initialize language on DOM ready
