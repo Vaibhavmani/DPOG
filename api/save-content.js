@@ -15,11 +15,11 @@ export default async function handler(req, res) {
     return res.status(405).json({ status: 'error', message: 'Method not allowed' });
   }
 
-  const token = process.env.GITHUB_TOKEN;
+  const token = req.headers['x-github-token'] || process.env.GITHUB_TOKEN;
   if (!token) {
     return res.status(500).json({
       status: 'error',
-      message: 'GITHUB_TOKEN environment variable is not set. Add it in Vercel → Project → Settings → Environment Variables.'
+      message: 'GitHub Access Token is missing. Please set GITHUB_TOKEN in Vercel environment variables OR enter your GitHub Personal Access Token in the Admin Settings field.'
     });
   }
 
@@ -44,7 +44,10 @@ export default async function handler(req, res) {
     }
   }
 
-  const authHeader = { 'Authorization': `token ${token}`, 'User-Agent': 'DPOG-Admin-Portal' };
+  const authHeader = { 
+    'Authorization': (token.startsWith('github_pat_') || token.startsWith('ghp_')) ? `Bearer ${token}` : `token ${token}`, 
+    'User-Agent': 'DPOG-Admin-Portal' 
+  };
 
   try {
     // Step 1: Get current file SHA (required for the PUT request)

@@ -103,10 +103,31 @@
 
       var printBtn = e.target.closest('.qr-print-btn');
       if (printBtn) {
-        window.print();
+        activeModals.forEach(function (m) {
+          m.classList.remove('active');
+        });
       }
     });
   }
+
+  // 5. Restrict DevTools & Inspect Element (Security Hardening)
+  document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    // Block F12
+    if (e.key === 'F12' || e.keyCode === 123) {
+      e.preventDefault();
+    }
+    // Block Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U
+    if (e.ctrlKey && (
+      (e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) ||
+      (e.key === 'U' || e.key === 'u')
+    )) {
+      e.preventDefault();
+    }
+  });
 
   // Initial check on DOM Ready
   document.addEventListener('DOMContentLoaded', function () {

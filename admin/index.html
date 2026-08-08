@@ -233,6 +233,10 @@
         <label>North District Control Room Phone Number</label>
         <input type="text" id="ctrl-number">
       </div>
+      <div class="form-group" style="margin-top: 15px;">
+        <label>GitHub Access Token (Optional override if GITHUB_TOKEN environment variable is not configured in Vercel)</label>
+        <input type="password" id="gh-token" placeholder="Paste ghp_... or github_pat_... token here">
+      </div>
     </section>
 
     <!-- Header Action Bar for Adding Posts -->
@@ -283,6 +287,9 @@
       document.getElementById('meta-updated').value = currentContent.meta.updated || '';
       var ctrlNum = (currentContent.meta.controlRoom && currentContent.meta.controlRoom[0]) ? (currentContent.meta.controlRoom[0].number || '') : '';
       document.getElementById('ctrl-number').value = ctrlNum;
+      if (document.getElementById('gh-token')) {
+        document.getElementById('gh-token').value = localStorage.getItem('dp_gh_token') || '';
+      }
 
       var container = document.getElementById('posts-editor-container');
       var html = '';
@@ -515,9 +522,19 @@
 
       showStatus('Saving content and rebuilding static app & QR codes...', 'info');
 
+      var headers = { 'Content-Type': 'application/json' };
+      var ghToken = document.getElementById('gh-token') ? document.getElementById('gh-token').value.trim() : '';
+      if (!ghToken) {
+        ghToken = localStorage.getItem('dp_gh_token') || '';
+      }
+      if (ghToken) {
+        headers['X-GitHub-Token'] = ghToken;
+        localStorage.setItem('dp_gh_token', ghToken);
+      }
+
       fetch('/api/save-content', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: headers,
         body: JSON.stringify(currentContent)
       })
       .then(res => res.json())
@@ -540,6 +557,22 @@
       s.style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    // Restrict DevTools & Inspect Element (Security Hardening)
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'F12' || e.keyCode === 123) {
+        e.preventDefault();
+      }
+      if (e.ctrlKey && (
+        (e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) ||
+        (e.key === 'U' || e.key === 'u')
+      )) {
+        e.preventDefault();
+      }
+    });
 
     document.addEventListener('DOMContentLoaded', fetchContent);
   </script>
