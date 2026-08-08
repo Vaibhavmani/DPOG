@@ -13,7 +13,12 @@
  */
 
 export const config = {
-  matcher: ['/dp-c9f7e2/:path*', '/dp-q3b8a1/:path*'],
+  matcher: [
+    '/dp-c9f7e2/:path*',
+    '/dp-q3b8a1/:path*',
+    '/admin/:path*',
+    '/api/save-content'
+  ],
 };
 
 export default function middleware(request) {
@@ -25,18 +30,17 @@ export default function middleware(request) {
     try {
       decoded = atob(encoded);
     } catch {
-      // bad base64
+      // invalid base64 encoding
     }
     const colonIdx = decoded.indexOf(':');
     const user = decoded.substring(0, colonIdx);
     const pass = decoded.substring(colonIdx + 1);
 
-    // Accept both 'admin' and 'dp' with 'delhipolice2026' or process.env setting
-    const isValidUser = (user === 'admin' || user === 'dp');
-    const isValidPass = (pass === 'delhipolice2026' || pass === 'delhipolice' || pass === process.env.DP_INTERNAL_PASSWORD);
+    const validUser = (user === 'admin' || user === 'dp');
+    const validPass = (pass === 'delhipolice2026' || pass === 'delhipolice' || pass === process.env.DP_INTERNAL_PASSWORD);
 
-    if (isValidUser && isValidPass) {
-      // Authenticated — pass through to static asset
+    if (validUser && validPass) {
+      // Authenticated — proceed cleanly
       return;
     }
   }
