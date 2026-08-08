@@ -1,0 +1,10 @@
+{
+  "name": "dp-deployment-app",
+  "version": "1.0.0",
+  "description": "Delhi Police Law & Order Deployment Quick Instruction Portal",
+  "main": "admin_server.py",
+  "scripts": {
+    "start": "python admin_server.py",
+    "build": "python build.py"
+  }
+}

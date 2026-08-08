@@ -281,7 +281,8 @@
 
       document.getElementById('meta-version').value = currentContent.meta.version || '1.0';
       document.getElementById('meta-updated').value = currentContent.meta.updated || '';
-      document.getElementById('ctrl-number').value = currentContent.meta.controlRoom[0].number || '';
+      var ctrlNum = (currentContent.meta.controlRoom && currentContent.meta.controlRoom[0]) ? (currentContent.meta.controlRoom[0].number || '') : '';
+      document.getElementById('ctrl-number').value = ctrlNum;
 
       var container = document.getElementById('posts-editor-container');
       var html = '';
@@ -471,6 +472,9 @@
 
       currentContent.meta.version = document.getElementById('meta-version').value;
       currentContent.meta.updated = document.getElementById('meta-updated').value;
+      if (!currentContent.meta.controlRoom || !Array.isArray(currentContent.meta.controlRoom) || currentContent.meta.controlRoom.length === 0) {
+        currentContent.meta.controlRoom = [{ label: { en: "North District Control Room", hi: "उत्तरी जिला नियंत्रण कक्ष" }, number: "" }];
+      }
       currentContent.meta.controlRoom[0].number = document.getElementById('ctrl-number').value;
 
       var postCards = document.querySelectorAll('.card[data-post-index]');

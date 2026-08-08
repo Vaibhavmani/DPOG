@@ -17,10 +17,17 @@
     "controlRoom": [
       {
         "label": {
-          "en": "North District Control Room",
-          "hi": "उत्तरी जिला नियंत्रण कक्ष"
+          "en": "North District Control Room (Line 1)",
+          "hi": "उत्तरी जिला नियंत्रण कक्ष (लाइन 1)"
         },
-        "number": "9899101199"
+        "number": "01123818614"
+      },
+      {
+        "label": {
+          "en": "North District Control Room (Line 2)",
+          "hi": "उत्तरी जिला नियंत्रण कक्ष (लाइन 2)"
+        },
+        "number": "01123818584"
       },
       {
         "label": {
@@ -33,7 +40,7 @@
     "hotlines": [
       {
         "name": {
-          "en": "Emergency Response",
+          "en": "Emergency Response System",
           "hi": "आपातकालीन प्रतिक्रिया"
         },
         "number": "112",
@@ -41,10 +48,18 @@
       },
       {
         "name": {
-          "en": "North District Control Room",
-          "hi": "उत्तरी जिला नियंत्रण कक्ष"
+          "en": "North District Control Room (Line 1)",
+          "hi": "उत्तरी जिला नियंत्रण कक्ष (लाइन 1)"
         },
-        "number": "011-23817012",
+        "number": "011-23818614",
+        "icon": "📞"
+      },
+      {
+        "name": {
+          "en": "North District Control Room (Line 2)",
+          "hi": "उत्तरी जिला नियंत्रण कक्ष (लाइन 2)"
+        },
+        "number": "011-23818584",
         "icon": "📞"
       },
       {
@@ -54,14 +69,6 @@
         },
         "number": "100",
         "icon": "🚓"
-      },
-      {
-        "name": {
-          "en": "SWAT / QRT Tactical Command",
-          "hi": "स्वाट / क्यूआरटी सामरिक कमान"
-        },
-        "number": "011-23817013",
-        "icon": "🛡️"
       }
     ]
   },

@@ -119,12 +119,15 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
                     json.dump(data, f, indent=2, ensure_ascii=False)
 
                 # Run build.py
-                res = subprocess.run([sys.executable, 'build.py'], capture_output=True, text=True)
+                script_dir = os.path.dirname(os.path.abspath(__file__))
+                build_script = os.path.join(script_dir, 'build.py')
+                res = subprocess.run([sys.executable, build_script], cwd=script_dir, capture_output=True, text=True)
                 if res.returncode != 0:
                     self.send_response(500)
                     self.send_header('Content-Type', 'application/json; charset=utf-8')
                     self.end_headers()
-                    self.wfile.write(json.dumps({'status': 'error', 'message': res.stderr}).encode('utf-8'))
+                    err_msg = (res.stderr.strip() if res.stderr else res.stdout.strip()) or 'Build script failed with returncode ' + str(res.returncode)
+                    self.wfile.write(json.dumps({'status': 'error', 'message': err_msg}).encode('utf-8'))
                     return
 
                 # Calculate payload size

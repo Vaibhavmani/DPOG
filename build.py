@@ -78,6 +78,24 @@ def main():
         ctrl_number = meta['controlRoom'][0]['number']
         phone_svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:24px; height:24px; fill:var(--signal-red);"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>'
         
+        hotline_items_list = []
+        for hl in meta.get('hotlines', []):
+            hl_name = hl['name']['en']
+            hl_num = hl['number']
+            hl_clean = hl_num.replace("-", "").replace(" ", "")
+            hl_icon = hl.get('icon', '📞')
+            hotline_items_list.append(f"""          <div class="hotline-item-card">
+            <div class="hotline-info">
+              <div class="hotline-icon">{hl_icon}</div>
+              <div>
+                <div class="hotline-name">{hl_name}</div>
+                <div class="hotline-num">{hl_num}</div>
+              </div>
+            </div>
+            <a href="tel:{hl_clean}" class="hotline-dial-btn">📞 Dial</a>
+          </div>""")
+        hotline_items_html = "\n".join(hotline_items_list)
+
         # Hotline Modal Markup
         hotline_modal_html = f"""
     <!-- Emergency Hotlines Modal -->
@@ -89,49 +107,7 @@ def main():
         <p class="qr-card-subtitle">One-touch tactical dialing for field personnel &amp; commanders.</p>
 
         <div style="margin-bottom: 20px; text-align: left;">
-          <div class="hotline-item-card">
-            <div class="hotline-info">
-              <div class="hotline-icon">🚨</div>
-              <div>
-                <div class="hotline-name">Emergency Response System</div>
-                <div class="hotline-num">112 (Toll Free)</div>
-              </div>
-            </div>
-            <a href="tel:112" class="hotline-dial-btn">📞 Dial 112</a>
-          </div>
-
-          <div class="hotline-item-card">
-            <div class="hotline-info">
-              <div class="hotline-icon">📞</div>
-              <div>
-                <div class="hotline-name">North District Control Room</div>
-                <div class="hotline-num">011-23817012</div>
-              </div>
-            </div>
-            <a href="tel:01123817012" class="hotline-dial-btn">📞 Dial</a>
-          </div>
-
-          <div class="hotline-item-card">
-            <div class="hotline-info">
-              <div class="hotline-icon">🚓</div>
-              <div>
-                <div class="hotline-name">Central Police Control Room (PCR)</div>
-                <div class="hotline-num">100</div>
-              </div>
-            </div>
-            <a href="tel:100" class="hotline-dial-btn">📞 Dial 100</a>
-          </div>
-
-          <div class="hotline-item-card">
-            <div class="hotline-info">
-              <div class="hotline-icon">🛡️</div>
-              <div>
-                <div class="hotline-name">SWAT / QRT Tactical Command</div>
-                <div class="hotline-num">011-23817013</div>
-              </div>
-            </div>
-            <a href="tel:01123817013" class="hotline-dial-btn">📞 Dial</a>
-          </div>
+{hotline_items_html}
         </div>
 
         <button type="button" class="qr-copy-btn qr-modal-close-btn-inline" style="width:100%; border:none; background-color:var(--navy-deep); color:var(--white);">Close Modal</button>
