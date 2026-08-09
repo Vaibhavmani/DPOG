@@ -78,6 +78,8 @@
     } else {
       window.copyPageURL(document.querySelector('.qr-copy-url-btn'));
     }
+  };
+
   window.handleQRError = function (imgEl, url) {
     if (!imgEl || imgEl.dataset.handled) return;
     imgEl.dataset.handled = "true";

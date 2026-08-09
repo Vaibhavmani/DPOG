@@ -3,7 +3,7 @@
  * Cache Version 11.0 - Guaranteed Fixed Signal Red Call Control Room Bar & Boosted Hindi Typography
  */
 
-var CACHE_NAME = 'dp-instructions-v21.0';
+var CACHE_NAME = 'dp-instructions-v22.0';
 
 var STATIC_ASSETS = [
 
@@ -37,7 +37,7 @@ var STATIC_ASSETS = [
   '/assets/js/lang.js',
   '/assets/js/search.js',
   '/assets/js/checklist.js?v=8.0',
-  '/assets/js/app.js?v=8.0',
+  '/assets/js/app.js?v=9.0',
   '/manifest.webmanifest',
   '/qr/home.svg',
   '/qr/rooftop.svg',
@@ -153,9 +153,12 @@ self.addEventListener('fetch', function (event) {
             }
 
             var responseToCache = networkResponse.clone();
-            caches.open(CACHE_NAME).then(function (cache) {
-              cache.put(event.request, responseToCache);
-            });
+            var reqUrl = new URL(event.request.url);
+            if (reqUrl.protocol === 'http:' || reqUrl.protocol === 'https:') {
+              caches.open(CACHE_NAME).then(function (cache) {
+                cache.put(event.request, responseToCache).catch(function () {});
+              });
+            }
 
             return networkResponse;
           });

@@ -181,7 +181,7 @@ def main():
   </footer>
   <script src="{rel_prefix}assets/js/lang.js"></script>
   <script src="{rel_prefix}assets/js/search.js"></script>
-  <script src="{rel_prefix}assets/js/app.js?v=8.0"></script>
+  <script src="{rel_prefix}assets/js/app.js?v=9.0"></script>
   {extra_script}
 </body>
 </html>
