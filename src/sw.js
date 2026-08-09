@@ -3,7 +3,7 @@
  * Cache Version 11.0 - Guaranteed Fixed Signal Red Call Control Room Bar & Boosted Hindi Typography
  */
 
-var CACHE_NAME = 'dp-instructions-v20.0';
+var CACHE_NAME = 'dp-instructions-v21.0';
 
 var STATIC_ASSETS = [
 
@@ -32,7 +32,7 @@ var STATIC_ASSETS = [
   '/medical/',
   '/medical/index.html',
   '/content/content.json',
-  '/assets/css/app.css?v=13.0',
+  '/assets/css/app.css?v=14.0',
   '/assets/css/fonts.css',
   '/assets/js/lang.js',
   '/assets/js/search.js',

@@ -113,7 +113,7 @@ def main():
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>{title_en} | Delhi Police — North District</title>
-  <link rel="stylesheet" href="{rel_prefix}assets/css/app.css?v=13.0">
+  <link rel="stylesheet" href="{rel_prefix}assets/css/app.css?v=14.0">
   <link rel="manifest" href="{rel_prefix}manifest.webmanifest">
   <meta name="theme-color" content="#000C44">
 </head>

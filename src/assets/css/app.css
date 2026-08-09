@@ -433,10 +433,6 @@ html[lang="hi"] .lang-en {
     gap: 3px;
     flex-shrink: 0;
   }
-  .header-qr-btn span:last-child {
-    display: inline-block !important;
-    white-space: nowrap !important;
-  }
   .lang-toggle-box {
     min-height: 38px;
     height: 38px;
