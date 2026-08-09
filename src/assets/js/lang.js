@@ -33,21 +33,22 @@
   function setLanguage(lang, updateUrl) {
     if (lang !== 'en' && lang !== 'hi') lang = 'en';
 
-    var currentLang = document.documentElement.getAttribute('lang');
+    // 1. Immediately update toggle button highlights synchronously for zero latency feedback
+    var toggleBtns = document.querySelectorAll('.lang-toggle-btn');
+    toggleBtns.forEach(function (btn) {
+      var btnLang = btn.getAttribute('data-lang');
+      if (btnLang) {
+        btn.classList.toggle('active-lang', btnLang === lang);
+        btn.setAttribute('aria-pressed', btnLang === lang ? 'true' : 'false');
+      }
+    });
 
-    // If already in requested language and initialized, do quick update without jump
+    var currentLang = document.documentElement.getAttribute('lang');
     if (currentLang === lang && document.body && !document.body.classList.contains('lang-transitioning')) {
-      var toggleBtns = document.querySelectorAll('.lang-toggle-btn');
-      toggleBtns.forEach(function (btn) {
-        var btnLang = btn.getAttribute('data-lang');
-        if (btnLang) {
-          btn.classList.toggle('active-lang', btnLang === lang);
-          btn.setAttribute('aria-pressed', btnLang === lang ? 'true' : 'false');
-        }
-      });
       return;
     }
 
+    // 2. Start smooth content crossfade
     if (document.body) {
       document.body.classList.add('lang-transitioning');
     }
@@ -70,16 +71,6 @@
         window.history.replaceState({}, '', currentUrl.toString());
       }
 
-      // Update all language toggle button labels & ARIA states
-      var toggleBtns = document.querySelectorAll('.lang-toggle-btn');
-      toggleBtns.forEach(function (btn) {
-        var btnLang = btn.getAttribute('data-lang');
-        if (btnLang) {
-          btn.classList.toggle('active-lang', btnLang === lang);
-          btn.setAttribute('aria-pressed', btnLang === lang ? 'true' : 'false');
-        }
-      });
-
       // Dispatch custom event for search or other modules
       window.dispatchEvent(new CustomEvent('dp-lang-changed', { detail: { lang: lang } }));
 
@@ -88,7 +79,7 @@
           document.body.classList.remove('lang-transitioning');
         }
       }, 40);
-    }, 90);
+    }, 80);
   }
 
   function toggleLanguage() {

@@ -657,7 +657,9 @@ html[lang="hi"] .slogan-banner,
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   margin-bottom: 18px;
+  flex-wrap: wrap;
 }
 
 .back-btn {
@@ -665,7 +667,7 @@ html[lang="hi"] .slogan-banner,
   align-items: center;
   gap: 8px;
   font-family: var(--font-display);
-  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+  font-size: clamp(0.85rem, 1.3vw, 1.05rem);
   font-weight: 700;
   color: var(--white);
   text-decoration: none;
@@ -673,9 +675,9 @@ html[lang="hi"] .slogan-banner,
   letter-spacing: 0.5px;
   background-color: var(--navy-deep);
   border: 2px solid var(--navy-deep);
-  padding: 9px 16px;
+  padding: 8px 14px;
   border-radius: 4px;
-  min-height: 44px;
+  min-height: 40px;
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
@@ -696,14 +698,15 @@ html[lang="hi"] .slogan-banner,
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 16px;
+  padding: 8px 14px;
   background-color: var(--white);
   border: 2px solid var(--navy-deep);
   color: var(--navy-deep);
   font-weight: 700;
-  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
   cursor: pointer;
   border-radius: 4px;
+  min-height: 40px;
 }
 
 .post-header-band {
@@ -756,12 +759,14 @@ html[lang="hi"] .slogan-banner,
 .post-hero-caption-bar {
   background-color: var(--navy-deep);
   color: var(--white);
-  padding: 10px 16px;
-  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  padding: 8px 14px;
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 12px;
   border-top: 2px solid var(--alert-yellow);
 }
 
