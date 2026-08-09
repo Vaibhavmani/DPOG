@@ -80,7 +80,8 @@ def main():
         
         hotline_items_list = []
         for hl in meta.get('hotlines', []):
-            hl_name = hl['name']['en']
+            hl_name_en = hl['name']['en']
+            hl_name_hi = hl['name']['hi']
             hl_num = hl['number']
             hl_clean = hl_num.replace("-", "").replace(" ", "")
             hl_icon = hl.get('icon', '📞')
@@ -88,32 +89,22 @@ def main():
             <div class="hotline-info">
               <div class="hotline-icon">{hl_icon}</div>
               <div>
-                <div class="hotline-name">{hl_name}</div>
+                <div class="hotline-name">
+                  <span class="lang-en">{hl_name_en}</span>
+                  <span class="lang-hi">{hl_name_hi}</span>
+                </div>
                 <div class="hotline-num">{hl_num}</div>
               </div>
             </div>
-            <a href="tel:{hl_clean}" class="hotline-dial-btn">📞 Dial</a>
+            <a href="tel:{hl_clean}" class="hotline-dial-btn">
+              <span class="lang-en">📞 Dial</span>
+              <span class="lang-hi">📞 कॉल करें</span>
+            </a>
           </div>""")
         hotline_items_html = "\n".join(hotline_items_list)
 
         # Hotline Modal Markup
-        hotline_modal_html = f"""
-    <!-- Emergency Hotlines Modal -->
-    <div id="hotline-modal" class="qr-modal-overlay" role="dialog" aria-modal="true">
-      <div class="qr-card-printable">
-        <button type="button" class="qr-modal-close-btn" aria-label="Close">✕</button>
-        <img src="{rel_prefix}assets/images/dp_logo.png" alt="Delhi Police Logo" class="qr-modal-logo">
-        <h2 class="qr-card-title">EMERGENCY CONTROL ROOM HOTLINES</h2>
-        <p class="qr-card-subtitle">One-touch tactical dialing for field personnel &amp; commanders.</p>
-
-        <div style="margin-bottom: 20px; text-align: left;">
-{hotline_items_html}
-        </div>
-
-        <button type="button" class="qr-copy-btn qr-modal-close-btn-inline" style="width:100%; border:none; background-color:var(--navy-deep); color:var(--white);">Close Modal</button>
-      </div>
-    </div>
-    """
+        hotline_modal_html = f"""<div id="hotline-modal" class="qr-modal-overlay" role="dialog" aria-modal="true"><div class="qr-card-printable"><button type="button" class="qr-modal-close-btn" aria-label="Close">✕</button><img src="{rel_prefix}assets/images/dp_logo.png" alt="Delhi Police Logo" class="qr-modal-logo"><h2 class="qr-card-title"><span class="lang-en">EMERGENCY CONTROL ROOM HOTLINES</span><span class="lang-hi">आपातकालीन नियंत्रण कक्ष हॉटलाइन</span></h2><p class="qr-card-subtitle"><span class="lang-en">One-touch tactical dialing for field personnel &amp; commanders.</span><span class="lang-hi">क्षेत्रीय कर्मियों और कमांडरों के लिए वन-टच डायल।</span></p><div style="margin-bottom: 20px; text-align: left;">{hotline_items_html}</div><button type="button" class="qr-copy-btn qr-modal-close-btn-inline" style="width:100%; border:none; background-color:var(--navy-deep); color:var(--white);"><span class="lang-en">Close Modal</span><span class="lang-hi">बंद करें</span></button></div></div>"""
 
         return f"""<!DOCTYPE html>
 <html lang="en">
@@ -127,14 +118,10 @@ def main():
   <meta name="theme-color" content="#000C44">
 </head>
 <body>
-
-  <!-- Offline Status Banner -->
   <div id="offline-banner" class="offline-banner" role="status">
     ☁️ <span class="lang-en">Offline — showing saved instructions (v{meta['version']})</span>
     <span class="lang-hi">ऑफ़लाइन — सहेजे गए निर्देश दिखा रहा है (v{meta['version']})</span>
   </div>
-
-  <!-- Masthead Header Ribbon (Exact Match to User Mockup) -->
   <header class="masthead">
     <div class="masthead-top">
       <a href="{rel_prefix}" class="masthead-brand">
@@ -149,35 +136,29 @@ def main():
       <div class="header-actions">
         <button type="button" class="header-qr-btn qr-view-btn" data-target-modal="{qr_modal_target_id}">
           <span>📱</span>
-          <span>QR Code</span>
+          <span class="lang-en">QR Code</span>
+          <span class="lang-hi">क्यूआर कोड</span>
         </button>
         <a href="tel:112" class="header-call-btn" aria-label="Call 112">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
           <span>112</span>
         </a>
         <div class="lang-toggle-box">
-          <button type="button" class="lang-toggle-btn active-lang" onclick="toggleLanguage('en')">EN</button>
+          <button type="button" class="lang-toggle-btn active-lang" data-lang="en" onclick="DPLang.set('en', true)">EN</button>
           <span style="color:rgba(255, 224, 127, 0.5); font-size:0.8rem;">|</span>
-          <button type="button" class="lang-toggle-btn" onclick="toggleLanguage('hi')">हिंदी</button>
+          <button type="button" class="lang-toggle-btn" data-lang="hi" onclick="DPLang.set('hi', true)">हिंदी</button>
         </div>
       </div>
     </div>
-
-    <!-- Red Standing Directive Ribbon -->
     <div class="directive-strip">
       <span class="lang-en">STAY ALERT • STAY VIGILANT • STAY SAFE</span>
       <span class="lang-hi">सतर्क रहें • चौकस रहें • सुरक्षित रहें</span>
     </div>
   </header>
-
-  <!-- Main Content Canvas -->
   <main class="container">
     {main_content_html}
   </main>
-
   {hotline_modal_html}
-
-  <!-- Fixed Bottom Control Room Call Bar (Signal Red Signature Element) -->
   <footer class="control-room-bar">
     <a href="tel:{ctrl_number}" class="control-room-call-btn" aria-label="Call Control Room">
       {phone_svg}
@@ -185,7 +166,6 @@ def main():
       <span class="lang-hi">नियंत्रण कक्ष को कॉल करें ({ctrl_number})</span>
     </a>
   </footer>
-
   <script src="{rel_prefix}assets/js/lang.js"></script>
   <script src="{rel_prefix}assets/js/search.js"></script>
   <script src="{rel_prefix}assets/js/app.js?v=8.0"></script>
@@ -195,56 +175,17 @@ def main():
 """
 
     # Generate QR SVGs first
-    print("\nGenerating Vector SVG QR Codes in qr/...")
-    os.makedirs("qr", exist_ok=True)
+    print("\nGenerating Vector SVG QR Codes in src/qr/...")
+    os.makedirs("src/qr", exist_ok=True)
     qr_targets = [("home", f"{base_domain}/")] + [(post["slug"], f"{base_domain}/{post['slug']}/") for post in posts]
     for slug, url in qr_targets:
-        out_svg = f"qr/{slug}.svg"
+        out_svg = f"src/qr/{slug}.svg"
         qr_matrix_to_svg(slug, url, out_svg)
         print(f"  [OK] Generated {out_svg} -> {url}")
 
-    # Read Home QR Embedded SVG
-    home_qr_svg = ""
-    if os.path.exists("qr/home.svg"):
-        with open("qr/home.svg", "r", encoding="utf-8") as f:
-            home_qr_svg = f.read()
-
     # Helper function to render exact QR Modal HTML (Matching Image 2)
-    def build_qr_modal_html(modal_id, qr_embedded_svg, rel_prefix=""):
-        return f"""
-    <!-- QR Code Modal (Exact Match to User Mockup Image 2) -->
-    <div id="{modal_id}" class="qr-modal-overlay" role="dialog" aria-modal="true">
-      <div class="qr-card-printable">
-        <button type="button" class="qr-modal-close-btn" aria-label="Close">✕</button>
-        <img src="{rel_prefix}assets/images/dp_logo.png" alt="Delhi Police Logo" class="qr-modal-logo">
-        <h2 class="qr-card-title">SCAN QR CODE FOR INSTRUCTIONS</h2>
-        <p class="qr-card-subtitle">
-          Scan with any smartphone camera to open instructions directly on mobile or tablet.
-        </p>
-
-        <div class="qr-inner-frame">
-          <div class="qr-image-container">
-            {qr_embedded_svg}
-          </div>
-          <div class="qr-frame-badge">
-            <span>📱</span>
-            <span>MOBILE &amp; TABLET OPTIMIZED</span>
-          </div>
-        </div>
-
-        <div class="qr-modal-actions">
-          <button type="button" class="qr-copy-btn qr-copy-url-btn" onclick="copyPageURL(this)">
-            <span>📋</span>
-            <span>Copy URL</span>
-          </button>
-          <button type="button" class="qr-share-btn" onclick="shareWebsite()">
-            <span>🔗</span>
-            <span>Share Website</span>
-          </button>
-        </div>
-      </div>
-    </div>
-    """
+    def build_qr_modal_html(modal_id, qr_slug, rel_prefix=""):
+        return f"""<div id="{modal_id}" class="qr-modal-overlay" role="dialog" aria-modal="true"><div class="qr-card-printable"><button type="button" class="qr-modal-close-btn" aria-label="Close">✕</button><img src="{rel_prefix}assets/images/dp_logo.png" alt="Delhi Police Logo" class="qr-modal-logo"><h2 class="qr-card-title"><span class="lang-en">SCAN QR CODE FOR INSTRUCTIONS</span><span class="lang-hi">निर्देशों के लिए क्यूआर कोड स्कैन करें</span></h2><p class="qr-card-subtitle"><span class="lang-en">Scan with any smartphone camera to open instructions directly on mobile or tablet.</span><span class="lang-hi">मोबाइल या टैबलेट पर निर्देश सीधे खोलने के लिए किसी भी स्मार्टफोन कैमरा से स्कैन करें।</span></p><div class="qr-inner-frame"><div class="qr-image-container"><img src="{rel_prefix}qr/{qr_slug}.svg" alt="QR Code" style="width:100%; height:100%; object-fit:contain;"></div><div class="qr-frame-badge"><span>📱</span><span class="lang-en">MOBILE &amp; TABLET OPTIMIZED</span><span class="lang-hi">मोबाइल एवं टैबलेट अनुकूलित</span></div></div><div class="qr-modal-actions"><button type="button" class="qr-copy-btn qr-copy-url-btn" onclick="copyPageURL(this)"><span>📋</span><span class="lang-en">Copy URL</span><span class="lang-hi">यूआरएल कॉपी करें</span></button><button type="button" class="qr-share-btn" onclick="shareWebsite()"><span>🔗</span><span class="lang-en">Share Website</span><span class="lang-hi">वेबसाइट शेयर करें</span></button></div></div></div>"""
 
     # 3. Pre-render Home Page (`src/index.html`)
     print("\nPre-rendering Home Page (index.html)...")
@@ -278,11 +219,26 @@ def main():
 
     category_filter_html = """
     <div class="category-filter-bar">
-      <button type="button" class="category-filter-btn active" data-filter="all">ALL POSTS</button>
-      <button type="button" class="category-filter-btn" data-filter="elevated">ELEVATED</button>
-      <button type="button" class="category-filter-btn" data-filter="access">ACCESS CONTROL</button>
-      <button type="button" class="category-filter-btn" data-filter="mobile">PATROL &amp; MOBILE</button>
-      <button type="button" class="category-filter-btn" data-filter="monitoring">MONITORING</button>
+      <button type="button" class="category-filter-btn active" data-filter="all">
+        <span class="lang-en">ALL POSTS</span>
+        <span class="lang-hi">सभी पोस्ट</span>
+      </button>
+      <button type="button" class="category-filter-btn" data-filter="elevated">
+        <span class="lang-en">ELEVATED</span>
+        <span class="lang-hi">ऊँचे स्थान</span>
+      </button>
+      <button type="button" class="category-filter-btn" data-filter="access">
+        <span class="lang-en">ACCESS CONTROL</span>
+        <span class="lang-hi">प्रवेश नियंत्रण</span>
+      </button>
+      <button type="button" class="category-filter-btn" data-filter="mobile">
+        <span class="lang-en">PATROL &amp; MOBILE</span>
+        <span class="lang-hi">गश्त एवं मोबाइल</span>
+      </button>
+      <button type="button" class="category-filter-btn" data-filter="monitoring">
+        <span class="lang-en">MONITORING</span>
+        <span class="lang-hi">निगरानी</span>
+      </button>
     </div>
     """
 
@@ -308,7 +264,7 @@ def main():
       Version {meta['version']} • Updated {meta['updated']}
     </div>
 
-    {build_qr_modal_html("qr-modal-home", home_qr_svg, rel_prefix="")}
+    {build_qr_modal_html("qr-modal-home", "home", rel_prefix="")}
     """
 
     category_filter_script = """
@@ -401,7 +357,7 @@ def main():
       Version {meta['version']} • Updated {meta['updated']}
     </div>
 
-    {build_qr_modal_html("qr-modal-checklist", home_qr_svg, rel_prefix="../")}
+    {build_qr_modal_html("qr-modal-checklist", "home", rel_prefix="../")}
     """
 
     checklist_extra_script = '<script src="../assets/js/checklist.js?v=8.0"></script>'
@@ -416,12 +372,6 @@ def main():
         slug = post["slug"]
         os.makedirs(f"src/{slug}", exist_ok=True)
         post_icon_svg = load_svg_icon(post["icon"])
-
-        qr_svg_path = f"qr/{slug}.svg"
-        qr_embedded_svg = ""
-        if os.path.exists(qr_svg_path):
-            with open(qr_svg_path, "r", encoding="utf-8") as f:
-                qr_embedded_svg = f.read()
 
         hero_img_rel = f"../assets/images/{slug}.jpg"
         hero_photo_card = ""
@@ -492,7 +442,7 @@ def main():
               <span class="lang-en">OPERATIONAL INSTRUCTIONS</span>
               <span class="lang-hi">परिचालन निर्देश</span>
             </h3>
-            <button type="button" class="inline-switch-btn" onclick="toggleLanguage(document.documentElement.lang === 'hi' ? 'en' : 'hi')">
+            <button type="button" class="inline-switch-btn" onclick="DPLang.toggle()">
               <span class="lang-en">हिंदी में देखें</span>
               <span class="lang-hi">SHOW IN ENGLISH</span>
             </button>
@@ -506,7 +456,7 @@ def main():
           Version {meta['version']} • Updated {meta['updated']}
         </div>
 
-        {build_qr_modal_html(post_modal_id, qr_embedded_svg, rel_prefix="../")}
+        {build_qr_modal_html(post_modal_id, slug, rel_prefix="../")}
         """
 
         post_html = build_page_html(post['en']['name'], post['hi']['name'], post_main_html, rel_prefix="../", qr_modal_target_id=post_modal_id, active_nav="home")
@@ -539,7 +489,7 @@ def main():
       Version {meta['version']} • Updated {meta['updated']}
     </div>
 
-    {build_qr_modal_html("qr-modal-search", home_qr_svg, rel_prefix="../")}
+    {build_qr_modal_html("qr-modal-search", "home", rel_prefix="../")}
     """
     search_html = build_page_html("Search Instructions", "निर्देश खोजें", search_main_html, rel_prefix="../", qr_modal_target_id="qr-modal-search", active_nav="search")
     with open("src/search/index.html", "w", encoding="utf-8") as f:
@@ -588,6 +538,8 @@ def main():
     total_gzipped = 0
 
     for root, _, files in os.walk("src"):
+        if "dp-c9f7e2" in root or "dp-q3b8a1" in root:
+            continue
         for file in files:
             if file.endswith((".html", ".css", ".js", ".json", ".webmanifest")):
                 path = os.path.join(root, file)

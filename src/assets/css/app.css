@@ -18,9 +18,9 @@
   --on-surface:       #1B1C19;
   --success-green:    #2E7D32;
 
-  --font-display: 'Archivo Narrow', sans-serif;
-  --font-latin:   'Inter', system-ui, sans-serif;
-  --font-devanagari: 'Noto Sans Devanagari', sans-serif;
+  --font-display: 'Barlow Condensed', 'Noto Sans Devanagari', sans-serif;
+  --font-latin:   'Inter', 'Noto Sans Devanagari', system-ui, sans-serif;
+  --font-devanagari: 'Noto Sans Devanagari', 'Inter', sans-serif;
 
   --line-height-latin: 1.5;
   --line-height-devanagari: 1.7;
@@ -46,8 +46,6 @@ html {
 
 html[lang="hi"], :lang(hi) {
   font-family: var(--font-devanagari), var(--font-latin);
-  line-height: var(--line-height-devanagari);
-  font-size: 18.5px;
   text-rendering: optimizeLegibility;
 }
 
@@ -81,37 +79,37 @@ body::before {
   z-index: 1;          /* above body background, below all content (z-index 10+) */
 }
 
-/* Smooth Language Transition System for Portable & Touch Devices */
-.lang-en, .lang-hi {
-  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+/* Smooth Language Crossfade System for Portable & Touch Devices */
+.container,
+.directive-strip,
+.control-room-bar,
+.masthead-title,
+.category-filter-bar {
+  transition: opacity 0.14s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: opacity;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
-body.lang-transitioning .lang-en,
-body.lang-transitioning .lang-hi {
-  transition: opacity 0.15s ease-out;
+body.lang-transitioning .container,
+body.lang-transitioning .directive-strip,
+body.lang-transitioning .control-room-bar,
+body.lang-transitioning .masthead-title,
+body.lang-transitioning .category-filter-bar {
+  opacity: 0.15;
+  transition: opacity 0.08s ease-out;
 }
 
 html[lang="en"] .lang-hi,
 html:not([lang="hi"]) .lang-hi {
   display: none !important;
-  opacity: 0;
 }
 
 html[lang="hi"] .lang-en {
   display: none !important;
-  opacity: 0;
-}
-
-html[lang="en"] .lang-en,
-html[lang="hi"] .lang-hi {
-  opacity: 1;
 }
 
 .lang-hi {
   font-weight: 500;
+  font-family: var(--font-devanagari), var(--font-latin);
 }
 
 
@@ -288,6 +286,8 @@ html[lang="hi"] .lang-hi {
   border: 1.5px solid rgba(255, 224, 127, 0.5);
   padding: 3px 6px;
   border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .lang-toggle-btn {
@@ -303,9 +303,14 @@ html[lang="hi"] .lang-hi {
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   -webkit-user-select: none;
+  white-space: nowrap;
   transition: background-color 0.18s cubic-bezier(0.4, 0, 0.2, 1), 
               color 0.18s cubic-bezier(0.4, 0, 0.2, 1), 
               transform 0.12s ease;
+}
+
+.lang-toggle-btn[data-lang="hi"] {
+  font-family: var(--font-devanagari), var(--font-latin);
 }
 
 .lang-toggle-btn:active, .inline-switch-btn:active {
@@ -431,10 +436,17 @@ html[lang="hi"] .lang-hi {
   font-size: clamp(1.1rem, 2vw, 1.5rem);
   font-weight: 700;
   color: var(--navy-deep);
-  opacity: 0.75;
+  opacity: 0.85;
   letter-spacing: 3px;
   text-transform: uppercase;
   margin-bottom: 16px;
+}
+
+html[lang="hi"] .slogan-banner,
+.slogan-banner .lang-hi {
+  font-family: var(--font-devanagari), sans-serif;
+  letter-spacing: 1px;
+  font-weight: 700;
 }
 
 /* ==========================================================================
@@ -470,6 +482,12 @@ html[lang="hi"] .lang-hi {
   white-space: nowrap;
   cursor: pointer;
   transition: all 0.15s ease;
+}
+
+.category-filter-btn .lang-hi {
+  font-family: var(--font-devanagari), sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .category-filter-btn.active,
