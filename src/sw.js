@@ -3,7 +3,7 @@
  * Cache Version 11.0 - Guaranteed Fixed Signal Red Call Control Room Bar & Boosted Hindi Typography
  */
 
-var CACHE_NAME = 'dp-instructions-v23.0';
+var CACHE_NAME = 'dp-instructions-v24.0';
 
 var STATIC_ASSETS = [
 

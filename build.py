@@ -263,8 +263,8 @@ def main():
     <div class="event-banner" role="region" aria-label="Event Information">
       <div class="event-banner-tag">
         <span class="event-banner-badge">
-          <span class="lang-en">79th INDEPENDENCE DAY DEPLOYMENT</span>
-          <span class="lang-hi">79वाँ स्वतंत्रता दिवस सुरक्षा ड्यूटी</span>
+          <span class="lang-en">80th INDEPENDENCE DAY DEPLOYMENT</span>
+          <span class="lang-hi">80वाँ स्वतंत्रता दिवस सुरक्षा ड्यूटी</span>
         </span>
         <div>
           <div class="event-banner-text">
@@ -464,8 +464,8 @@ def main():
         </div>
 
         <div class="post-event-strip">
-          <span class="lang-en">79th INDEPENDENCE DAY SECURITY DEPLOYMENT • NORTH DISTRICT</span>
-          <span class="lang-hi">79वाँ स्वतंत्रता दिवस सुरक्षा व्यवस्था • उत्तरी जिला</span>
+          <span class="lang-en">80th INDEPENDENCE DAY SECURITY DEPLOYMENT • NORTH DISTRICT</span>
+          <span class="lang-hi">80वाँ स्वतंत्रता दिवस सुरक्षा व्यवस्था • उत्तरी जिला</span>
         </div>
 
         {hero_photo_card}
