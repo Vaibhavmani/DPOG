@@ -383,42 +383,63 @@ html[lang="hi"] .lang-en {
   color: var(--navy-deep);
 }
 
+.mobile-only {
+  display: none !important;
+}
+
 /* Mobile Responsiveness Hardening (< 600px Viewport - Portable Devices) */
 @media (max-width: 600px) {
+  .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: inline-block !important;
+  }
+
   .masthead-top {
-    padding: 8px 10px;
-    gap: 6px;
-    min-height: 54px;
+    padding: 6px 8px;
+    gap: 4px;
+    min-height: 52px;
     flex-wrap: nowrap;
+    overflow: hidden;
   }
   .masthead-brand {
-    gap: 8px;
+    gap: 6px;
     flex: 1 1 auto;
     min-width: 0;
-    max-width: none;
+    overflow: hidden;
+  }
+  .header-titles {
+    min-width: 0;
+    overflow: hidden;
   }
   .header-logo-box {
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
     flex-shrink: 0;
   }
   .masthead-title {
-    font-size: clamp(0.82rem, 3.4vw, 1.05rem);
-    letter-spacing: 0.2px;
+    font-size: clamp(0.74rem, 3.2vw, 0.98rem);
+    letter-spacing: 0.1px;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .masthead-subtitle {
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     line-height: 1.1;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .masthead-subtitle .lang-hi {
-    font-size: 0.58rem;
+    font-size: 0.55rem;
   }
   .header-actions {
-    gap: 4px;
+    gap: 3px;
     align-items: center;
-    flex-shrink: 0;
+    flex: 0 0 auto;
+    margin-left: 2px;
   }
   .header-qr-btn,
   .header-call-btn,
@@ -428,10 +449,10 @@ html[lang="hi"] .lang-en {
   }
   .header-qr-btn,
   .header-call-btn {
-    min-height: 36px;
-    height: 36px;
-    padding: 4px 6px;
-    font-size: 0.74rem;
+    min-height: 34px;
+    height: 34px;
+    padding: 2px 6px;
+    font-size: 0.72rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -439,16 +460,16 @@ html[lang="hi"] .lang-en {
     flex-shrink: 0;
   }
   .lang-toggle-box {
-    min-height: 36px;
-    height: 36px;
+    min-height: 34px;
+    height: 34px;
     padding: 2px 4px;
     display: inline-flex;
     align-items: center;
     flex-shrink: 0;
   }
   .lang-toggle-btn {
-    padding: 3px 5px;
-    font-size: 0.74rem;
+    padding: 2px 4px;
+    font-size: 0.72rem;
   }
   .container {
     padding: 12px 10px;
