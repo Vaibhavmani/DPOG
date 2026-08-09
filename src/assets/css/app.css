@@ -386,26 +386,31 @@ html[lang="hi"] .lang-en {
 /* Mobile Responsiveness Hardening (< 600px Viewport - Portable Devices) */
 @media (max-width: 600px) {
   .masthead-top {
-    padding: 8px 8px;
-    gap: 4px;
-    min-height: 56px;
+    padding: 8px 10px;
+    gap: 6px;
+    min-height: 54px;
+    flex-wrap: nowrap;
   }
   .masthead-brand {
-    gap: 6px;
-    max-width: 44%;
+    gap: 8px;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: none;
   }
   .header-logo-box {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     flex-shrink: 0;
   }
   .masthead-title {
-    font-size: 0.85rem;
+    font-size: clamp(0.82rem, 3.4vw, 1.05rem);
     letter-spacing: 0.2px;
+    white-space: nowrap;
   }
   .masthead-subtitle {
     font-size: 0.6rem;
     line-height: 1.1;
+    white-space: nowrap;
   }
   .masthead-subtitle .lang-hi {
     font-size: 0.58rem;
@@ -423,8 +428,8 @@ html[lang="hi"] .lang-en {
   }
   .header-qr-btn,
   .header-call-btn {
-    min-height: 38px;
-    height: 38px;
+    min-height: 36px;
+    height: 36px;
     padding: 4px 6px;
     font-size: 0.74rem;
     display: inline-flex;
@@ -434,8 +439,8 @@ html[lang="hi"] .lang-en {
     flex-shrink: 0;
   }
   .lang-toggle-box {
-    min-height: 38px;
-    height: 38px;
+    min-height: 36px;
+    height: 36px;
     padding: 2px 4px;
     display: inline-flex;
     align-items: center;
@@ -491,31 +496,31 @@ html[lang="hi"] .lang-en {
   }
 }
 
-/* Standing Directive Warning Banner (Signal Red) */
+/* Standing Directive Warning Banner (Signal Red) - Fluid Multi-Screen Scaling */
 .directive-strip {
   background-color: var(--signal-red);
   color: var(--white);
-  min-height: 36px;
-  height: 36px;
-  padding: 4px 12px;
+  min-height: 32px;
+  height: auto;
+  padding: 5px 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: clamp(0.8rem, 1.4vw, 1.1rem);
-  letter-spacing: 1px;
+  font-size: clamp(0.72rem, 2.2vw, 1.05rem);
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   text-align: center;
   border-bottom: 2px solid var(--navy-deep);
+  line-height: 1.25;
+  width: 100%;
 }
 
 @media (max-width: 600px) {
   .directive-strip {
-    font-size: 0.72rem;
-    letter-spacing: 0.2px;
-    padding: 2px 6px;
-    min-height: 34px;
-    height: 34px;
+    font-size: clamp(0.68rem, 2.6vw, 0.82rem);
+    letter-spacing: 0.3px;
+    padding: 4px 8px;
   }
 }
 
