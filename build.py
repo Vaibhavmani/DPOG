@@ -113,7 +113,7 @@ def main():
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>{title_en} | Delhi Police — North District</title>
-  <link rel="stylesheet" href="{rel_prefix}assets/css/app.css?v=11.0">
+  <link rel="stylesheet" href="{rel_prefix}assets/css/app.css?v=12.0">
   <link rel="manifest" href="{rel_prefix}manifest.webmanifest">
   <meta name="theme-color" content="#000C44">
 </head>
@@ -196,9 +196,10 @@ def main():
         qr_matrix_to_svg(slug, url, out_svg)
         print(f"  [OK] Generated {out_svg} -> {url}")
 
-    # Helper function to render exact QR Modal HTML (Matching Image 2)
+    # Helper function to render exact QR Modal HTML
     def build_qr_modal_html(modal_id, qr_slug, rel_prefix=""):
-        return f"""<div id="{modal_id}" class="qr-modal-overlay" role="dialog" aria-modal="true"><div class="qr-card-printable"><button type="button" class="qr-modal-close-btn" aria-label="Close">✕</button><img src="{rel_prefix}assets/images/dp_logo.png" alt="Delhi Police Logo" class="qr-modal-logo"><h2 class="qr-card-title"><span class="lang-en">SCAN QR CODE FOR INSTRUCTIONS</span><span class="lang-hi">निर्देशों के लिए क्यूआर कोड स्कैन करें</span></h2><p class="qr-card-subtitle"><span class="lang-en">Scan with any smartphone camera to open instructions directly on mobile or tablet.</span><span class="lang-hi">मोबाइल या टैबलेट पर निर्देश सीधे खोलने के लिए किसी भी स्मार्टफोन कैमरा से स्कैन करें।</span></p><div class="qr-inner-frame"><div class="qr-image-container"><img src="{rel_prefix}qr/{qr_slug}.svg" alt="QR Code" style="width:100%; height:100%; object-fit:contain;"></div><div class="qr-frame-badge"><span>📱</span><span class="lang-en">MOBILE &amp; TABLET OPTIMIZED</span><span class="lang-hi">मोबाइल एवं टैबलेट अनुकूलित</span></div></div><div class="qr-modal-actions"><button type="button" class="qr-copy-btn qr-copy-url-btn" onclick="copyPageURL(this)"><span>📋</span><span class="lang-en">Copy URL</span><span class="lang-hi">यूआरएल कॉपी करें</span></button><button type="button" class="qr-share-btn" onclick="shareWebsite()"><span>🔗</span><span class="lang-en">Share Website</span><span class="lang-hi">वेबसाइट शेयर करें</span></button></div></div></div>"""
+        img_tag = f'<img src="{rel_prefix}qr/{qr_slug}.svg?v=19.0" alt="QR Code" style="width:100%; height:100%; object-fit:contain;" onerror="handleQRError(this, \'{rel_prefix}qr/{qr_slug}.svg?v=19.0\')">'
+        return f"""<div id="{modal_id}" class="qr-modal-overlay" role="dialog" aria-modal="true"><div class="qr-card-printable"><button type="button" class="qr-modal-close-btn" aria-label="Close">✕</button><img src="{rel_prefix}assets/images/dp_logo.png" alt="Delhi Police Logo" class="qr-modal-logo"><h2 class="qr-card-title"><span class="lang-en">SCAN QR CODE FOR INSTRUCTIONS</span><span class="lang-hi">निर्देशों के लिए क्यूआर कोड स्कैन करें</span></h2><p class="qr-card-subtitle"><span class="lang-en">Scan with any smartphone camera to open instructions directly on mobile or tablet.</span><span class="lang-hi">मोबाइल या टैबलेट पर निर्देश सीधे खोलने के लिए किसी भी स्मार्टफोन कैमरा से स्कैन करें।</span></p><div class="qr-inner-frame"><div class="qr-image-container">{img_tag}</div><div class="qr-frame-badge"><span>📱</span><span class="lang-en">MOBILE &amp; TABLET OPTIMIZED</span><span class="lang-hi">मोबाइल एवं टैबलेट अनुकूलित</span></div></div><div class="qr-modal-actions"><button type="button" class="qr-copy-btn qr-copy-url-btn" onclick="copyPageURL(this)"><span>📋</span><span class="lang-en">Copy URL</span><span class="lang-hi">यूआरएल कॉपी करें</span></button><button type="button" class="qr-share-btn" onclick="shareWebsite()"><span>🔗</span><span class="lang-en">Share Website</span><span class="lang-hi">वेबसाइट शेयर करें</span></button></div></div></div>"""
 
     # 3. Pre-render Home Page (`src/index.html`)
     print("\nPre-rendering Home Page (index.html)...")

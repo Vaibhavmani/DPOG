@@ -78,6 +78,22 @@
     } else {
       window.copyPageURL(document.querySelector('.qr-copy-url-btn'));
     }
+  window.handleQRError = function (imgEl, url) {
+    if (!imgEl || imgEl.dataset.handled) return;
+    imgEl.dataset.handled = "true";
+    fetch(url)
+      .then(function (res) { return res.text(); })
+      .then(function (svgText) {
+        if (svgText && svgText.indexOf('<svg') !== -1) {
+          var container = imgEl.parentElement;
+          if (container) {
+            container.innerHTML = svgText;
+          }
+        }
+      })
+      .catch(function (err) {
+        console.warn('QR SVG fetch fallback failed:', err);
+      });
   };
 
   // 4. QR Code Modal Viewer & Event Delegation
