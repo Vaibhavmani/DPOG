@@ -99,7 +99,12 @@
       var toggleBtn = e.target.closest('.lang-toggle-btn') || e.target.closest('.inline-switch-btn');
       if (toggleBtn) {
         e.preventDefault();
-        toggleLanguage();
+        var targetLang = toggleBtn.getAttribute('data-lang');
+        if (targetLang === 'en' || targetLang === 'hi') {
+          setLanguage(targetLang, true);
+        } else {
+          toggleLanguage();
+        }
       }
     });
   });
