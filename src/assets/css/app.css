@@ -44,12 +44,47 @@ html {
   overflow-x: hidden;
 }
 
-/* Devanagari Proportional Sizing - Scoped to .lang-hi so global layout dimensions remain 100% identical */
+/* Devanagari Proportional Sizing & Compact Spacing - Ensures Hindi spacing matches English 100% */
 .lang-hi {
   font-family: var(--font-devanagari), var(--font-latin);
   font-size: 0.92em;
   line-height: 1.35;
   font-weight: 600;
+}
+
+.instructions-cards-list.lang-hi {
+  gap: 8px;
+}
+
+.instructions-cards-list.lang-hi .instruction-card {
+  padding: 10px 14px;
+  gap: 10px;
+}
+
+.instructions-cards-list.lang-hi .instruction-text {
+  font-size: 0.92rem;
+  line-height: 1.38;
+}
+
+.key-directives-list.lang-hi {
+  gap: 8px;
+}
+
+.key-directives-list.lang-hi .key-directive-item {
+  gap: 8px;
+  font-size: 0.95rem;
+  line-height: 1.32;
+}
+
+html[lang="hi"] .key-directives-block {
+  padding: clamp(14px, 2vw, 20px);
+  margin-bottom: 20px;
+}
+
+html[lang="hi"] .category-filter-bar {
+  gap: 6px;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .slogan-banner .lang-hi {

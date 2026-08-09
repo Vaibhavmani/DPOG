@@ -96,15 +96,21 @@
 
     // Wire masthead language toggle buttons
     document.addEventListener('click', function (e) {
-      var toggleBtn = e.target.closest('.lang-toggle-btn') || e.target.closest('.inline-switch-btn');
+      var toggleBtn = e.target.closest('.lang-toggle-btn');
       if (toggleBtn) {
         e.preventDefault();
         var targetLang = toggleBtn.getAttribute('data-lang');
         if (targetLang === 'en' || targetLang === 'hi') {
           setLanguage(targetLang, true);
-        } else {
-          toggleLanguage();
         }
+        return;
+      }
+
+      var inlineBtn = e.target.closest('.inline-switch-btn');
+      if (inlineBtn) {
+        e.preventDefault();
+        toggleLanguage();
+        return;
       }
     });
   });
