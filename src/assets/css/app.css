@@ -383,50 +383,115 @@ html[lang="hi"] .lang-en {
   color: var(--navy-deep);
 }
 
-/* Mobile Responsiveness Hardening (< 600px Viewport) */
+/* Mobile Responsiveness Hardening (< 600px Viewport - Portable Devices) */
 @media (max-width: 600px) {
   .masthead-top {
-    padding: 8px 10px;
-    gap: 6px 10px;
+    padding: 8px 8px;
+    gap: 4px;
+    min-height: 56px;
   }
   .masthead-brand {
-    gap: 8px;
+    gap: 6px;
+    max-width: 44%;
   }
   .header-logo-box {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
   }
   .masthead-title {
-    font-size: 0.92rem;
+    font-size: 0.85rem;
     letter-spacing: 0.2px;
   }
   .masthead-subtitle {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     line-height: 1.1;
   }
   .masthead-subtitle .lang-hi {
-    font-size: 0.62rem;
+    font-size: 0.58rem;
   }
   .header-actions {
-    gap: 5px;
+    gap: 4px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .header-qr-btn,
+  .header-call-btn,
+  .header-qr-btn *,
+  .header-call-btn * {
+    white-space: nowrap !important;
+  }
+  .header-qr-btn,
+  .header-call-btn {
+    min-height: 38px;
+    height: 38px;
+    padding: 4px 6px;
+    font-size: 0.74rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    flex-shrink: 0;
   }
   .header-qr-btn span:last-child {
-    display: none;
-  }
-  .header-qr-btn {
-    padding: 6px 8px;
-    font-size: 0.8rem;
-  }
-  .header-call-btn {
-    padding: 6px 10px;
-    font-size: 0.85rem;
+    display: inline-block !important;
+    white-space: nowrap !important;
   }
   .lang-toggle-box {
+    min-height: 38px;
+    height: 38px;
     padding: 2px 4px;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
   }
   .lang-toggle-btn {
-    padding: 2px 6px;
-    font-size: 0.8rem;
+    padding: 3px 5px;
+    font-size: 0.74rem;
+  }
+  .container {
+    padding: 12px 10px;
+  }
+  body::before {
+    opacity: 0.12 !important;
+  }
+
+  /* Mobile Event Banner Hardening */
+  .event-banner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 12px !important;
+    gap: 10px !important;
+  }
+  .event-banner-tag {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  .event-banner-badge {
+    align-self: flex-start !important;
+    font-size: 0.74rem !important;
+    padding: 4px 8px !important;
+  }
+  .event-banner-text {
+    font-size: 0.88rem !important;
+    line-height: 1.3 !important;
+    width: 100% !important;
+  }
+  .event-banner-subtext {
+    font-size: 0.76rem !important;
+    width: 100% !important;
+  }
+  .north-district-pill {
+    align-self: flex-start !important;
+    font-size: 0.74rem !important;
+    padding: 4px 10px !important;
+    margin-top: 2px !important;
+  }
+  .post-event-strip {
+    font-size: 0.75rem !important;
+    padding: 6px 10px !important;
   }
 }
 
