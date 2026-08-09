@@ -129,8 +129,11 @@ def main():
           <img src="{rel_prefix}assets/images/dp_logo.png" alt="Delhi Police Logo">
         </div>
         <div class="header-titles">
-          <h1 class="masthead-title">QUICK INSTRUCTIONS</h1>
-          <div class="masthead-subtitle">DELHI POLICE • दिल्ली पुलिस</div>
+          <h1 class="masthead-title">DPOG</h1>
+          <div class="masthead-subtitle">
+            <span class="lang-en">DELHI POLICE OPERATIONAL GUIDE</span>
+            <span class="lang-hi">दिल्ली पुलिस ऑपरेशनल गाइड</span>
+          </div>
         </div>
       </a>
       <div class="header-actions">
@@ -261,7 +264,7 @@ def main():
     {home_tiles_html}
 
     <div class="version-stamp">
-      Version {meta['version']} • Updated {meta['updated']}
+      DPOG v{meta['version']} • Updated {meta['updated']}
     </div>
 
     {build_qr_modal_html("qr-modal-home", "home", rel_prefix="")}
@@ -354,7 +357,7 @@ def main():
     </div>
 
     <div class="version-stamp">
-      Version {meta['version']} • Updated {meta['updated']}
+      DPOG v{meta['version']} • Updated {meta['updated']}
     </div>
 
     {build_qr_modal_html("qr-modal-checklist", "home", rel_prefix="../")}
@@ -453,7 +456,7 @@ def main():
         </div>
 
         <div class="version-stamp">
-          Version {meta['version']} • Updated {meta['updated']}
+          DPOG v{meta['version']} • Updated {meta['updated']}
         </div>
 
         {build_qr_modal_html(post_modal_id, slug, rel_prefix="../")}
@@ -486,7 +489,7 @@ def main():
     <div id="search-results"></div>
 
     <div class="version-stamp">
-      Version {meta['version']} • Updated {meta['updated']}
+      DPOG v{meta['version']} • Updated {meta['updated']}
     </div>
 
     {build_qr_modal_html("qr-modal-search", "home", rel_prefix="../")}
