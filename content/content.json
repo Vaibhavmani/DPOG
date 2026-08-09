@@ -9,11 +9,15 @@
       "hi": "सतर्क रहें • चौकस रहें • सुरक्षित रहें"
     },
     "issuedBy": {
-      "en": "Delhi Police — North District",
-      "hi": "दिल्ली पुलिस — उत्तरी जिला"
+      "en": "Initiated & Issued by North District, Delhi Police",
+      "hi": "उत्तरी जिला, दिल्ली पुलिस द्वारा प्रारम्भ एवं जारी"
+    },
+    "event": {
+      "en": "Independence Day Law & Order Security Deployment",
+      "hi": "स्वतंत्रता दिवस कानून और व्यवस्था सुरक्षा ड्यूटी"
     },
     "version": "1.0",
-    "updated": "2026-08-07",
+    "updated": "2026-08-09",
     "controlRoom": [
       {
         "label": {

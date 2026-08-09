@@ -20,7 +20,7 @@ def qr_matrix_to_svg(slug, target_url, output_path):
     svg_str = img.to_string(encoding='utf-8').decode('utf-8')
 
     # Style dark modules with Delhi Police Deep Navy (#000C44)
-    svg_str = svg_str.replace('<path ', '<path fill="#000C44" ')
+    svg_str = svg_str.replace('fill="#000000"', 'fill="#000C44"')
 
     # Add crisp white background rect inside <svg>
     idx = svg_str.find('>')
@@ -112,8 +112,8 @@ def main():
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>{title_en} | Delhi Police</title>
-  <link rel="stylesheet" href="{rel_prefix}assets/css/app.css?v=8.0">
+  <title>{title_en} | Delhi Police — North District</title>
+  <link rel="stylesheet" href="{rel_prefix}assets/css/app.css?v=11.0">
   <link rel="manifest" href="{rel_prefix}manifest.webmanifest">
   <meta name="theme-color" content="#000C44">
 </head>
@@ -131,8 +131,8 @@ def main():
         <div class="header-titles">
           <h1 class="masthead-title">DPOG</h1>
           <div class="masthead-subtitle">
-            <span class="lang-en">DELHI POLICE OPERATIONAL GUIDE</span>
-            <span class="lang-hi">दिल्ली पुलिस ऑपरेशनल गाइड</span>
+            <span class="lang-en">DELHI POLICE • NORTH DISTRICT</span>
+            <span class="lang-hi">दिल्ली पुलिस • उत्तरी जिला</span>
           </div>
         </div>
       </a>
@@ -157,11 +157,21 @@ def main():
       <span class="lang-en">STAY ALERT • STAY VIGILANT • STAY SAFE</span>
       <span class="lang-hi">सतर्क रहें • चौकस रहें • सुरक्षित रहें</span>
     </div>
+    <div class="id-tricolor-bar">
+      <div class="saffron"></div>
+      <div class="white"></div>
+      <div class="green"></div>
+    </div>
   </header>
   <main class="container">
     {main_content_html}
   </main>
   {hotline_modal_html}
+  <div class="id-tricolor-bar">
+    <div class="saffron"></div>
+    <div class="white"></div>
+    <div class="green"></div>
+  </div>
   <footer class="control-room-bar">
     <a href="tel:{ctrl_number}" class="control-room-call-btn" aria-label="Call Control Room">
       {phone_svg}
@@ -245,7 +255,33 @@ def main():
     </div>
     """
 
+    event_banner_html = f"""
+    <div class="event-banner" role="region" aria-label="Event Information">
+      <div class="event-banner-tag">
+        <span class="event-banner-badge">
+          <span class="lang-en">79th INDEPENDENCE DAY DEPLOYMENT</span>
+          <span class="lang-hi">79वाँ स्वतंत्रता दिवस सुरक्षा ड्यूटी</span>
+        </span>
+        <div>
+          <div class="event-banner-text">
+            <span class="lang-en">{meta['event']['en']} 2026</span>
+            <span class="lang-hi">{meta['event']['hi']} 2026</span>
+          </div>
+          <div class="event-banner-subtext">
+            <span class="lang-en">Initiated &amp; Issued by North District, Delhi Police</span>
+            <span class="lang-hi">उत्तरी जिला, दिल्ली पुलिस द्वारा प्रारम्भ एवं जारी</span>
+          </div>
+        </div>
+      </div>
+      <div class="north-district-pill">
+        <span class="lang-en">NORTH DISTRICT</span>
+        <span class="lang-hi">उत्तरी जिला</span>
+      </div>
+    </div>
+    """
+
     home_main_html = f"""
+    {event_banner_html}
     <div class="slogan-banner">
       <span class="lang-en">Peace • Service • Justice</span>
       <span class="lang-hi">शांति • सेवा • न्याय</span>
@@ -258,13 +294,11 @@ def main():
       </div>
     </form>
 
-
-
     {category_filter_html}
     {home_tiles_html}
 
     <div class="version-stamp">
-      DPOG v{meta['version']} • Updated {meta['updated']}
+      DPOG v{meta['version']} • Initiated &amp; Issued by North District, Delhi Police • Updated {meta['updated']}
     </div>
 
     {build_qr_modal_html("qr-modal-home", "home", rel_prefix="")}
@@ -425,6 +459,11 @@ def main():
           <div class="post-header-icon">{post_icon_svg}</div>
         </div>
 
+        <div class="post-event-strip">
+          <span class="lang-en">79th INDEPENDENCE DAY SECURITY DEPLOYMENT • NORTH DISTRICT</span>
+          <span class="lang-hi">79वाँ स्वतंत्रता दिवस सुरक्षा व्यवस्था • उत्तरी जिला</span>
+        </div>
+
         {hero_photo_card}
 
         <!-- Key Directives Container Box -->
@@ -456,7 +495,7 @@ def main():
         </div>
 
         <div class="version-stamp">
-          DPOG v{meta['version']} • Updated {meta['updated']}
+          DPOG v{meta['version']} • Initiated &amp; Issued by North District, Delhi Police • Updated {meta['updated']}
         </div>
 
         {build_qr_modal_html(post_modal_id, slug, rel_prefix="../")}

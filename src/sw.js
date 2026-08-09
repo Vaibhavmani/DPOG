@@ -3,7 +3,7 @@
  * Cache Version 11.0 - Guaranteed Fixed Signal Red Call Control Room Bar & Boosted Hindi Typography
  */
 
-var CACHE_NAME = 'dp-instructions-v14.0';
+var CACHE_NAME = 'dp-instructions-v18.0';
 
 var STATIC_ASSETS = [
 
@@ -32,13 +32,23 @@ var STATIC_ASSETS = [
   '/medical/',
   '/medical/index.html',
   '/content/content.json',
-  '/assets/css/app.css?v=8.0',
+  '/assets/css/app.css?v=11.0',
   '/assets/css/fonts.css',
   '/assets/js/lang.js',
   '/assets/js/search.js',
   '/assets/js/checklist.js?v=8.0',
   '/assets/js/app.js?v=8.0',
   '/manifest.webmanifest',
+  '/qr/home.svg',
+  '/qr/rooftop.svg',
+  '/qr/morcha.svg',
+  '/qr/machan.svg',
+  '/qr/vehicle-checking.svg',
+  '/qr/dfmd.svg',
+  '/qr/qrt.svg',
+  '/qr/xray.svg',
+  '/qr/cctv.svg',
+  '/qr/medical.svg',
   '/assets/icons/building-watch.svg',
   '/assets/icons/barricade.svg',
   '/assets/icons/watchtower.svg',

@@ -1453,3 +1453,288 @@ mark.search-highlight {
   font-weight: 700;
   padding: 0 4px;
 }
+
+/* ==========================================================================
+   Independence Day 2026 Event & North District Initiation Branding
+   ========================================================================== */
+.id-tricolor-bar {
+  display: flex;
+  height: 5px;
+  width: 100%;
+}
+.id-tricolor-bar .saffron { flex: 1; background-color: #FF9933; }
+.id-tricolor-bar .white   { flex: 1; background-color: #FFFFFF; }
+.id-tricolor-bar .green   { flex: 1; background-color: #138808; }
+
+.event-banner {
+  background: var(--navy-deep);
+  border: 2px solid var(--gold-accent);
+  border-top: 4px solid #FF9933;
+  border-bottom: 4px solid #138808;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  box-shadow: 0 4px 16px rgba(0, 12, 68, 0.25);
+}
+
+.event-banner-tag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.event-banner-badge {
+  background-color: var(--alert-yellow);
+  color: var(--navy-deep);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.8rem;
+  padding: 5px 12px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+}
+
+.event-banner-text {
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+
+.event-banner-subtext {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.84rem;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.north-district-pill {
+  background: rgba(200, 177, 135, 0.22);
+  border: 1.5px solid var(--gold-accent);
+  color: var(--alert-yellow);
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.post-event-strip {
+  background: var(--navy-deep);
+  border-left: 4px solid #FF9933;
+  border-right: 4px solid #138808;
+  border-bottom: 2px solid var(--gold-accent);
+  color: var(--alert-yellow);
+  padding: 8px 14px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.5px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   Sharable QR Code Modal & Overlay System (Tactical High-Contrast Overlay)
+   ========================================================================== */
+.qr-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 12, 68, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.qr-modal-overlay.active {
+  display: flex !important;
+  animation: modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.qr-card-printable {
+  background-color: var(--white);
+  border: 3px solid var(--gold-accent);
+  border-radius: 12px;
+  padding: 24px 20px 20px 20px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  margin: auto;
+}
+
+.qr-modal-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  background-color: var(--khaki-light);
+  border: 2px solid var(--gold-accent);
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--navy-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  z-index: 10;
+  transition: all 0.15s ease;
+}
+
+.qr-modal-close-btn:hover {
+  background-color: var(--navy-deep);
+  color: var(--white);
+}
+
+.qr-modal-logo {
+  height: 56px;
+  width: auto;
+  margin: 0 auto 12px auto;
+  display: block;
+}
+
+.qr-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-weight: 800;
+  color: var(--navy-deep);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.qr-card-subtitle {
+  font-size: 0.85rem;
+  color: #444444;
+  margin-bottom: 16px;
+  line-height: 1.4;
+  padding: 0 8px;
+}
+
+.qr-inner-frame {
+  background-color: var(--paper);
+  border: 2px dashed var(--navy-deep);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-image-container {
+  width: 210px;
+  height: 210px;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white);
+  padding: 8px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.qr-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.qr-frame-badge {
+  margin-top: 12px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--navy-deep);
+  background-color: var(--alert-yellow);
+  padding: 4px 12px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--gold-accent);
+}
+
+.qr-modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.qr-copy-btn,
+.qr-share-btn {
+  flex: 1;
+  min-width: 140px;
+  min-height: 48px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  border: none;
+  transition: all 0.15s ease;
+}
+
+.qr-copy-btn {
+  background-color: var(--khaki-light);
+  border: 2px solid var(--navy-deep);
+  color: var(--navy-deep);
+}
+
+.qr-copy-btn:hover {
+  background-color: var(--navy-deep);
+  color: var(--white);
+}
+
+.qr-share-btn {
+  background-color: var(--navy-deep);
+  color: var(--white);
+  border: 2px solid var(--navy-deep);
+}
+
+.qr-share-btn:hover {
+  background-color: #071A52;
+  border-color: #071A52;
+}
+
