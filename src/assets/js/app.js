@@ -147,10 +147,15 @@
     }
   });
 
-  // Initial check on DOM Ready
-  document.addEventListener('DOMContentLoaded', function () {
+  // Initial check on DOM Ready & Immediate fallback
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      updateOnlineStatus();
+      initQRModal();
+    });
+  } else {
     updateOnlineStatus();
     initQRModal();
-  });
+  }
 
 })();

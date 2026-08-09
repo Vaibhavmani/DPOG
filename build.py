@@ -113,7 +113,7 @@ def main():
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>{title_en} | Delhi Police — North District</title>
-  <link rel="stylesheet" href="{rel_prefix}assets/css/app.css?v=14.0">
+  <link rel="stylesheet" href="{rel_prefix}assets/css/app.css?v=15.0">
   <link rel="manifest" href="{rel_prefix}manifest.webmanifest">
   <meta name="theme-color" content="#000C44">
 </head>
@@ -129,7 +129,10 @@ def main():
           <img src="{rel_prefix}assets/images/dp_logo.png" alt="Delhi Police Logo">
         </div>
         <div class="header-titles">
-          <h1 class="masthead-title">DPOG</h1>
+          <h1 class="masthead-title">
+            <span class="lang-en">Quick Instructions</span>
+            <span class="lang-hi">त्वरित निर्देश</span>
+          </h1>
           <div class="masthead-subtitle">
             <span class="lang-en">DELHI POLICE • NORTH DISTRICT</span>
             <span class="lang-hi">दिल्ली पुलिस • उत्तरी जिला</span>
@@ -181,7 +184,7 @@ def main():
   </footer>
   <script src="{rel_prefix}assets/js/lang.js"></script>
   <script src="{rel_prefix}assets/js/search.js"></script>
-  <script src="{rel_prefix}assets/js/app.js?v=9.0"></script>
+  <script src="{rel_prefix}assets/js/app.js?v=10.0"></script>
   {extra_script}
 </body>
 </html>
@@ -299,7 +302,7 @@ def main():
     {home_tiles_html}
 
     <div class="version-stamp">
-      DPOG v{meta['version']} • Initiated &amp; Issued by North District, Delhi Police • Updated {meta['updated']}
+      <span class="lang-en">Quick Instructions</span><span class="lang-hi">त्वरित निर्देश</span> v{meta['version']} • Initiated &amp; Issued by North District, Delhi Police • Updated {meta['updated']}
     </div>
 
     {build_qr_modal_html("qr-modal-home", "home", rel_prefix="")}
@@ -496,7 +499,7 @@ def main():
         </div>
 
         <div class="version-stamp">
-          DPOG v{meta['version']} • Initiated &amp; Issued by North District, Delhi Police • Updated {meta['updated']}
+          <span class="lang-en">Quick Instructions</span><span class="lang-hi">त्वरित निर्देश</span> v{meta['version']} • Initiated &amp; Issued by North District, Delhi Police • Updated {meta['updated']}
         </div>
 
         {build_qr_modal_html(post_modal_id, slug, rel_prefix="../")}
