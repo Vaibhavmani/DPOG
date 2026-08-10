@@ -21,6 +21,16 @@ export const config = {
   ],
 };
 
+function timingSafeEqual(a, b) {
+  if (typeof a !== 'string' || typeof b !== 'string') return false;
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) {
+    diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return diff === 0;
+}
+
 export default function middleware(request) {
   const authHeader = request.headers.get('authorization') || '';
   const [scheme, encoded] = authHeader.split(' ');
@@ -36,12 +46,15 @@ export default function middleware(request) {
     const user = decoded.substring(0, colonIdx);
     const pass = decoded.substring(colonIdx + 1);
 
-    const validUser = (user === 'admin' || user === 'dp');
-    const validPass = (pass === 'delhipolice2026' || pass === 'delhipolice' || pass === process.env.DP_INTERNAL_PASSWORD);
+    const envPass = process.env.DP_INTERNAL_PASSWORD;
+    if (envPass) {
+      const validUser = (user === 'admin' || user === 'dp');
+      const validPass = timingSafeEqual(pass, envPass);
 
-    if (validUser && validPass) {
-      // Authenticated — proceed cleanly
-      return;
+      if (validUser && validPass) {
+        // Authenticated — proceed cleanly
+        return;
+      }
     }
   }
 
@@ -61,3 +74,4 @@ export default function middleware(request) {
     }
   );
 }
+

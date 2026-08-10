@@ -30,9 +30,16 @@ export default async function handler(req, res) {
     return res.status(400).json({ status: 'error', message: 'Invalid JSON body' });
   }
 
+  if (!newContent || typeof newContent !== 'object' || !newContent.meta || !Array.isArray(newContent.posts)) {
+    return res.status(400).json({ status: 'error', message: 'Invalid content structure: missing meta or posts array' });
+  }
+
   // Validate: every post must have equal en/hi instruction counts
   if (newContent.posts && Array.isArray(newContent.posts)) {
     for (const post of newContent.posts) {
+      if (!post.en || !post.hi) {
+        return res.status(400).json({ status: 'error', message: `Post "${post.slug || post.id}" is missing en or hi object` });
+      }
       const enLen = (post.en?.instructions || []).length;
       const hiLen = (post.hi?.instructions || []).length;
       if (enLen !== hiLen) {

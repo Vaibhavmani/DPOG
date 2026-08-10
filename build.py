@@ -39,6 +39,15 @@ def load_svg_icon(icon_name):
             return f.read()
     return ""
 
+def minify_html(html_str):
+    # Remove standard HTML comments
+    html_str = re.sub(r'<!--(?!\[if).*?-->', '', html_str, flags=re.DOTALL)
+    # Remove white space between tags
+    html_str = re.sub(r'>\s+<', '><', html_str)
+    # Strip each line and combine
+    lines = [line.strip() for line in html_str.split('\n') if line.strip()]
+    return ''.join(lines)
+
 def main():
     print("=== Law & Order Deployment Quick Instructions Build System ===")
     
@@ -333,7 +342,7 @@ def main():
 
     home_html = build_page_html(meta['title']['en'], meta['title']['hi'], home_main_html, rel_prefix="", qr_modal_target_id="qr-modal-home", active_nav="home", extra_script=category_filter_script)
     with open("src/index.html", "w", encoding="utf-8") as f:
-        f.write(home_html)
+        f.write(minify_html(home_html))
 
     # 4. Pre-render Duty Shift Compliance Checklist Page (`src/checklist/index.html`)
     print("\nPre-rendering Duty Shift Compliance Checklist Page (checklist/index.html)...")
@@ -404,7 +413,7 @@ def main():
     checklist_extra_script = '<script src="../assets/js/checklist.js?v=8.0"></script>'
     checklist_html = build_page_html("Duty Shift Compliance Checklist", "ड्यूटी चेकलिस्ट", checklist_main_html, rel_prefix="../", qr_modal_target_id="qr-modal-checklist", active_nav="checklist", extra_script=checklist_extra_script)
     with open("src/checklist/index.html", "w", encoding="utf-8") as f:
-        f.write(checklist_html)
+        f.write(minify_html(checklist_html))
 
 
     # 5. Pre-render Post Detail Pages
@@ -507,7 +516,7 @@ def main():
 
         post_html = build_page_html(post['en']['name'], post['hi']['name'], post_main_html, rel_prefix="../", qr_modal_target_id=post_modal_id, active_nav="home")
         with open(f"src/{slug}/index.html", "w", encoding="utf-8") as f:
-            f.write(post_html)
+            f.write(minify_html(post_html))
         print(f"  [OK] Pre-rendered src/{slug}/index.html")
 
     # 6. Pre-render Search Page (`src/search/index.html`)
@@ -539,7 +548,7 @@ def main():
     """
     search_html = build_page_html("Search Instructions", "निर्देश खोजें", search_main_html, rel_prefix="../", qr_modal_target_id="qr-modal-search", active_nav="search")
     with open("src/search/index.html", "w", encoding="utf-8") as f:
-        f.write(search_html)
+        f.write(minify_html(search_html))
 
     # 7. Copy content.json into `src/content/content.json`
     os.makedirs("src/content", exist_ok=True)
@@ -600,9 +609,10 @@ def main():
     print(f"  Gzipped:      {total_gzipped / 1024:.2f} KB")
 
     if total_gzipped > 100 * 1024:
-        print("[WARNING] Payload exceeds 100KB gzipped budget!")
+        print(f"[ERROR] Payload exceeds 100KB gzipped budget! ({total_gzipped / 1024:.2f} KB)")
+        raise ValueError(f"Payload budget exceeded: {total_gzipped / 1024:.2f} KB > 100 KB gzipped limit!")
     else:
-        print("[SUCCESS] Payload is comfortably within the 100KB gzipped budget.")
+        print(f"[SUCCESS] Payload is comfortably within the 100KB gzipped budget ({total_gzipped / 1024:.2f} KB).")
 
 if __name__ == "__main__":
     main()
