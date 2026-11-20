@@ -3,10 +3,21 @@ import os
 import gzip
 import re
 import math
-import qrcode
-import qrcode.image.svg
+
+try:
+    import qrcode
+    import qrcode.image.svg
+    HAS_QRCODE = True
+except ImportError:
+    HAS_QRCODE = False
 
 def qr_matrix_to_svg(slug, target_url, output_path):
+    if not HAS_QRCODE:
+        if os.path.exists(output_path):
+            return
+        print(f"  [WARN] qrcode module not found and {output_path} missing.")
+        return
+
     qr = qrcode.QRCode(
         version=None,
         error_correction=qrcode.constants.ERROR_CORRECT_M,
@@ -206,7 +217,10 @@ def main():
     for slug, url in qr_targets:
         out_svg = f"src/qr/{slug}.svg"
         qr_matrix_to_svg(slug, url, out_svg)
-        print(f"  [OK] Generated {out_svg} -> {url}")
+        if HAS_QRCODE:
+            print(f"  [OK] Generated {out_svg} -> {url}")
+        else:
+            print(f"  [OK] Using existing {out_svg} -> {url}")
 
     # Helper function to render exact QR Modal HTML
     def build_qr_modal_html(modal_id, qr_slug, rel_prefix=""):
